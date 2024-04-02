@@ -27,6 +27,7 @@ ALLOWED_HOSTS = os.getenv(
 INSTALLED_APPS = [
     # Own applications
     "core.apps.CoreConfig",
+    "homepage.apps.HomepageConfig",
     # Django applications
     "django.contrib.admin",
     "django.contrib.auth",
@@ -46,12 +47,22 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+if DEBUG:
+    INTERNAL_IPS = [
+        "localhost",
+        "127.0.0.1",
+    ]
+    MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
+    INSTALLED_APPS.append("debug_toolbar")
+
 ROOT_URLCONF = "django_arena.urls"
+
+TEMPLATES_DIRS = [BASE_DIR / "templates"]
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": TEMPLATES_DIRS,
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -91,6 +102,21 @@ AUTH_PASSWORD_VALIDATORS = [
         "password_validation.NumericPasswordValidator",
     },
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    },
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
+DJANGO_REDIS_LOG_IGNORED_EXCEPTIONS = True
 
 LANGUAGE_CODE = "en-us"
 
