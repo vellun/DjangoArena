@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+{{ title }}
+{% endblock title %}
+{% block content %}
+<div id="lobby-page" {% if game_started %}style="display: none;" {% endif %}>
+  {% if are_you_leader %}
+  Ты лидер <br>
+  {% endif %}
+  {% if are_you_leader %}
+  <button type="submit" id="start-button" style="background-color:green;color:white;">НАЧАТЬ ИГРУ</button>
+  <br>
+  {% endif %}
+  Игра пока не началась
+</div>
+<div id="game-page" {% if not game_started %}style="display: none;" {% endif %}>
+  Игра идёт
+</div>
+{% endblock content %}

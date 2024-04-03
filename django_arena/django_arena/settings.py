@@ -25,6 +25,8 @@ ALLOWED_HOSTS = os.getenv(
 ).split(",")
 
 INSTALLED_APPS = [
+    # Should be in start
+    "daphne",
     # Own applications
     "core.apps.CoreConfig",
     "homepage.apps.HomepageConfig",
@@ -113,6 +115,17 @@ CACHES = {
     },
 }
 
+ASGI_APPLICATION = "django_arena.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
@@ -127,6 +140,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static_dev",
+]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
