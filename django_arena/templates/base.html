@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +16,7 @@
     {% endblock content %}
   </div>
   {% include "includes/footer.html" %}
+  <script src="{% static 'script.js' %}"></script>
 </div>
 </body>
 </html>
