@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # Own applications
     "core.apps.CoreConfig",
     "homepage.apps.HomepageConfig",
+    "problems.apps.ProblemsConfig",
     # Django applications
     "django.contrib.admin",
     "django.contrib.auth",
@@ -126,6 +127,9 @@ CHANNEL_LAYERS = {
     },
 }
 
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
@@ -140,6 +144,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/auth/login/"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static_dev",
