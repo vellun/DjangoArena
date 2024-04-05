@@ -19,6 +19,11 @@ TRUE_VALUES = (
 
 DEBUG = os.getenv("DJANGO_DEBUG", default="False").lower() in TRUE_VALUES
 
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
+}
+
+
 ALLOWED_HOSTS = os.getenv(
     "DJANGO_ALLOWED_HOSTS",
     default="localhost,127.0.0.1,[::1]",
@@ -26,6 +31,7 @@ ALLOWED_HOSTS = os.getenv(
 
 INSTALLED_APPS = [
     # Own applications
+    "profile.apps.ProfileModelsConfig",
     "core.apps.CoreConfig",
     "homepage.apps.HomepageConfig",
     # Django applications
@@ -54,6 +60,9 @@ if DEBUG:
     ]
     MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
     INSTALLED_APPS.append("debug_toolbar")
+    DEBUG_TOOLBAR_PANELS = [
+        "debug_toolbar.panels.sql.SQLPanel",
+    ]
 
 ROOT_URLCONF = "django_arena.urls"
 
@@ -127,6 +136,14 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+STATIC_ROOT = "static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static_dev",
+]
+
+
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

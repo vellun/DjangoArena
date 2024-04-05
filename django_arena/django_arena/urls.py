@@ -1,14 +1,15 @@
 import django.conf
 from django.contrib import admin
-import django.contrib.admin
 import django.contrib.auth.urls
 import django.urls
 
 import homepage.urls
+import profile.urls
 
 
 urlpatterns = [
     django.urls.path("", django.urls.include(homepage.urls)),
+    django.urls.path("profile/", django.urls.include(profile.urls)),
     django.urls.path("admin/", admin.site.urls),
     django.urls.path("auth/", django.urls.include(django.contrib.auth.urls)),
 ]
