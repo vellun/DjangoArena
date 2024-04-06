@@ -19,21 +19,21 @@ TRUE_VALUES = (
 
 DEBUG = os.getenv("DJANGO_DEBUG", default="False").lower() in TRUE_VALUES
 
-DEBUG_TOOLBAR_CONFIG = {
-    "INTERCEPT_REDIRECTS": False,
-}
-
-
 ALLOWED_HOSTS = os.getenv(
     "DJANGO_ALLOWED_HOSTS",
     default="localhost,127.0.0.1,[::1]",
 ).split(",")
 
 INSTALLED_APPS = [
+    # Should be in start
+    "daphne",
     # Own applications
-    "profile.apps.ProfileModelsConfig",
     "core.apps.CoreConfig",
     "homepage.apps.HomepageConfig",
+    "problems.apps.ProblemsConfig",
+    "achievements.apps.AchievementsConfig",
+    "notes.apps.NoteConfig",
+    "tags.apps.TagsConfig",
     # Django applications
     "django.contrib.admin",
     "django.contrib.auth",
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "sorl.thumbnail",
 ]
 
 MIDDLEWARE = [
@@ -60,9 +61,6 @@ if DEBUG:
     ]
     MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
     INSTALLED_APPS.append("debug_toolbar")
-    DEBUG_TOOLBAR_PANELS = [
-        "debug_toolbar.panels.sql.SQLPanel",
-    ]
 
 ROOT_URLCONF = "django_arena.urls"
 
@@ -122,6 +120,20 @@ CACHES = {
     },
 }
 
+ASGI_APPLICATION = "django_arena.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
@@ -136,14 +148,14 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
-STATIC_ROOT = "static/"
+
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/auth/login/"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static_dev",
 ]
-
-
-MEDIA_ROOT = BASE_DIR / "media"
-MEDIA_URL = "media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

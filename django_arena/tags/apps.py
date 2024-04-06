@@ -1,6 +1,10 @@
 from django.apps import AppConfig
 
 
-class ProfileModelsConfig(AppConfig):
+class TagsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "profile"
+    name = "tags"
+    verbose_name = "Теги"
+
+
+__all__ = []
