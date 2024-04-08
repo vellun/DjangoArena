@@ -56,8 +56,9 @@ class LobbyView(django.views.View):
     def post(self, *args, **kwargs):
         uidb_url = kwargs.get("uidb")
         cache.set("lobby_game_started_" + uidb_url, True)
+        # Start duel
         return django.shortcuts.redirect(
-            django.urls.reverse("homepage:lobby", kwargs={"uidb": uidb_url}),
+            django.urls.reverse("duel:duel", kwargs={"uidb": uidb_url}),
         )
 
 
