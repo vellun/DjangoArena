@@ -1,5 +1,5 @@
-import uuid
 import re
+import uuid
 
 from django.core.cache import cache
 import django.http
@@ -27,6 +27,7 @@ class CodeTester:
         for word in stop_words:
             if word in self.exec_code:
                 return False
+
         return True
 
     def run_tests(self):
@@ -76,7 +77,7 @@ class LobbyView(django.views.View):
         are_you_in_game = self.request.user.id in cur_lobby
 
         if not self.request.user.is_authenticated or (
-                game_started and not are_you_in_game
+            game_started and not are_you_in_game
         ):
             return HttpResponse("ВОООООООООООООООООН")
 
@@ -89,7 +90,7 @@ class LobbyView(django.views.View):
             cache.set("lobby_game_started_" + uidb_url, False)
 
         are_you_leader = (
-                cache.get("lobby_leader_" + uidb_url) == self.request.user.id
+            cache.get("lobby_leader_" + uidb_url) == self.request.user.id
         )
 
         context = {
@@ -123,7 +124,15 @@ class TestCodeView(django.views.View):
             tests_all = "Тестов нет"
             tests_passed = "Тестов нет"
 
-        return django.shortcuts.render(self.request, "homepage/test.html", context={"errors": errors, "tests_all": tests_all, "tests_passed": tests_passed})
+        return django.shortcuts.render(
+            self.request,
+            "homepage/test.html",
+            context={
+                "errors": errors,
+                "tests_all": tests_all,
+                "tests_passed": tests_passed,
+            },
+        )
 
     def post(self, *args, **kwargs):
         code_text = self.request.POST.get("code")
@@ -133,10 +142,22 @@ class TestCodeView(django.views.View):
         if not validation_res:
             cur_errors = "Недопустимые ключевые слова в тексте"
             return self.get(args, kwargs, errors=cur_errors)
+
         tests_all, tests_passed, cur_errors = code_tester.run_tests()
-        print("Тестов всего было вот столько:", tests_all, "а прошло всего", tests_passed)
+        print(
+            "Тестов всего было вот столько:",
+            tests_all,
+            "а прошло всего",
+            tests_passed,
+        )
         print(cur_errors)
-        return self.get(args, kwargs, errors=cur_errors, tests_all=tests_all, tests_passed=tests_passed)
+        return self.get(
+            args,
+            kwargs,
+            errors=cur_errors,
+            tests_all=tests_all,
+            tests_passed=tests_passed,
+        )
 
 
 __all__ = []

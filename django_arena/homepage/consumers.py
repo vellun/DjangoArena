@@ -21,7 +21,6 @@ class LobbyConsumer(WebsocketConsumer):
             self.lobby_id,
             self.channel_name,
         )
-        raise StopConsumer()
 
     # Receive message from WebSocket
     def receive(self, text_data):

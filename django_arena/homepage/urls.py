@@ -15,5 +15,5 @@ urlpatterns = [
         "test_code/",
         homepage.views.TestCodeView.as_view(),
         name="test_code",
-    )
+    ),
 ]
