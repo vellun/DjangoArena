@@ -1,9 +1,15 @@
-import django.contrib
+import django.contrib.admin
 
 import core.models
 
 
-django.contrib.admin.site.register(core.models.User)
+@django.contrib.admin.register(core.models.User)
+class UserAdmin(django.contrib.admin.ModelAdmin):
+    list_display = (
+        core.models.User.username.field.name,
+        core.models.User.rating.field.name,
+        core.models.User.views.field.name,
+    )
 
 
 __all__ = []

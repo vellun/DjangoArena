@@ -31,6 +31,9 @@ INSTALLED_APPS = [
     "core.apps.CoreConfig",
     "homepage.apps.HomepageConfig",
     "problems.apps.ProblemsConfig",
+    "achievements.apps.AchievementsConfig",
+    "notes.apps.NoteConfig",
+    "tags.apps.TagsConfig",
     # Django applications
     "django.contrib.admin",
     "django.contrib.auth",
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "sorl.thumbnail",
 ]
 
 MIDDLEWARE = [
@@ -148,6 +152,14 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/auth/login/"
 
 STATIC_URL = "/static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static_dev",
+]
+
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/auth/login/"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static_dev",
