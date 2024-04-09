@@ -2,6 +2,8 @@ import django.contrib.admin
 
 import core.models
 
+import core.models
+
 
 @django.contrib.admin.register(core.models.User)
 class UserAdmin(django.contrib.admin.ModelAdmin):
