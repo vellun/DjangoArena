@@ -7,6 +7,7 @@ import django.views.generic
 import django.views.generic.edit
 
 import duel.forms
+import submissions.models
 
 
 class DuelView(django.views.generic.edit.FormView):
@@ -23,6 +24,15 @@ class DuelView(django.views.generic.edit.FormView):
         return context
 
     def form_valid(self, form):
+        code = form.cleaned_data.get("code")
+
+        submission = submissions.models.Submission(
+            code=code,
+            problem_id=1,
+            user_id=self.request.user.id,
+        )
+        submission.save()
+
         django.contrib.messages.success(
             self.request,
             "Ваше решение отправлено!",

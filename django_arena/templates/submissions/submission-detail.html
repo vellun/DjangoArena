@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+  <div>
+    <h1 style="text-align:center">{{ title }}</h1>
+    <hr>
+    <div class="row">
+          <p>{{ submission.created_at }}</p>
+          <textarea id="id_code">{{ submission.code }}</textarea>
+    </div>
+  </div>
+
+<script>var editor = CodeMirror.fromTextArea(document.getElementById("id_code"), {
+    mode: "python",
+    lineNumbers: true,
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    lineWrapping: true,
+    indentUnit: 4,
+    theme: "dracula",
+  });</script>
+
+{% endblock content %}

@@ -6,8 +6,13 @@
   <title>{% block title %}
   {% endblock title %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" >
-  {% block codemirror_files %}
-  {% endblock codemirror_files %}
+  <script type="text/javascript" src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
+  <link type="text/css" rel="stylesheet" href="{% static 'codemirror/css/codemirror.min.css' %}">
+  <link type="text/css" rel="stylesheet" href="{% static 'codemirror/css/dracula.min.css' %}">
+  <script type="text/javascript" src="{% static 'codemirror/js/codemirror.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'codemirror/js/python.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'codemirror/js/matchbrackets.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'codemirror/js/closebrackets.min.js' %}"></script>
 </head>
 <body>
 <div>
