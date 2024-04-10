@@ -1,3 +1,5 @@
+import random
+
 import django.contrib
 import django.core.cache
 import django.http
@@ -28,6 +30,7 @@ class DuelView(django.views.generic.edit.FormView):
 
         submission = submissions.models.Submission(
             code=code,
+            score=random.randrange(100),
             problem_id=1,
             user_id=self.request.user.id,
         )

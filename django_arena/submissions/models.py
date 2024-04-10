@@ -1,4 +1,5 @@
 import django.conf
+import django.core.validators
 import django.db.models
 
 import problems.models
@@ -6,7 +7,16 @@ import problems.models
 
 class Submission(django.db.models.Model):
     code = django.db.models.TextField()
+
+    score = django.db.models.PositiveIntegerField(
+        "Оценка",
+        null=True,
+        blank=True,
+        validators=[django.core.validators.MaxValueValidator(100)],
+    )
+
     created_at = django.db.models.DateTimeField(
+        "Дата создания",
         auto_now=True,
     )
 

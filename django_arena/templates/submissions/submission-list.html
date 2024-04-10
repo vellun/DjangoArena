@@ -11,6 +11,7 @@
         {% for sb in submissions %}
         <a href="{% url "submissions:submission-detail" sb.id %}" style="text-decoration:none;">
             <p>{{ sb.created_at }}</p>
+            <p>Оценка: {{ sb.score }}/100</p>
             <textarea id="id_code_{{ sb.id }}">{{ sb.code }}</textarea>
         </a>
         <script>
