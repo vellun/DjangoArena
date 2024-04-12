@@ -1,8 +1,7 @@
+import django.conf
 import django.db.models
 import django.utils.safestring
 import sorl.thumbnail
-
-import core.models
 
 
 class Achievement(django.db.models.Model):
@@ -12,7 +11,7 @@ class Achievement(django.db.models.Model):
         auto_now=True,
     )
     user_id = django.db.models.ManyToManyField(
-        core.models.User,
+        django.conf.settings.AUTH_USER_MODEL,
         related_name="achievements",
         related_query_name="achievements",
     )

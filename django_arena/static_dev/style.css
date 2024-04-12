@@ -1,0 +1,68 @@
+body {
+  height: 100%;
+}
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #252b2a;
+}
+
+.flex-vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  background-color: #252b2a;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  margin: 25px;
+}
+
+.resizable-column {
+  overflow: auto;
+  white-space: nowrap;
+  height: 100%;
+  border-radius: 10px;
+  border: 2px solid #77ddd0;
+}
+
+#column1 {
+  background-color: #252b2a;
+  width: 30%;
+}
+
+#column2 {
+  background-color: #343a39;
+  width: 50%;
+}
+
+#column3 {
+  background-color: #343a39;
+  width: 20%;
+}
+
+#code-section {
+  height: 70%;
+}
+
+#tests-section {
+  background-color: #252b2a;
+  height: 30%;
+}
+
+.resizer {
+  width: 10px;
+  background-color: #252b2a;
+  cursor: ew-resize;
+}
+
+.resizer2 {
+  height: 10px;
+  background-color: #252b2a;
+  cursor: ns-resize;
+}
