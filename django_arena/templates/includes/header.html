@@ -1,1 +1,12 @@
-header
+<header class="header">
+  <ul>
+    <li>
+      <a href="{% url 'homepage:main' %}">Главная</a>
+    </li>
+    {% if request.user.is_staff or request.user.is_admin %}
+      <li>
+        <a href="{% url 'homepage:test_code' %}">Тестик</a>
+      </li>
+    {% endif %}
+  </ul>
+</header>

@@ -13,9 +13,18 @@
   <script type="text/javascript" src="{% static 'codemirror/js/python.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'codemirror/js/matchbrackets.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'codemirror/js/closebrackets.min.js' %}"></script>
+  <style>
+    .header {
+        background-color: #959595;
+    }
+    .wrapper, body {
+        padding: 0px;
+        margin: 0px;
+    }
+  </style>
 </head>
 <body>
-<div>
+<div class="wrapper">
   {% include "includes/header.html" %}
   <div class="container">
     {% block content %}
