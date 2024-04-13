@@ -25,27 +25,46 @@
             <img src="{% static "logo.jpg" %}" alt="" height="37" class="d-inline-block align-text-top">
         </div>
     </nav>
+
     <div class="content">
         <div class="resizable-column" id="column1">
             Column 1
         </div>
-        <div class="resizer" id="resizer1"></div>
+        <div class="resizer" id="resizer1">
+            <div class="circles">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
         <div class="flex-vertical" id="column2">
             <div class="resizable-column" id="code-section">
-                {% csrf_token %}
                 <form method="post">
+                    {% csrf_token %}
                     <button type="submit">Submit</button>
                     <div class="code">
                         {{ form.code }}
                     </div>
                 </form>
             </div>
-            <div class="resizer2" id="resizer3"></div>
+            <div class="resizer2" id="resizer3">
+                <div class="circles2">
+                    <div class="circle2"></div>
+                    <div class="circle2"></div>
+                    <div class="circle2"></div>
+                </div>
+            </div>
             <div class="resizable-column" id="tests-section">
                 Column 4
             </div>
         </div>
-        <div class="resizer" id="resizer2"></div>
+        <div class="resizer" id="resizer2">
+            <div class="circles">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
         <div class="resizable-column" id="column3">
             Column 3
         </div>

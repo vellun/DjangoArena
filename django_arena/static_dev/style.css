@@ -1,6 +1,11 @@
 body {
   height: 100%;
 }
+
+.CodeMirror {
+  margin-top: 40px;
+}
+
 .flex-container {
   display: flex;
   flex-direction: column;
@@ -56,13 +61,44 @@ nav {
 }
 
 .resizer {
+  position: relative;
   width: 10px;
   background-color: #252b2a;
   cursor: ew-resize;
 }
 
 .resizer2 {
+  position: relative;
   height: 10px;
   background-color: #252b2a;
   cursor: ns-resize;
+}
+
+.circle,
+.circle2 {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: #8a9290;
+}
+
+.circle {
+  margin: 4px auto;
+}
+
+.circle2 {
+  margin: 3px;
+}
+
+.circles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+}
+
+.circles2 {
+  display: flex;
+  justify-content: center;
 }
