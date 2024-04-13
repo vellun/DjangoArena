@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "achievements.apps.AchievementsConfig",
     "notes.apps.NoteConfig",
     "tags.apps.TagsConfig",
+    "submissions.apps.SubmissionsConfig",
     # Django applications
     "django.contrib.admin",
     "django.contrib.auth",
@@ -147,7 +148,15 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "static/"
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/auth/login/"
+
+STATIC_URL = "/static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static_dev",
+]
 
 LOGIN_URL = "/auth/login/"
 LOGIN_REDIRECT_URL = "/"
