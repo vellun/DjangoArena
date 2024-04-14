@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "notes.apps.NoteConfig",
     "tags.apps.TagsConfig",
     "submissions.apps.SubmissionsConfig",
+    "lobby.apps.LobbyConfig",
     # Django applications
     "django.contrib.admin",
     "django.contrib.auth",

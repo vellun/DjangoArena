@@ -1,3 +1,4 @@
+{% load static %}
 <header class="header">
   <ul>
     <li>
@@ -8,5 +9,12 @@
         <a href="{% url 'homepage:test_code' %}">Тестик</a>
       </li>
     {% endif %}
+    <li>
+      <button id="open-popup">Open Popup</button>
+      
+      {% include "includes/duel-popup.html" %}
+
+      <script src="{% static 'popup/popup.js' %}"></script>
+    </li>
   </ul>
 </header>
