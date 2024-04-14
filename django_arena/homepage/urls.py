@@ -16,4 +16,9 @@ urlpatterns = [
         homepage.views.TestCodeView.as_view(),
         name="test_code",
     ),
+    django.urls.path(
+        "profile/<int:user_id>",
+        homepage.views.ProfileView.as_view(),
+        name="profile",
+    ),
 ]
