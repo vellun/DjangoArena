@@ -7,6 +7,8 @@ from django.http import HttpResponse
 import django.shortcuts
 import django.views.decorators.http
 
+import core.models
+
 
 class CodeTester:
     def __init__(self, code, tests):
@@ -158,6 +160,20 @@ class TestCodeView(django.views.View):
             errors=cur_errors,
             tests_all=tests_all,
             tests_passed=tests_passed,
+        )
+
+
+class ProfileView(django.views.View):
+    def get(self, *args, **kwargs):
+        user_id = kwargs.get("user_id")
+        user = django.shortcuts.get_object_or_404(core.models.User, pk=user_id)
+        context = {
+            "user": user,
+        }
+        return django.shortcuts.render(
+            self.request,
+            "homepage/profile.html",
+            context,
         )
 
 

@@ -1,12 +1,26 @@
+{% load static %}
 <header class="header">
-  <ul>
-    <li>
-      <a href="{% url 'homepage:main' %}">Главная</a>
-    </li>
-    {% if request.user.is_staff or request.user.is_admin %}
-      <li>
-        <a href="{% url 'homepage:test_code' %}">Тестик</a>
+  <nav class="header__navbar navbar-header navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid p-3">
+      <img src="{% static "logo.jpg" %}" alt="" height="37" class="d-inline-block align-text-top">
+    </div>
+    <ul class="navbar-header__menu menu-header p-3">
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'homepage:main' %}">Главная</a>
       </li>
-    {% endif %}
-  </ul>
+      {% if request.user.is_staff or request.user.is_admin %}
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'homepage:test_code' %}">Тестик</a>
+      </li>
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'admin:index' %}">Я админ йопта</a>
+      </li>
+      {% endif %}
+      {% if request.user.is_authenticated %}
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'homepage:profile' request.user.id %}">Профиль</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
 </header>
