@@ -37,3 +37,13 @@ body {
 nav {
     background-color: #252b2a;
 }
+
+
+
+page.page-404 {
+    display: flex;
+}
+
+.page-404_link {
+    text-decoration: none !important;
+}
