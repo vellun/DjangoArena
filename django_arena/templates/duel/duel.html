@@ -23,12 +23,25 @@
     <nav class="navbar navbar-expand-lg navbar-dark p-3">
         <div class="container-fluid">
             <img src="{% static "logo.jpg" %}" alt="" height="37" class="d-inline-block align-text-top">
+
+            <ul>
+                {% for i in cnt %}
+                <a href={% url "duel:duel" uidb forloop.counter %} style="text-decoration: none;">
+                    <li {% if forloop.counter == task_num %} class="li_task_active" {% else %}class="li_task"
+                        {% endif %}>{{ forloop.counter }}</li>
+                </a>
+                {% endfor %}
+            </ul>
+
+            <button>Leave Duel</button>
         </div>
     </nav>
 
     <div class="content">
         <div class="resizable-column" id="column1">
-            Column 1
+            <h2>{{ task.title }}</h2>
+            <hr>
+            <div>{{ task.text }}</div>
         </div>
         <div class="resizer" id="resizer1">
             <div class="circles">
@@ -70,6 +83,7 @@
         </div>
         <script>
             const cache_url = "{% url 'duel:cache-code' uidb %}";
+            const task_num = "{{ task_num }}";
             const csrf_token = "{{ csrf_token }}";
         </script>
         <script type="text/javascript" src="{% static 'code_editor.js' %}"></script>

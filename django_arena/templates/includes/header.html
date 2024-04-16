@@ -10,11 +10,18 @@
       </li>
     {% endif %}
     <li>
-      <button id="open-popup">Open Popup</button>
-      
-      {% include "includes/duel-popup.html" %}
+      <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
 
-      <script src="{% static 'popup/popup.js' %}"></script>
+      <div id="modal" class="modal fade">
+        <div id="dialog" class="modal-dialog" hx-target="this"></div>
+      </div>
+
+      <button hx-get="{% url 'lobby:gameplay-settings' %}" hx-target="#dialog">
+        Начать дуэль
+      </button>
+
+      <script src={% static "htmx/htmx.min.js" %}></script>
+      <script src={% static "popup/popup.js" %}></script>
     </li>
   </ul>
 </header>

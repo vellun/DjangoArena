@@ -1,37 +1,39 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var popupForm = document.getElementById("popup-form");
-  var openPopupBtn = document.getElementById("open-popup");
-  var closePopupBtn = document.querySelector(".close");
+const modal = new bootstrap.Modal(document.getElementById("modal"), {
+  backdrop: 'static'
+})
 
-  openPopupBtn.onclick = function () {
-    loadForm();
-    popupForm.style.display = "block";
-  };
+htmx.on("htmx:afterSettle", (e) => {
+  const response = JSON.parse(e.detail.xhr.responseText);
 
-  closePopupBtn.onclick = function () {
-    popupForm.style.display = "none";
-  };
+  if (response.success) {
+      modal.hide();
 
-  window.onclick = function (event) {
-    if (event.target == popupForm) {
-      popupForm.style.display = "block";
-    }
-  };
-
-  function loadForm() {
-    var formContainer = document.getElementById("settings-form");
-    while (formContainer.firstChild) {
-      formContainer.removeChild(formContainer.firstChild);
-    }
-
-    fetch(settings_url)
-      .then((response) => response.text())
-      .then((html) => {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(html, "text/html");
-        var formElement = doc.getElementById("settings-form");
-        formContainer.appendChild(formElement);
-      });
+      const link = response.link;
+      if (link) {
+          window.location.href = link;
+      }
   }
 });
+
+
+htmx.on("htmx:afterSwap", (e) => {
+  // Response targeting #dialog => show the modal
+  if (e.detail.target.id == "dialog") {
+    modal.show()
+  }
+})
+
+htmx.on("htmx:beforeSwap", (e) => {
+  // Empty response targeting #dialog => hide the modal
+  if (e.detail.target.id == "dialog" && !e.detail.xhr.response) {
+    modal.hide()
+    e.detail.shouldSwap = false
+  }
+})
+
+htmx.on("hidden.bs.modal", () => {
+  document.getElementById("dialog").innerHTML = ""
+})
+
+
 

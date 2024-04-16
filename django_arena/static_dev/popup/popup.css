@@ -1,40 +1,76 @@
-.popup-form {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+/* modal window style */
+
+#modal {
   overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-h2 {
-  text-align: center;
-}
-
-.popup-content {
-  color: #C1C8C9;
+.modal-content {
+  color: #c1c8c9;
   border-radius: 10px;
   border: 2px solid #77ddd0;
   background-color: #252b2a;
-  margin: 15% auto;
-  padding: 20px;
-  width: 40%;
+  margin: 30% auto;
+  padding: 30px;
 }
 
 .close {
   color: #aaaaaa;
   float: right;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
   color: #77ddd0;
-  text-decoration: none;
   cursor: pointer;
+}
+
+h3 {
+  text-align: center;
+}
+
+/* tabs style */
+
+.tab {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tab > input[type="radio"] {
+  display: none;
+}
+
+.tab-content {
+  display: none;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+#tab-btn-1:checked ~ #content-1,
+#tab-btn-2:checked ~ #content-2 {
+  display: block;
+}
+
+.tab > label {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  color: #c1c8c9;
+  background: 0 0;
+  border-bottom: 0.125rem solid transparent;
+}
+
+.tab > label:hover {
+  border-bottom-color: #c1c8c9;
+}
+
+.tab > input[type="radio"]:checked + label {
+  cursor: default;
+  font-weight: bold;
+  color: #77ddd0;
+  border-bottom-color: #77ddd0;
 }

@@ -1,9 +1,15 @@
+import uuid
+
 import django.core.cache
+import django.db.models
 import django.http
 import django.shortcuts
+from django.urls import reverse
 import django.views.decorators.http
 
+import duel.models
 import lobby.forms
+import problems.models
 
 
 class LobbyView(django.views.View):
@@ -61,27 +67,102 @@ class LobbyView(django.views.View):
         django.core.cache.cache.set("lobby_game_started_" + uidb_url, True)
         # Start duel
         return django.shortcuts.redirect(
-            django.urls.reverse("duel:duel", kwargs={"uidb": uidb_url}),
+            django.urls.reverse(
+                "duel:duel",
+                kwargs={"uidb": uidb_url, "task_num": 1},
+            ),
         )
 
 
 class GameplaySettingsView(django.views.View):
     def dispatch(self, request, *args, **kwargs):
-        self.form = lobby.forms.GameplaySettingsForm(request.POST or None)
-        print(1)
+        self.common_settings_form = lobby.forms.CommonGameplaySettingsForm(
+            request.POST or None,
+        )
+        self.detailed_settings_form = lobby.forms.DetailedGameplaySettingsForm(
+            request.POST or None,
+        )
         return super().dispatch(request, *args, **kwargs)
 
-    def get(self, request):
-        print(2)
+    def get(self, request, checked_first=True):
         context = {
-            "form": self.form,
+            "form1": self.common_settings_form,
+            "form2": self.detailed_settings_form,
+            "link": uuid.uuid4().hex,
+            "checked_first": checked_first,
         }
 
         return django.shortcuts.render(
             request,
-            "includes/duel-popup.html",
+            "lobby/settings-form.html",
             context,
         )
+
+    def post(self, request):
+        form_type = request.POST.get("form_type")
+        checked_first = True
+        uidb = uuid.uuid4().hex
+        success_json = django.http.JsonResponse(
+            {
+                "success": True,
+                "link": reverse("lobby:lobby", args=[uidb]),
+            },
+        )
+
+        if (  # If form 1 was submitted(tab 1 on modal window)
+            form_type == "form1" and self.common_settings_form.is_valid()
+        ):
+            form = self.common_settings_form
+
+            number_of_tasks = form.cleaned_data.get("tasks")
+            diff = form.cleaned_data.get("difficulty")
+
+            tasks = problems.models.Problem.objects.filter(
+                difficulty=diff,
+            )[:number_of_tasks]
+
+            new_duel = duel.models.Duel.objects.create(
+                uuid=uidb,
+            )
+            new_duel.problems.set(tasks)
+            new_duel.save()
+
+            return success_json
+
+        if (
+            form_type == "form2"
+        ):  # If form 2 was submitted(tab 2 on modal window)
+            if self.detailed_settings_form.is_valid():
+                form = self.detailed_settings_form
+
+                easy = form.cleaned_data.get("easy_tasks")
+                medium = form.cleaned_data.get("medium_tasks")
+                hard = form.cleaned_data.get("hard_tasks")
+
+                e_tasks = problems.models.Problem.objects.filter(
+                    difficulty="easy",
+                )[:easy]
+                m_tasks = problems.models.Problem.objects.filter(
+                    difficulty="medium",
+                )[:medium]
+                h_tasks = problems.models.Problem.objects.filter(
+                    difficulty="hard",
+                )[:hard]
+
+                tasks = e_tasks | m_tasks | h_tasks
+
+                new_duel = duel.models.Duel.objects.create(
+                    uuid=uidb,
+                )
+                new_duel.problems.set(tasks)
+                new_duel.save()
+
+                return success_json
+
+            # Flag to know which tab on modal window is should be active
+            checked_first = False
+
+        return self.get(request, checked_first=checked_first)
 
 
 __all__ = [LobbyView]

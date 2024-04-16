@@ -2,6 +2,7 @@ import random
 
 import django.contrib
 import django.core.cache
+import django.db.models
 import django.http
 import django.shortcuts
 import django.views
@@ -9,6 +10,7 @@ import django.views.generic
 import django.views.generic.edit
 
 import duel.forms
+import duel.models
 import submissions.models
 
 
@@ -22,7 +24,19 @@ class DuelView(django.views.generic.edit.FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         uidb = self.kwargs["uidb"]
+        task_num = self.kwargs.get("task_num", 1)
+
         context["uidb"] = uidb
+
+        cur_duel = django.shortcuts.get_object_or_404(
+            duel.models.Duel, uuid=uidb,
+        )
+        tasks = cur_duel.problems.all()
+
+        context["task"] = tasks[task_num - 1]  # current task
+        context["cnt"] = tasks
+        context["task_num"] = task_num
+
         return context
 
     def form_valid(self, form):
@@ -36,22 +50,17 @@ class DuelView(django.views.generic.edit.FormView):
         )
         submission.save()
 
-        django.contrib.messages.success(
-            self.request,
-            "Ваше решение отправлено!",
-        )
-
         return super().form_valid(form)
 
     def get_initial(self):
         initial = super().get_initial()
         uidb_url = self.kwargs.get("uidb")
-        code = django.core.cache.cache.get(
-            "duel_submission_code_"
-            + uidb_url
-            + "_user_"
-            + str(self.request.user.id),
-        )
+        task_num = self.kwargs.get("task_num", 1)
+
+        user_prefix = f"user_{str(self.request.user.id)}"
+        task_prefix = f"task_{str(task_num)}"
+        key = f"duel_submission_code_{uidb_url}_{user_prefix}_{task_prefix}"
+        code = django.core.cache.cache.get(key)
         if code:
             initial["code"] = code
 
@@ -67,6 +76,7 @@ class CacheCodeView(django.views.generic.View):
 
     def post(self, request, *args, **kwargs):
         code = request.POST.get("code")
+        task_num = request.POST.get("task_num")
 
         if code is None:
             raise django.http.Http404
@@ -75,10 +85,8 @@ class CacheCodeView(django.views.generic.View):
 
         # TODO: add the problem id to the cache key
         django.core.cache.cache.set(
-            "duel_submission_code_"
-            + uidb_url
-            + "_user_"
-            + str(self.request.user.id),
+            f"duel_submission_code_{uidb_url}_user_"
+            + f"{str(self.request.user.id)}_task_{str(task_num)}",
             code,
         )
 

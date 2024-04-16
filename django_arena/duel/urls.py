@@ -6,7 +6,7 @@ app_name = "duel"
 
 urlpatterns = [
     django.urls.path(
-        "<uidb>/",
+        "<uidb>/<int:task_num>/",
         duel.views.DuelView.as_view(),
         name="duel",
     ),

@@ -7,14 +7,18 @@
   <title>{% block title %}
     {% endblock title %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="text/javascript" src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
   <link type="text/css" rel="stylesheet" href="{% static 'codemirror/css/codemirror.min.css' %}">
   <link type="text/css" rel="stylesheet" href="{% static 'codemirror/css/dracula.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
+  <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
   <script type="text/javascript" src="{% static 'codemirror/js/codemirror.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'codemirror/js/python.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'codemirror/js/matchbrackets.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'codemirror/js/closebrackets.min.js' %}"></script>
+
+  <script src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'modal-forms/bootstrap5.modal.forms.js' %}"></script>
   <style>
     .header {
       background-color: #959595;
@@ -37,6 +41,7 @@
       {% endblock content %}
     </div>
     {% include "includes/footer.html" %}
+    <script src="{% static "bootstrap/js/bootstrap.bundle.min.js" %}"></script>
     <script src="{% static 'script.js' %}"></script>
   </div>
 
