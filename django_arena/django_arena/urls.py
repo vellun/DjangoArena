@@ -6,12 +6,18 @@ import django.urls
 
 import duel.urls
 import homepage.urls
+import notifications.urls
 import lobby.urls
+
 import submissions.urls
 
 
 urlpatterns = [
     django.urls.path("", django.urls.include(homepage.urls)),
+    django.urls.path(
+        "notifications/",
+        django.urls.include(notifications.urls),
+    ),
     django.urls.path("duel/", django.urls.include(duel.urls)),
     django.urls.path("play/", django.urls.include(lobby.urls)),
     django.urls.path("submissions/", django.urls.include(submissions.urls)),

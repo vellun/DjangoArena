@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "daphne",
     # Own applications
     "core.apps.CoreConfig",
+    "notifications.apps.NotificationsConfig",
     "homepage.apps.HomepageConfig",
     "problems.apps.ProblemsConfig",
     "achievements.apps.AchievementsConfig",
@@ -80,6 +81,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "notifications.context_processors.get_notifications",
             ],
         },
     },
