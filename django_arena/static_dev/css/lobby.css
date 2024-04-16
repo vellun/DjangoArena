@@ -1,0 +1,24 @@
+.lobby {
+    display: flex;
+    flex-direction: column;
+}
+.cur-player-status {
+    width: 100%;
+    font-size: 32px;
+}
+.start-game-form {
+    margin-top: 20px;
+}
+.participants {
+    margin-top: 20px;
+}
+.participants__title {
+    font-size: 26px;
+}
+.participants__list {
+    margin-top: 10px;
+    list-style: none;
+}
+.participants__item {
+    color: white;
+}

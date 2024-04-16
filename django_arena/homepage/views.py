@@ -95,10 +95,25 @@ class LobbyView(django.views.View):
             cache.get("lobby_leader_" + uidb_url) == self.request.user.id
         )
 
+        cur_players = list(cache.get("lobby_users_" + uidb_url) or [])
+
+        for i in range(len(cur_players)):
+            if cache.get("lobby_leader_" + uidb_url) == i + 1:
+                status = "владелец лобби"
+            else:
+                status = "участник лобби"
+
+            cur_username = core.models.User.objects.get(
+                pk=cur_players[i],
+            ).username
+
+            cur_players[i] = cur_username + " - " + status
+
         context = {
             "title": "Главная",
             "are_you_leader": are_you_leader,
             "game_started": game_started,
+            "participants": cur_players,
         }
 
         return django.shortcuts.render(
