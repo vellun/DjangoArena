@@ -1,5 +1,8 @@
+/* resizable sections */
+
 body {
   height: 100%;
+  color: #c1c8c9;
 }
 
 .CodeMirror {
@@ -101,4 +104,32 @@ nav {
 .circles2 {
   display: flex;
   justify-content: center;
+}
+
+/* tasks sections */
+
+.li_task {
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  line-height: 2em;
+  border-radius: 1em;
+  background-color: #424c4a;
+  margin: 0 1em;
+  display: inline-block;
+  color: #c1c8c9;
+  position: relative;
+}
+
+.li_task_active {
+  background: #77ddd0;
+  color: #252b2a;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  line-height: 2em;
+  border-radius: 1em;
+  margin: 0 1em;
+  display: inline-block;
+  position: relative;
 }

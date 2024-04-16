@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     "achievements.apps.AchievementsConfig",
     "notes.apps.NoteConfig",
     "tags.apps.TagsConfig",
+    "duel.apps.DuelConfig",
     "submissions.apps.SubmissionsConfig",
+    "lobby.apps.LobbyConfig",
     # Django applications
     "django.contrib.admin",
     "django.contrib.auth",

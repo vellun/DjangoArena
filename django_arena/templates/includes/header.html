@@ -35,7 +35,12 @@
     <ul class="navbar-header__menu navbar-header__menu-right menu-header p-3">
       {% if request.resolver_match.view_name == "homepage:main" %}
         <li class="menu-header__item">
-          <a class="menu-header__link btn btn-primary" href="{% url 'homepage:lobby' link %}">НАЧАТЬ ЗАРУБУ</a>
+          <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
+
+          <div id="modal" class="modal fade">
+            <div id="dialog" class="modal-dialog" hx-target="this"></div>
+          </div>
+          <button class="menu-header__link btn btn-primary" hx-get="{% url 'lobby:gameplay-settings' %}" hx-target="#dialog">НАЧАТЬ ЗАРУБУ</button>
         </li>
       {% endif %}
       {% if request.user.is_authenticated %}
@@ -43,6 +48,9 @@
           <a class="menu-header__link" href="{% url 'homepage:profile' request.user.id %}">Профиль</a>
         </li>
       {% endif %}
+      <script src={% static "htmx/htmx.min.js" %}></script>
+      <script src={% static "bootstrap/js/bootstrap.bundle.min.js" %}></script>
+      <script src={% static "popup/popup.js" %}></script>
     </ul>
   </nav>
 </header>
