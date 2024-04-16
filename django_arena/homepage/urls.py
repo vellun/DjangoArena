@@ -11,4 +11,14 @@ urlpatterns = [
         homepage.views.LobbyView.as_view(),
         name="lobby",
     ),
+    django.urls.path(
+        "test_code/",
+        homepage.views.TestCodeView.as_view(),
+        name="test_code",
+    ),
+    django.urls.path(
+        "profile/<int:user_id>",
+        homepage.views.ProfileView.as_view(),
+        name="profile",
+    ),
 ]

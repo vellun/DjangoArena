@@ -3,20 +3,27 @@
 {{ title }}
 {% endblock title %}
 {% block content %}
-<div id="lobby-page" {% if game_started %}style="display: none;" {% endif %}>
+<div class="lobby">
   {% if are_you_leader %}
-  Ты лидер <br>
+  <span class="text-white cur-player-status">Ты лидер</span>
+  {% else %}
+  <span class="text-white cur-player-status">Ты участник</span>
   {% endif %}
+  <div class="participants">
+      <span class="text-white participants__title">Участники</span>
+      <ul class="participants__list">
+        {% for participant in participants %}
+          <li class="participants__item">{{ participant }}</li>
+        {% endfor %}
+      </ul>
+  </div>
   {% if are_you_leader %}
-  <form method="post">
-  {% csrf_token %}
-  <button type="submit" id="start-button" style="background-color:green;color:white;">НАЧАТЬ ИГРУ</button>
+  <form class="start-game-form" method="post">
+    {% csrf_token %}
+    <button class="btn btn-primary" type="submit" id="start-button" style="background-color:green;color:white;">НАЧАТЬ
+      ИГРУ
+    </button>
   </form>
-  <br>
   {% endif %}
-  Игра пока не началась
-</div>
-<div id="game-page" {% if not game_started %}style="display: none;" {% endif %}>
-  Игра идёт
 </div>
 {% endblock content %}

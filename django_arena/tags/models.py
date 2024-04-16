@@ -12,13 +12,11 @@ class Tag(django.db.models.Model):
     )
     problem = django.db.models.ManyToManyField(
         problems.models.Problem,
-        null=True,
     )
     note = django.db.models.ManyToManyField(
         notes.models.Note,
         related_name="tag",
         related_query_name="tag",
-        null=True,
     )
 
     class Meta:
