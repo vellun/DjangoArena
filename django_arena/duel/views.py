@@ -29,7 +29,8 @@ class DuelView(django.views.generic.edit.FormView):
         context["uidb"] = uidb
 
         cur_duel = django.shortcuts.get_object_or_404(
-            duel.models.Duel, uuid=uidb,
+            duel.models.Duel,
+            uuid=uidb,
         )
         tasks = cur_duel.problems.all()
 

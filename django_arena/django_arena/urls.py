@@ -6,9 +6,8 @@ import django.urls
 
 import duel.urls
 import homepage.urls
-import notifications.urls
 import lobby.urls
-
+import notifications.urls
 import submissions.urls
 
 
