@@ -1,0 +1,7 @@
+{% load static %}
+<div class="card" id="note_card">
+    <div class="card-body">
+    <h5>{{ request.user.username }}{{ note.title }}</h5>
+      {{ note.text }}
+    </div>
+  </div>

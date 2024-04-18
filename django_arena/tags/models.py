@@ -1,6 +1,6 @@
 import django.db.models
-import notes.models
 
+import notes.models
 import problems.models
 
 

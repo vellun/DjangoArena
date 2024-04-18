@@ -12,10 +12,10 @@ class Note(django.db.models.Model):
     updated_at = django.db.models.DateTimeField(
         auto_now=True,
     )
-    user_id = django.db.models.ForeignKey(
+    author = django.db.models.ForeignKey(
         core.models.User,
-        related_name="note",
-        related_query_name="note",
+        related_name="notes",
+        related_query_name="notes",
         on_delete=django.db.models.CASCADE,
     )
     likes = django.db.models.IntegerField(
@@ -36,4 +36,4 @@ class Note(django.db.models.Model):
         verbose_name_plural = "посты"
 
 
-__all__ = ["Note"]
+__all__ = [Note]

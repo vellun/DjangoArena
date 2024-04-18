@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="card" id="parent_card">
+    <div class="card-body">
+        {% for note in notes %}
+          {% include "includes/note.html" %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
