@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ note.title }}</h1>
+  <p>{{ note.text }}</p> 
+  {% if request.user.id == note.author.id %}
+    <a href={% url "notes:update" note.id %}><button class="create-post-btn btn btn-primary">Редактировать</button></a>
+    <a href={% url "notes:delete" note.id %}><button class="btn btn-outline-danger">Удалить</button></a>
+  {% endif %}
+{% endblock %}

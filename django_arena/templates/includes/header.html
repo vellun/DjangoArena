@@ -8,12 +8,15 @@
       <li class="menu-header__item">
         <a class="menu-header__link" href="{% url 'homepage:main' %}">Главная</a>
       </li>
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'notes:blog-all' %}">Блог</a>
+      </li>
       {% if request.user.is_staff or request.user.is_admin %}
       <li class="menu-header__item">
         <a class="menu-header__link" href="{% url 'homepage:test_code' %}">Тестик</a>
       </li>
       <li class="menu-header__item">
-        <a class="menu-header__link" href="{% url 'admin:index' %}">Я админ йопта</a>
+        <a class="menu-header__link" href="{% url 'admin:index' %}">Админочка</a>
       </li>
       {% endif %}
       <li class="menu-header__item" id="header-notifications-button">
@@ -33,16 +36,16 @@
       </li>
     </ul>
     <ul class="navbar-header__menu navbar-header__menu-right menu-header p-3">
-      {% if request.resolver_match.view_name == "homepage:main" %}
-        <li class="menu-header__item">
-          <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
+      {% comment %} {% if request.resolver_match.view_name == "homepage:main" %} {% endcomment %}
+      <li class="menu-header__item">
+        <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
 
-          <div id="modal" class="modal fade">
-            <div id="dialog" class="modal-dialog" hx-target="this"></div>
-          </div>
-          <button class="menu-header__link btn btn-primary" hx-get="{% url 'lobby:gameplay-settings' %}" hx-target="#dialog">НАЧАТЬ ЗАРУБУ</button>
-        </li>
-      {% endif %}
+        <div id="modal" class="modal fade">
+          <div id="dialog" class="modal-dialog" hx-target="this"></div>
+        </div>
+        <button class="menu-header__link btn btn-primary" hx-get="{% url 'lobby:gameplay-settings' %}" hx-target="#dialog">НАЧАТЬ ЗАРУБУ</button>
+      </li>
+      {% comment %} {% endif %} {% endcomment %}
       {% if request.user.is_authenticated %}
         <li class="menu-header__item">
           <a class="menu-header__link" href="{% url 'homepage:profile' request.user.id %}">Профиль</a>
