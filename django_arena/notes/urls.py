@@ -10,14 +10,34 @@ app_name = "notes"
 
 urlpatterns = [
     django.urls.path(
-        "",
-        notes.views.NoteListView.as_view(),
-        name="blog",
+        "<int:pk>/",
+        notes.views.NoteDetailView.as_view(),
+        name="detail",
+    ),
+    django.urls.path(
+        "all/",
+        notes.views.NoteListAllView.as_view(),
+        name="blog-all",
+    ),
+    django.urls.path(
+        "my/",
+        notes.views.NoteListMyView.as_view(),
+        name="blog-my",
     ),
     django.urls.path(
         "create/",
         notes.views.NoteCreateView.as_view(),
         name="create",
+    ),
+    django.urls.path(
+        "update/<int:pk>",
+        notes.views.NoteUpdateView.as_view(),
+        name="update",
+    ),
+    django.urls.path(
+        "delete/<int:pk>",
+        notes.views.NoteDeleteView.as_view(),
+        name="delete",
     ),
 ]
 

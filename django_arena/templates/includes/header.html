@@ -9,7 +9,7 @@
         <a class="menu-header__link" href="{% url 'homepage:main' %}">Главная</a>
       </li>
       <li class="menu-header__item">
-        <a class="menu-header__link" href="{% url 'notes:blog' %}">Блог</a>
+        <a class="menu-header__link" href="{% url 'notes:blog-all' %}">Блог</a>
       </li>
       {% if request.user.is_staff or request.user.is_admin %}
       <li class="menu-header__item">
