@@ -3,6 +3,17 @@
     <li>
       <a href="{% url 'homepage:main' %}">Главная</a>
     </li>
+    {% if request.user.is_authenticated %}
+    <li>
+      <a href="{% url 'groups:groups' %}">Группы пользователя</a>
+    </li>
+        <li>
+      <a href="{% url 'groups:new_groups' %}">Создать новую группу</a>
+    </li>
+    <li>
+      <a href="{% url 'groups:enter_user_in_group' %}">Присоединиться к группе</a>
+    </li>
+    {% endif %}
     {% if request.user.is_staff or request.user.is_admin %}
       <li>
         <a href="{% url 'homepage:test_code' %}">Тестик</a>
