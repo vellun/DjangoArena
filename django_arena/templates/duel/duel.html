@@ -32,8 +32,8 @@
                 </a>
                 {% endfor %}
             </ul>
-
-            <a href={% url "homepage:main" %}><button>Leave Duel</button></a>
+            <a href={% url "duel:results" uidb %}><button class="btn btn-primary">Submit Tasks</button></a>
+            <a href={% url "homepage:main" %}><button class="btn btn-primary">Leave Duel</button></a>
         </div>
     </nav>
 
