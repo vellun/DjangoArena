@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ group_form }}
+    <button type="submit">Создать группу</button>
+</form>
+{% endblock %}

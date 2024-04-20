@@ -11,4 +11,9 @@ urlpatterns = [
         homepage.views.LobbyView.as_view(),
         name="lobby",
     ),
+    django.urls.path(
+        "test_code/",
+        homepage.views.TestCodeView.as_view(),
+        name="test_code",
+    ),
 ]

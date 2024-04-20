@@ -8,7 +8,10 @@
   Ты лидер <br>
   {% endif %}
   {% if are_you_leader %}
+  <form method="post">
+  {% csrf_token %}
   <button type="submit" id="start-button" style="background-color:green;color:white;">НАЧАТЬ ИГРУ</button>
+  </form>
   <br>
   {% endif %}
   Игра пока не началась

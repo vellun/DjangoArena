@@ -3,7 +3,6 @@ from pathlib import Path
 
 import dotenv
 
-
 dotenv.load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,9 +30,12 @@ INSTALLED_APPS = [
     "core.apps.CoreConfig",
     "homepage.apps.HomepageConfig",
     "problems.apps.ProblemsConfig",
+    "groups.apps.GroupsConfig",
     "achievements.apps.AchievementsConfig",
     "notes.apps.NoteConfig",
     "tags.apps.TagsConfig",
+    "submissions.apps.SubmissionsConfig",
+    "requests.apps.RequestsConfig",
     # Django applications
     "django.contrib.admin",
     "django.contrib.auth",
@@ -147,7 +149,15 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "static/"
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/auth/login/"
+
+STATIC_URL = "/static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static_dev",
+]
 
 LOGIN_URL = "/auth/login/"
 LOGIN_REDIRECT_URL = "/"
