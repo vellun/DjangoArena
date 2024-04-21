@@ -8,9 +8,10 @@ import requests
 class CodeTester:
     def test(self, request, tasks, duel_id, user_id, finish_parameter):
         user_score = 0
+        cur_task = 1
         for task in tasks:
             str_parameter = (
-                "duel_" + duel_id + "_" + str(task.id) + "_" + str(user_id)
+                "duel_" + duel_id + "_" + str(cur_task) + "_" + str(user_id)
             )
             code = django.core.cache.cache.get(str_parameter)
             with task.tests_file.open() as file:
@@ -36,6 +37,8 @@ class CodeTester:
             user_score += (
                 data["ran_tests_count"] / data["failures_count"] * 100
             )
+            cur_task += 1
+
         user_score_parameter = (
             "duel_" + duel_id + "_" + str(user_id) + "_" + "score"
         )
