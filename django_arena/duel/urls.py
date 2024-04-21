@@ -11,6 +11,11 @@ urlpatterns = [
         name="duel",
     ),
     django.urls.path(
+        "<uidb>/results/",
+        duel.views.ResultsView.as_view(),
+        name="results",
+    ),
+    django.urls.path(
         "cache-code/<uidb>/",
         duel.views.CacheCodeView.as_view(),
         name="cache-code",
