@@ -8,6 +8,7 @@ app_name = "users"
 def set_form(form):
     return users.forms.set_custom_form(form)
 
+
 login_view = users.views.CustomLoginView.as_view(
     template_name="users/login.html",
     form_class=set_form(users.forms.CustomAuthenticationForm),
@@ -24,6 +25,13 @@ urlpatterns = [
         name="profile",
     ),
     django.urls.path("login/", login_view, name="login"),
-    django.urls.path("signup/", users.views.SignupView.as_view(), name="signup"),
+    django.urls.path(
+        "signup/",
+        users.views.SignupView.as_view(),
+        name="signup",
+    ),
     django.urls.path("logout/", logout_view, name="logout"),
 ]
+
+
+__all__ = []

@@ -1,8 +1,8 @@
 import django.http
 import django.views.decorators.http
 
-import users.forms
 import core.models
+import users.forms
 
 
 class ProfileView(django.views.View):
