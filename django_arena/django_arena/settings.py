@@ -3,7 +3,6 @@ from pathlib import Path
 
 import dotenv
 
-
 dotenv.load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,11 +31,13 @@ INSTALLED_APPS = [
     "notifications.apps.NotificationsConfig",
     "homepage.apps.HomepageConfig",
     "problems.apps.ProblemsConfig",
+    "groups.apps.GroupsConfig",
     "achievements.apps.AchievementsConfig",
     "notes.apps.NoteConfig",
     "tags.apps.TagsConfig",
     "duel.apps.DuelConfig",
     "submissions.apps.SubmissionsConfig",
+    "requests.apps.RequestsConfig",
     "lobby.apps.LobbyConfig",
     # Django applications
     "django.contrib.admin",
