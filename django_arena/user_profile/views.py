@@ -23,6 +23,7 @@ class ProfileView(django.views.View):
             core.models.User.objects.filter(id__gte=3200).count(),
         ]
         context = {
+            "title": "Профиль",
             "user": user,
             "user_rank": user_rank,
             "user_rank_distribution": user_rank_distribution,

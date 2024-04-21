@@ -16,6 +16,7 @@ class NoteListAllView(django.views.generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["tab"] = "all"
+        context["title"] = "Блог: популярное"
         return context
 
 
@@ -34,6 +35,7 @@ class NoteListMyView(django.views.generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["tab"] = "my"
+        context["title"] = "Блог: мои посты"
         return context
 
 
