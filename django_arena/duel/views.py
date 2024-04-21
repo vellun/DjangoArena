@@ -9,10 +9,10 @@ import django.views
 import django.views.generic
 import django.views.generic.edit
 
+from duel.code_tester import CodeTester
 import duel.forms
 import duel.models
 import submissions.models
-from duel.code_tester import CodeTester
 
 
 class DuelView(django.views.generic.edit.FormView):
@@ -157,7 +157,11 @@ class ResultsView(django.views.generic.View):
             tasks = cur_duel.problems.all()
             code_tester = CodeTester()
             code_tester.test(
-                request, tasks, uidb, request.user.id, str_parameter,
+                request,
+                tasks,
+                uidb,
+                request.user.id,
+                str_parameter,
             )
         elif currently_testing == "Finished":
             user_score_parameter = (

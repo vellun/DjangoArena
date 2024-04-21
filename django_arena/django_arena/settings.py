@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     "tags.apps.TagsConfig",
     "duel.apps.DuelConfig",
     "submissions.apps.SubmissionsConfig",
-    "requests.apps.RequestsConfig",
     "lobby.apps.LobbyConfig",
     # Django applications
     "django.contrib.admin",

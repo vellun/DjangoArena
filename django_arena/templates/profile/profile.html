@@ -12,11 +12,12 @@
         {% if user.shortname %}
           <span class="text-white social-profile__shortname">{{ user.shortname }}</span>
         {% endif %}
-        <span class="text-white social-profile__rating"><img src="{% static "images/icons/profile_rating.svg" %}" alt="rating_img"> Rating: {{ user.rating }}</span>
-        <span class="text-white social-profile__views"><img src="{% static "images/icons/profile_views.svg" %}" alt="views_img"> Views: {{ user.views }}</span>
+        <span class="text-white social-profile__rating"><img src="{% static "images/icons/profile_rating.svg" %}" alt="rating_img"> Рейтинг: {{ user.rating }}</span>
+        <span class="text-white social-profile__views"><img src="{% static "images/icons/profile_views.svg" %}" alt="views_img"> Просмотры: {{ user.views }}</span>
       </div>
     </div>
-    <span class="text-white social-profile__rank">Ранг: Чушпан</span>
+    <div class="text-white social-profile__rank">Ранг: {{ user_rank.0 }}</div>
+    <div class="text-white social-profile__rank">Мемный ранг: {{ user_rank.1 }}</div>
     <ul class="social-profile__social">
       <li class="text-white social-profile__social__items">Друзья: 0</li>
       <li class="text-white social-profile__social__items">Группы: 0</li>
@@ -98,7 +99,20 @@
         ],
         hoverOffset: 4,
     }]
-};
+  };
+  user_rank_distribution = [
+    {rank: "Новичок", count: {{user_rank_distribution.0}}},
+    {rank: "Ученик", count: {{user_rank_distribution.1}}},
+    {rank: "Специалист", count: {{user_rank_distribution.2}}},
+    {rank: "Эксперт", count: {{user_rank_distribution.3}}},
+    {rank: "Кандидат в мастера", count: {{user_rank_distribution.4}}},
+    {rank: "Мастер", count: {{user_rank_distribution.5}}},
+    {rank: "Международный мастер", count: {{user_rank_distribution.6}}},
+    {rank: "Гроссмейстер", count: {{user_rank_distribution.7}}},
+    {rank: "Международный гроссмейстер", count: {{user_rank_distribution.8}}},
+    {rank: "Легендарный гроссмейстер", count: {{user_rank_distribution.9}}},
+    {rank: "Легенда платформы", count: {{user_rank_distribution.10}}},
+  ];
 </script>
 <script src="{% static "js/profile.js" %}"></script>
 {% endblock %}

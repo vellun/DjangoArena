@@ -27,6 +27,11 @@
     color: #8DBBD6 !important;
 }
 
+.social-profile__rank {
+    width: 100%;
+    padding: 10px 0;
+}
+
 .social-profile__main {
     display: flex;
     justify-content: space-between;

@@ -6,5 +6,3 @@ urlpatterns = [
     path("test/<uidb>/", django_arena_testing.views.testing, name="testing"),
     path("admin/", admin.site.urls),
 ]
-
-

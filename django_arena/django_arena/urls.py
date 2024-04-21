@@ -11,9 +11,11 @@ import lobby.urls
 import notes.urls
 import notifications.urls
 import submissions.urls
+import user_profile.urls
 
 urlpatterns = [
     django.urls.path("", django.urls.include(homepage.urls)),
+    django.urls.path("profile/", django.urls.include(user_profile.urls)),
     django.urls.path(
         "notifications/",
         django.urls.include(notifications.urls),
