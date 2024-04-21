@@ -16,20 +16,40 @@
     <script type="text/javascript" src="{% static 'resizable-sections.js' %}"></script>
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "swiper/css/swiper-bundle.min.css" %}" rel="stylesheet">
-    <link href="{% static "style.css" %}" rel="stylesheet">
+    <link href="{% static "css/duel.css" %}" rel="stylesheet">
 </head>
 
 <body class="flex-container">
     <nav class="navbar navbar-expand-lg navbar-dark p-3">
         <div class="container-fluid">
             <img src="{% static "logo.jpg" %}" alt="" height="37" class="d-inline-block align-text-top">
+
+            <ul>
+                {% for i in cnt %}
+                <a href={% url "duel:duel" uidb forloop.counter %} style="text-decoration: none;">
+                    <li {% if forloop.counter == task_num %} class="li_task_active" {% else %}class="li_task"
+                        {% endif %}>{{ forloop.counter }}</li>
+                </a>
+                {% endfor %}
+            </ul>
+            <a href={% url "duel:results" uidb %}><button class="btn btn-primary">Submit Tasks</button></a>
+            <a href={% url "homepage:main" %}><button class="btn btn-primary">Leave Duel</button></a>
         </div>
     </nav>
+
     <div class="content">
         <div class="resizable-column" id="column1">
-            Column 1
+            <h2>{{ task.title }}</h2>
+            <hr>
+            <div>{{ task.text }}</div>
         </div>
-        <div class="resizer" id="resizer1"></div>
+        <div class="resizer" id="resizer1">
+            <div class="circles">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
         <div class="flex-vertical" id="column2">
             <div class="resizable-column" id="code-section">
                 <form method="post">
@@ -40,17 +60,30 @@
                     </div>
                 </form>
             </div>
-            <div class="resizer2" id="resizer3"></div>
+            <div class="resizer2" id="resizer3">
+                <div class="circles2">
+                    <div class="circle2"></div>
+                    <div class="circle2"></div>
+                    <div class="circle2"></div>
+                </div>
+            </div>
             <div class="resizable-column" id="tests-section">
                 Column 4
             </div>
         </div>
-        <div class="resizer" id="resizer2"></div>
+        <div class="resizer" id="resizer2">
+            <div class="circles">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
         <div class="resizable-column" id="column3">
             Column 3
         </div>
         <script>
             const cache_url = "{% url 'duel:cache-code' uidb %}";
+            const task_num = "{{ task_num }}";
             const csrf_token = "{{ csrf_token }}";
         </script>
         <script type="text/javascript" src="{% static 'code_editor.js' %}"></script>

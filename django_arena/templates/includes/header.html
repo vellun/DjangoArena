@@ -1,23 +1,59 @@
+{% load static %}
 <header class="header">
-  <ul>
-    <li>
-      <a href="{% url 'homepage:main' %}">Главная</a>
-    </li>
-    {% if request.user.is_authenticated %}
-    <li>
-      <a href="{% url 'groups:groups' %}">Группы пользователя</a>
-    </li>
-        <li>
-      <a href="{% url 'groups:new_groups' %}">Создать новую группу</a>
-    </li>
-    <li>
-      <a href="{% url 'groups:enter_user_in_group' %}">Присоединиться к группе</a>
-    </li>
-    {% endif %}
-    {% if request.user.is_staff or request.user.is_admin %}
-      <li>
-        <a href="{% url 'homepage:test_code' %}">Тестик</a>
+  <nav class="header__navbar navbar-header navbar navbar-expand-lg navbar-dark">
+    <div class="p-3">
+      <img src="{% static "logo.jpg" %}" alt="" height="37" class="d-inline-block align-text-top">
+    </div>
+    <ul class="navbar-header__menu navbar-header__menu-left menu-header p-3">
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'homepage:main' %}">Главная</a>
       </li>
-    {% endif %}
-  </ul>
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'notes:blog-all' %}">Блог</a>
+      </li>
+      {% if request.user.is_staff or request.user.is_admin %}
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'homepage:test_code' %}">Тестик</a>
+      </li>
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'admin:index' %}">Админочка</a>
+      </li>
+      {% endif %}
+      <li class="menu-header__item" id="header-notifications-button">
+        <img class="menu-header__img" src="{% static "images/icons/header_notifications.svg" %}" alt="">
+        <div id="menu-header-notifications-list" class="menu-header__notifications-list" style="display: none">
+          {% if notifications %}
+            <ul class="menu-header__notifications-list__list">
+              {% for notification in notifications %}
+                <li>
+                  <span class="menu-header__notifications-list__text">{{ notification }}</span>
+                  <div class="menu-header__notifications-list__remove" data-delete="{{ notification.id }}"><img class="menu-header__notifications-list__remove__img" src="{% static "images/icons/header_remove.svg" %}" alt=""></div>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-header__menu navbar-header__menu-right menu-header p-3">
+      {% comment %} {% if request.resolver_match.view_name == "homepage:main" %} {% endcomment %}
+      <li class="menu-header__item">
+        <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
+
+        <div id="modal" class="modal fade">
+          <div id="dialog" class="modal-dialog" hx-target="this"></div>
+        </div>
+        <button class="menu-header__link btn btn-primary" hx-get="{% url 'lobby:gameplay-settings' %}" hx-target="#dialog">НАЧАТЬ ЗАРУБУ</button>
+      </li>
+      {% comment %} {% endif %} {% endcomment %}
+      {% if request.user.is_authenticated %}
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'homepage:profile' request.user.id %}">Профиль</a>
+        </li>
+      {% endif %}
+      <script src={% static "htmx/htmx.min.js" %}></script>
+      <script src={% static "bootstrap/js/bootstrap.bundle.min.js" %}></script>
+      <script src={% static "popup/popup.js" %}></script>
+    </ul>
+  </nav>
 </header>

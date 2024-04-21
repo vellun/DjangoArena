@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1 class="blog-title">Arena<span>Blog<span></h1>
+        <ul class="nav nav-tabs" style="border: none;margin-bottom: -2px">
+            <li class="nav-item">
+                <a class="nav-link" {% if tab == "all" %}style="background-color: #343a39;border:none" {% else %}
+                    style="border:none" {% endif %} href={% url "notes:blog-all" %}>Популярное</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" {% if tab == "my" %}style="background-color: #343a39;border: none;" {% else %}
+                    style="border:none" {% endif %} href={% url "notes:blog-my" %}>Мои посты</a>
+            </li>
+        </ul>
+        <div class="card" id="parent_card">
+            <div class="card-body">
+                {% for note in notes %}
+                <a style="text-decoration:none" href={% url "notes:detail" note.id %}>{% include "includes/note.html" %}</a>
+                {% empty %}
+                <div class="no-posts">
+                    <img id="raccoon" alt="" src={% static "images/sad-raccoon.png" %} height="170" loading="lazy">
+                    <div>
+                        <p><span style="color: #74decb">Е</span>нот грустит без новых знаний( Поделитесь своим опытом!
+                            Опубликуйте первый пост!</p>
+                        <a href={% url "notes:create" %}><button class="create-post-btn btn btn-primary">Создать
+                                публикацию</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% comment %} style="background-color: #343a39; border: none" {% endcomment %}

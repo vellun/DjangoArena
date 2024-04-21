@@ -1,62 +1,12 @@
 import re
 import uuid
 
-from django.core.cache import cache
 import django.http
-from django.http import HttpResponse
 import django.shortcuts
 import django.views.decorators.http
 
-
-class CodeTester:
-    def __init__(self, code, tests):
-        self.code = code
-        self.tests_code = tests
-        self.function_names = []
-        self.exec_code = self.create_file()
-
-    def create_file(self):
-        regex = r"def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\("
-        function_names = re.findall(regex, self.tests_code)
-        function_names = [name + "()" for name in function_names]
-        self.function_names = function_names
-        return self.code + "\n" + self.tests_code
-
-    def validate(self):
-        stop_words = ["print(", "exit(", "sleep("]
-        for word in stop_words:
-            if word in self.exec_code:
-                return False
-
-        return True
-
-    def run_tests(self):
-        cur_errors = ""
-        tests_all = len(self.function_names)
-        tests_passed = 0
-        cur_code = ""
-        for function_name in self.function_names:
-            try:
-                globals_dict = {}
-                cur_code = self.exec_code + "\n" + function_name
-                exec(cur_code, globals_dict, globals_dict)
-            except AssertionError as e:
-                print("AssertionError", e)
-                print(cur_code)
-                cur_errors += str(e)
-            except SyntaxError as e:
-                print("SyntaxError", e)
-                cur_errors += str(e)
-            except NameError as e:
-                print("NameError", e)
-                cur_errors += str(e)
-            except Exception as e:
-                print("Unexpected error, probably send it to feedback form", e)
-                cur_errors += str(e)
-            else:
-                tests_passed += 1
-
-        return tests_all, tests_passed, cur_errors
+import core.models
+from duel.code_tester import CodeTester
 
 
 class HomeView(django.views.View):
@@ -66,51 +16,6 @@ class HomeView(django.views.View):
             self.request,
             template_name="homepage/main.html",
             context=context,
-        )
-
-
-class LobbyView(django.views.View):
-    def get(self, *args, **kwargs):
-        uidb_url = kwargs.get("uidb")
-        game_started = cache.get("lobby_game_started_" + uidb_url)
-        cur_lobby = set(cache.get("lobby_users_" + uidb_url) or [])
-        are_you_in_game = self.request.user.id in cur_lobby
-
-        if not self.request.user.is_authenticated or (
-            game_started and not are_you_in_game
-        ):
-            return HttpResponse("ВОООООООООООООООООН")
-
-        cur_lobby.add(self.request.user.id)
-        cache.set("lobby_users_" + uidb_url, set(cur_lobby))
-        if cache.get("lobby_leader_" + uidb_url) is None:
-            cache.set("lobby_leader_" + uidb_url, self.request.user.id)
-
-        if cache.get("lobby_game_started_" + uidb_url) is None:
-            cache.set("lobby_game_started_" + uidb_url, False)
-
-        are_you_leader = (
-            cache.get("lobby_leader_" + uidb_url) == self.request.user.id
-        )
-
-        context = {
-            "title": "Главная",
-            "are_you_leader": are_you_leader,
-            "game_started": game_started,
-        }
-
-        return django.shortcuts.render(
-            self.request,
-            "homepage/lobby.html",
-            context,
-        )
-
-    def post(self, *args, **kwargs):
-        uidb_url = kwargs.get("uidb")
-        cache.set("lobby_game_started_" + uidb_url, True)
-        # Start duel
-        return django.shortcuts.redirect(
-            django.urls.reverse("duel:duel", kwargs={"uidb": uidb_url}),
         )
 
 
@@ -158,6 +63,20 @@ class TestCodeView(django.views.View):
             errors=cur_errors,
             tests_all=tests_all,
             tests_passed=tests_passed,
+        )
+
+
+class ProfileView(django.views.View):
+    def get(self, *args, **kwargs):
+        user_id = kwargs.get("user_id")
+        user = django.shortcuts.get_object_or_404(core.models.User, pk=user_id)
+        context = {
+            "user": user,
+        }
+        return django.shortcuts.render(
+            self.request,
+            "homepage/profile.html",
+            context,
         )
 
 

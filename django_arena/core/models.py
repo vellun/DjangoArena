@@ -3,12 +3,21 @@ from django.db import models
 
 
 class User(AbstractUser):
+    shortname = models.CharField(max_length=16, blank=True, null=True)
+    username = models.CharField(max_length=16, unique=True)
     rating = models.IntegerField(default=1000)
     views = models.PositiveIntegerField(default=0)
     friends = models.ManyToManyField(
         "self",
         blank=True,
     )
+    github_link = models.URLField(blank=True, null=True)
+    gitlab_link = models.URLField(blank=True, null=True)
+    games_played = models.PositiveIntegerField(default=0)
+    games_won = models.PositiveIntegerField(default=0)
+    easy_problems = models.PositiveIntegerField(default=0)
+    medium_problems = models.PositiveIntegerField(default=0)
+    hard_problems = models.PositiveIntegerField(default=0)
 
     class Meta:
         verbose_name = "пользователь"

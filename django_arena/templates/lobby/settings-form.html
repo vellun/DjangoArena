@@ -1,0 +1,33 @@
+{% load static %}
+<div class="modal-content">
+    {% csrf_token %}
+    <div class="modal-body">
+    <span data-bs-dismiss="modal" class="close">&times;</span>
+    <h3 >Настройки соревнования</h3>
+    <br>
+    <div class="tab">
+        <input {% if checked_first %} checked {% endif %} id="tab-btn-1" name="tab-btn" type="radio" value="">
+        <label for="tab-btn-1">Общий режим</label>
+        <input {% if not checked_first %} checked {% endif %} id="tab-btn-2" name="tab-btn" type="radio" value="">
+        <label for="tab-btn-2">Детальная настройка</label>
+        <div class="tab-content" id="content-1">
+            <form hx-post="{{ request.path }}">
+                <input name="form_type" value="form1" style="display: none"></input>
+                {% with form=form1 %}
+                {% include "includes/form.html" %}
+                {% endwith %}
+                <button type="submit" name="submit_button">В лобби</button>
+            </form>
+        </div>
+        <div class="tab-content" id="content-2">
+            <form hx-post="{{ request.path }}">
+                <input name="form_type" value="form2" style="display: none"></input>
+                {% with form=form2  %}
+                {% include "includes/form.html" %}
+                {% endwith %}
+                <button type="submit" name="submit_button">В лобби</button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
