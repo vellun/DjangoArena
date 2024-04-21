@@ -104,7 +104,8 @@ class ResultsView(django.views.generic.View):
 
         if currently_testing is None:
             testing_thread = Thread(
-                target=test_code, args=(uidb, request.user.id, str_parameter),
+                target=test_code,
+                args=(uidb, request.user.id, str_parameter),
             )
             testing_thread.start()
             django.core.cache.cache.set(str_parameter, "Testing")
