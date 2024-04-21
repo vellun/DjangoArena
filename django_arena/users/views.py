@@ -1,6 +1,7 @@
 import django.http
 import django.views.decorators.http
 
+import users.forms
 import core.models
 
 
@@ -30,9 +31,58 @@ class ProfileView(django.views.View):
         }
         return django.shortcuts.render(
             self.request,
-            "profile/profile.html",
+            "users/profile.html",
             context,
         )
+
+
+class SignupView(django.views.View):
+    def get(self, request):
+        form = users.forms.SignUpForm(request.POST or None)
+        template = "users/signup.html"
+        context = {
+            "form": form,
+        }
+        return django.shortcuts.render(request, template, context)
+
+    def post(self, request):
+        form = users.forms.SignUpForm(request.POST or None)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+
+            django.contrib.messages.success(
+                request,
+                "Вы успешно зарегистрированы",
+            )
+
+            return django.shortcuts.redirect(
+                django.urls.reverse("users:login"),
+            )
+
+        return self.get(request)
+
+
+class CustomLoginView(django.contrib.auth.views.LoginView):
+    def form_invalid(self, form):
+        user = core.models.User.objects.get_by_natural_key(
+            form.cleaned_data["username"],
+        )
+
+        if (
+            user is not None
+            and hasattr(user, "profile")
+            and user.profile.attempts_count
+            >= django.conf.settings.MAX_AUTH_ATTEMPTS
+        ):
+            return django.http.HttpResponseRedirect(
+                django.urls.reverse(
+                    "users:deactivate",
+                    kwargs={"username": user.username},
+                ),
+            )
+
+        return super().form_invalid(form)
 
 
 __all__ = []
