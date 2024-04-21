@@ -45,16 +45,16 @@ def testing(request, uidb):
         tests = json_data["tests"]
         tests = tests.replace("~~~", uidb)
         print(code)
-        with Path(f"{uidb}/views.py", "w").open() as file:
+        with Path(f"{uidb}/views.py").open(mode="w") as file:
             file.writelines(code)
 
-        with Path(f"{uidb}/tests.py", "w").open() as file:
+        with Path(f"{uidb}/tests.py").open(mode="w") as file:
             file.writelines(tests)
 
-        with Path(f"{uidb}/urls.py", "w").open() as file:
+        with Path(f"{uidb}/urls.py").open(mode="w") as file:
             file.writelines(return_url_file(uidb))
 
-        with Path("django_arena_testing/urls.py", "a").open() as file:
+        with Path("django_arena_testing/urls.py").open(mode="a") as file:
             new_url = [
                 f"import {uidb}.views\n",
                 f'urlpatterns += [path("{uidb}/", {uidb}'
@@ -86,11 +86,11 @@ def testing(request, uidb):
         shutil.rmtree(uidb)
         text_to_remove = uidb
 
-        with Path("django_arena_testing/urls.py", "r").open() as file:
+        with Path("django_arena_testing/urls.py").open(mode="r") as file:
             lines = file.readlines()
 
         lines = [line for line in lines if text_to_remove not in line]
-        with Path("django_arena_testing/urls.py", "w").open() as file:
+        with Path("django_arena_testing/urls.py").open(mode="w") as file:
             file.writelines(lines)
 
         return django.http.JsonResponse(
