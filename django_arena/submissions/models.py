@@ -2,6 +2,7 @@ import django.conf
 import django.core.validators
 import django.db.models
 
+import duel.models
 import problems.models
 
 
@@ -22,6 +23,13 @@ class Submission(django.db.models.Model):
 
     problem = django.db.models.ForeignKey(
         problems.models.Problem,
+        on_delete=django.db.models.CASCADE,
+        related_name="submissions",
+        related_query_name="submissions",
+    )
+
+    duel = django.db.models.ForeignKey(
+        duel.models.Duel,
         on_delete=django.db.models.CASCADE,
         related_name="submissions",
         related_query_name="submissions",

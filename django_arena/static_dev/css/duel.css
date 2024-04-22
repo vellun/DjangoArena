@@ -133,3 +133,55 @@ nav {
   display: inline-block;
   position: relative;
 }
+
+/* section with task description and submissions */
+
+.duel_tab {
+  color: #c1c8c9;
+  border: none;
+  position: relative;
+  display: inline-block;
+}
+
+.duel_tab::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: 0;
+  height: 2px;
+  background-color: #77ddd0;
+  transition: all 0.3s ease-out;
+  transform: translateX(-50%);
+}
+
+.duel_tab:hover {
+  border-color: transparent;
+  color: #ddf6f8;
+}
+
+.duel_tab:hover::after {
+  width: 70%;
+  transform: translateX(-50%);
+  border-color: transparent;
+}
+
+.duel_tab.duel_active {
+  color: #ddf6f8;
+}
+
+.duel_tab.duel_active::after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  bottom: 0;
+  display: block;
+  width: 80%;
+  height: 2px;
+  background: #77ddd0;
+}
+
+.duel_nav_tabs .nav-link:hover {
+  border-color: transparent;
+  font-size: 18px;
+}

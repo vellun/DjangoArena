@@ -1,31 +1,38 @@
-from django.contrib.auth.models import AbstractUser
-from django.db import models
+import django.contrib.auth.models
+import django.db.models
 
 
-class UserManager(models.Manager):
+class UserManager(django.contrib.auth.models.BaseUserManager):
     def is_note_liked(self, note_id):
         return User.objects.filter(id=self.id, note_likes__id=note_id).exists()
 
     def is_note_disliked(self, note_id):
-        return User.objects.filter(id=self.id, note_dislikes__id=note_id).exists()
+        return User.objects.filter(
+            id=self.id,
+            note_dislikes__id=note_id,
+        ).exists()
 
 
-class User(AbstractUser):
-    shortname = models.CharField(max_length=16, blank=True, null=True)
-    username = models.CharField(max_length=16, unique=True)
-    rating = models.IntegerField(default=1000)
-    views = models.PositiveIntegerField(default=0)
-    friends = models.ManyToManyField(
+class User(django.contrib.auth.models.AbstractUser):
+    shortname = django.db.models.CharField(
+        max_length=16,
+        blank=True,
+        null=True,
+    )
+    username = django.db.models.CharField(max_length=16, unique=True)
+    rating = django.db.models.IntegerField(default=1000)
+    views = django.db.models.PositiveIntegerField(default=0)
+    friends = django.db.models.ManyToManyField(
         "self",
         blank=True,
     )
-    github_link = models.URLField(blank=True, null=True)
-    gitlab_link = models.URLField(blank=True, null=True)
-    games_played = models.PositiveIntegerField(default=0)
-    games_won = models.PositiveIntegerField(default=0)
-    easy_problems = models.PositiveIntegerField(default=0)
-    medium_problems = models.PositiveIntegerField(default=0)
-    hard_problems = models.PositiveIntegerField(default=0)
+    github_link = django.db.models.URLField(blank=True, null=True)
+    gitlab_link = django.db.models.URLField(blank=True, null=True)
+    games_played = django.db.models.PositiveIntegerField(default=0)
+    games_won = django.db.models.PositiveIntegerField(default=0)
+    easy_problems = django.db.models.PositiveIntegerField(default=0)
+    medium_problems = django.db.models.PositiveIntegerField(default=0)
+    hard_problems = django.db.models.PositiveIntegerField(default=0)
     objects = UserManager()
 
     def __str__(self):

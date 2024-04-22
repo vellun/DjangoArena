@@ -69,7 +69,7 @@ class LobbyView(django.views.View):
         return django.shortcuts.redirect(
             django.urls.reverse(
                 "duel:duel",
-                kwargs={"uidb": uidb_url, "task_num": 1},
+                kwargs={"uidb": uidb_url, "task_num": 1, "tab": "description"},
             ),
         )
 

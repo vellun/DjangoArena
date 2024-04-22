@@ -29,34 +29,41 @@ class DuelView(django.views.generic.edit.FormView):
         context = super().get_context_data(**kwargs)
         uidb = self.kwargs["uidb"]
         task_num = self.kwargs.get("task_num", 1)
-
-        context["uidb"] = uidb
+        tab = self.kwargs["tab"]
 
         cur_duel = django.shortcuts.get_object_or_404(
             duel.models.Duel,
             uuid=uidb,
         )
         tasks = cur_duel.problems.all()
-        task = tasks[task_num - 1]
+        task = tasks[int(task_num) - 1]
 
-        duration = datetime.timedelta(
-            seconds=10,
-        )  # Можно пока изменять секунды, это на время разработки
+        if tab == "submissions":
+            subs = submissions.models.Submission.objects.filter(
+                duel__uuid=uidb,
+                problem__id=task.id,
+            ).order_by("-pk")
+            context["submissions"] = subs
+
+        # duration = datetime.timedelta(
+        #     seconds=20,
+        # )  # Можно на время разработки регулировать секунды
 
         # А в итоге будет так
-        # duration = datetime.timedelta(
-        #     seconds=sum(task.duration.total_seconds() for task in tasks),
-        # )
+        duration = datetime.timedelta(
+            seconds=sum(task.duration.total_seconds() for task in tasks),
+        )
 
         hours = duration.seconds // 3600
         minutes = (duration.seconds % 3600) // 60
         seconds = duration.seconds % 60
 
         context["duration"] = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
-
+        context["uidb"] = uidb
+        context["task_num"] = int(task_num)
+        context["tab"] = tab
         context["task"] = task  # current task
         context["cnt"] = tasks
-        context["task_num"] = task_num
         context["title"] = "Дуэль"
 
         return context
@@ -82,6 +89,7 @@ class DuelView(django.views.generic.edit.FormView):
             score=random.randrange(100),
             problem_id=task_num,
             user_id=self.request.user.id,
+            duel=duel.models.Duel.objects.get(uuid=uidb_url),
         )
         submission.save()
 

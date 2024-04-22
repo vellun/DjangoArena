@@ -26,13 +26,14 @@
 
             <ul>
                 {% for i in cnt %}
-                <a href={% url "duel:duel" uidb forloop.counter %} style="text-decoration: none;">
+                <a href={% url "duel:duel" uidb forloop.counter "description" %} style="text-decoration: none;">
                     <li {% if forloop.counter == task_num %} class="li_task_active" {% else %}class="li_task"
                         {% endif %}>{{ forloop.counter }}</li>
                 </a>
                 {% endfor %}
             </ul>
-            <div id="timer">
+            <div>Осталось времени: <span id="timer">
+                </span>
             </div>
             <a href={% url "duel:results" uidb %}><button class="btn btn-primary">Submit Tasks</button></a>
             <a href={% url "duel:leave" uidb %}><button class="btn btn-primary">Leave Duel</button></a>
@@ -41,9 +42,25 @@
 
     <div class="content">
         <div class="resizable-column" id="column1">
+            <ul class="duel_nav_tabs nav nav-tabs" style="border: none;margin-top: 1%;font-size:18px">
+                <li class="duel_nav_item nav-item">
+                    <a class="duel_tab {% if tab == "description" %} duel_active {% endif %} nav-link"
+                        href={% url "duel:duel" uidb task_num "description" %}>Условие</a>
+                </li>
+                <li class="nav-item">
+                    <a class="duel_tab {% if tab == "submissions" %} duel_active {% endif %} nav-link"
+                        href={% url "duel:duel" uidb task_num "submissions" %}>Отправки</a>
+                </li>
+            </ul>
+            {% if tab == "submissions" %}
+                {% for sb in submissions %}
+                    <div>{{ sb.created_at }}</div>
+                {% endfor %}
+            {% else %}
             <h2>{{ task.title }}</h2>
             <hr>
             <div>{{ task.text }}</div>
+            {% endif %}
         </div>
         <div class="resizer" id="resizer1">
             <div class="circles">

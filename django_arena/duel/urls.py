@@ -5,8 +5,8 @@ import duel.views
 app_name = "duel"
 
 urlpatterns = [
-    django.urls.path(
-        "<uidb>/<int:task_num>/",
+    django.urls.re_path(
+        r"^(?P<uidb>\w+)/(?P<task_num>\d+)/(?P<tab>description|submissions)/$",
         duel.views.DuelView.as_view(),
         name="duel",
     ),
