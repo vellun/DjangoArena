@@ -24,6 +24,11 @@ urlpatterns = [
         users.views.ProfileView.as_view(),
         name="profile",
     ),
+    django.urls.path(
+        "friends/",
+        users.views.FriendsView.as_view(),
+        name="friends",
+    ),
     django.urls.path("login/", login_view, name="login"),
     django.urls.path(
         "signup/",

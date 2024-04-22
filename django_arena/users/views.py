@@ -85,4 +85,18 @@ class CustomLoginView(django.contrib.auth.views.LoginView):
         return super().form_invalid(form)
 
 
+class FriendsView(django.views.View):
+    def get(self, *args, **kwargs):
+        cur_user = self.request.user
+        friends = cur_user.friends.all()
+        context = {
+            "friends": friends,
+        }
+        return django.shortcuts.render(
+            self.request,
+            template_name="users/friends.html",
+            context=context,
+        )
+
+
 __all__ = []
