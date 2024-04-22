@@ -75,4 +75,12 @@ class DetailedGameplaySettingsForm(BootstrapForm):
             )
 
 
-__all__ = [CommonGameplaySettingsForm, DetailedGameplaySettingsForm]
+class InviteStrangersForm(BootstrapForm):
+    username = django.forms.CharField(max_length=255, required=True)
+
+
+__all__ = [
+    CommonGameplaySettingsForm,
+    DetailedGameplaySettingsForm,
+    InviteStrangersForm,
+]
