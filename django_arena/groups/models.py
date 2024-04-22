@@ -43,4 +43,26 @@ class GroupUser(django.db.models.Model):
     )
 
 
-__all__ = [Group]
+class GroupInvite(django.db.models.Model):
+    ANSWER = (
+        (1, "Принять"),
+        (0, "Отклонить"),
+    )
+    user = django.db.models.ForeignKey(
+        core.models.User,
+        on_delete=django.db.models.CASCADE,
+    )
+    group = django.db.models.OneToOneField(
+        Group,
+        on_delete=django.db.models.CASCADE,
+    )
+    text = django.db.models.CharField(
+        max_length=255,
+    )
+    accept = django.db.models.BooleanField(
+        choices=ANSWER,
+        default=0,
+    )
+
+
+__all__ = [Group, GroupUser, GroupInvite]

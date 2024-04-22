@@ -17,4 +17,19 @@ urlpatterns = [
         groups.views.GroupEnterUser.as_view(),
         name="enter_user_in_group",
     ),
+    django.urls.path(
+        "invitations/",
+        groups.views.GroupInvitations.as_view(),
+        name="invitations",
+    ),
+    django.urls.path(
+        "invite_request/",
+        groups.views.GroupInviteRequest.as_view(),
+        name="invite_request",
+    ),
+    django.urls.path(
+        "invitations/<int:pk>/",
+        groups.views.GroupInviteCard.as_view(),
+        name="invite_card",
+    ),
 ]

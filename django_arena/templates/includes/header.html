@@ -11,7 +11,13 @@
       <a href="{% url 'groups:new_groups' %}">Создать новую группу</a>
     </li>
     <li>
-      <a href="{% url 'groups:enter_user_in_group' %}">Присоединиться к группе</a>
+      <a href="{% url 'groups:enter_user_in_group' %}">Присоединиться к публичной группе</a>
+    </li>
+    <li>
+      <a href="{% url 'groups:invite_request' %}">Пригласить в группу</a>
+    </li>
+    <li>
+      <a href="{% url 'groups:invitations' %}">Приглашения</a>
     </li>
     {% endif %}
     {% if request.user.is_staff or request.user.is_admin %}

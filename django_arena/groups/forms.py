@@ -27,4 +27,16 @@ class EnterGroupForm(django.forms.ModelForm):
         }
 
 
-__all__ = [GroupForm]
+class InviteGroupForm(django.forms.Form):
+    user = django.forms.CharField(max_length=255)
+    groups = django.forms.CharField(max_length=255)
+    text = django.forms.CharField(max_length=255)
+
+
+class AcceptRejectForm(django.forms.ModelForm):
+    class Meta:
+        model = groups.models.GroupInvite
+        fields = (groups.models.GroupInvite.accept.field.name,)
+
+
+__all__ = [GroupForm, InviteGroupForm]
