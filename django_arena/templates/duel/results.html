@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<span class="text-white">Results</span>
-{{ user_score }}
+<div class="results">
+  <div class="text-white results__title">Результаты</div>
+  <div class="text-white results__user-score">
+    Ваш рейтинг: {{ user_score }}
+  </div>
+</div>
 {% endblock %}

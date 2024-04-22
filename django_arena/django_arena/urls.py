@@ -11,11 +11,11 @@ import lobby.urls
 import notes.urls
 import notifications.urls
 import submissions.urls
-import user_profile.urls
+import users.urls
 
 urlpatterns = [
     django.urls.path("", django.urls.include(homepage.urls)),
-    django.urls.path("profile/", django.urls.include(user_profile.urls)),
+    django.urls.path("users/", django.urls.include(users.urls)),
     django.urls.path(
         "notifications/",
         django.urls.include(notifications.urls),
@@ -26,7 +26,6 @@ urlpatterns = [
     django.urls.path("groups/", django.urls.include(groups.urls)),
     django.urls.path("blog/", django.urls.include(notes.urls)),
     django.urls.path("admin/", django.contrib.admin.site.urls),
-    django.urls.path("auth/", django.urls.include(django.contrib.auth.urls)),
 ]
 
 if django.conf.settings.DEBUG:

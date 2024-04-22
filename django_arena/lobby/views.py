@@ -51,7 +51,7 @@ class LobbyView(django.views.View):
         )
 
         context = {
-            "title": "Главная",
+            "title": "Лобби",
             "are_you_leader": are_you_leader,
             "game_started": game_started,
         }

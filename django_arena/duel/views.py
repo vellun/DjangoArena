@@ -1,5 +1,6 @@
 import datetime
 import random
+from threading import Thread
 
 import django.contrib
 import django.core.cache
@@ -11,7 +12,7 @@ import django.views
 import django.views.generic
 import django.views.generic.edit
 
-from duel.code_tester import CodeTester
+from duel.code_tester import test_code
 import duel.forms
 import duel.models
 import submissions.models
@@ -56,6 +57,7 @@ class DuelView(django.views.generic.edit.FormView):
         context["task"] = task  # current task
         context["cnt"] = tasks
         context["task_num"] = task_num
+        context["title"] = "Дуэль"
 
         return context
 
@@ -132,61 +134,9 @@ class LeaveDuelView(django.views.generic.View):
         return django.shortcuts.redirect(django.urls.reverse("homepage:main"))
 
 
-class TestCodeView(django.views.View):
-    def get(self, *args, **kwargs):
-        if "errors" in kwargs:
-            errors = kwargs["errors"]
-            tests_all = kwargs["tests_all"]
-            tests_passed = kwargs["tests_passed"]
-        else:
-            errors = ""
-            tests_all = "Тестов нет"
-            tests_passed = "Тестов нет"
-
-        return django.shortcuts.render(
-            self.request,
-            "homepage/test.html",
-            context={
-                "errors": errors,
-                "tests_all": tests_all,
-                "tests_passed": tests_passed,
-            },
-        )
-
-    def post(self, *args, **kwargs):
-        code_text = self.request.POST.get("code")
-        tests_text = self.request.POST.get("test")
-        code_tester = CodeTester(code_text, tests_text)
-        validation_res = code_tester.validate()
-        if not validation_res:
-            cur_errors = "Недопустимые ключевые слова в тексте"
-            return self.get(args, kwargs, errors=cur_errors)
-
-        tests_all, tests_passed, cur_errors = code_tester.run_tests()
-        print(
-            "Тестов всего было вот столько:",
-            tests_all,
-            "а прошло всего",
-            tests_passed,
-        )
-        print(cur_errors)
-        return self.get(
-            args,
-            kwargs,
-            errors=cur_errors,
-            tests_all=tests_all,
-            tests_passed=tests_passed,
-        )
-
-
 class ResultsView(django.views.generic.View):
     def get(self, request, *args, **kwargs):
         uidb = self.kwargs["uidb"]
-
-        cur_duel = django.shortcuts.get_object_or_404(
-            duel.models.Duel,
-            uuid=uidb,
-        )
 
         str_parameter = (
             "duel_"
@@ -198,21 +148,18 @@ class ResultsView(django.views.generic.View):
         )
         currently_testing = django.core.cache.cache.get(str_parameter)
 
-        user_score = None
+        user_score = "Pending..."
 
         print(currently_testing)
 
         if currently_testing is None:
-            django.core.cache.cache.set(str_parameter, "Testing")
-            tasks = cur_duel.problems.all()
-            code_tester = CodeTester()
-            code_tester.test(
-                request,
-                tasks,
-                uidb,
-                request.user.id,
-                str_parameter,
+            testing_thread = Thread(
+                target=test_code,
+                args=(uidb, request.user.id, str_parameter),
             )
+            testing_thread.start()
+            django.core.cache.cache.set(str_parameter, "Testing")
+
         elif currently_testing == "Finished":
             user_score_parameter = (
                 "duel_" + uidb + "_" + str(request.user.id) + "_" + "score"

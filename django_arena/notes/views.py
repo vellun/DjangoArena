@@ -2,9 +2,11 @@ import django.contrib.auth.mixins
 import django.shortcuts
 import django.urls
 import django.views.generic
+import django.http
 
 import notes.forms
 import notes.models
+import core.models
 
 
 class NoteListAllView(django.views.generic.ListView):
@@ -16,6 +18,7 @@ class NoteListAllView(django.views.generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["tab"] = "all"
+        context["title"] = "Блог: популярное"
         return context
 
 
@@ -34,6 +37,7 @@ class NoteListMyView(django.views.generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["tab"] = "my"
+        context["title"] = "Блог: мои посты"
         return context
 
 
@@ -88,4 +92,40 @@ class NoteDeleteView(
         return self.request.user == post.author
 
 
-__all__ = [NoteListAllView, NoteListMyView, NoteDetailView, NoteCreateView]
+class NoteLikeView(django.views.View):
+    def post(self, *args, **kwargs):
+        note_id = self.request.POST.get("note_id")
+        user_id = self.request.POST.get("user_id")
+        note = notes.models.Note.objects.get(id=note_id)
+        user = core.models.User.objects.get(id=user_id)
+        if notes.models.Note.objects.filter(id=note.id, user_dislikes__id=user.id).exists():
+            note.user_dislikes.remove(user)
+            note.dislikes -= 1
+            note.save()
+        if notes.models.Note.objects.filter(id=note.id, user_likes__id=user.id).exists():
+            return django.http.HttpResponse("Already liked", status=400)
+        note.user_likes.add(user)
+        note.likes += 1
+        note.save()
+        return django.http.HttpResponse("Liked successfully", status=200)
+
+
+class NoteDislikeView(django.views.View):
+    def post(self, *args, **kwargs):
+        note_id = self.request.POST.get("note_id")
+        user_id = self.request.POST.get("user_id")
+        note = notes.models.Note.objects.get(id=note_id)
+        user = core.models.User.objects.get(id=user_id)
+        if notes.models.Note.objects.filter(id=note.id, user_likes__id=user.id).exists():
+            note.user_likes.remove(user)
+            note.likes -= 1
+            note.save()
+        if notes.models.Note.objects.filter(id=note.id, user_dislikes__id=user.id).exists():
+            return django.http.HttpResponse("Already disliked", status=400)
+        note.user_dislikes.add(user)
+        note.dislikes += 1
+        note.save()
+        return django.http.HttpResponse("Disliked successfully", status=200)
+
+
+__all__ = []

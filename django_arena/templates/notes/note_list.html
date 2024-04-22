@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% block title %}
+{{ title }}
+{% endblock %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -12,6 +15,9 @@
             <li class="nav-item">
                 <a class="nav-link" {% if tab == "my" %}style="background-color: #343a39;border: none;" {% else %}
                     style="border:none" {% endif %} href={% url "notes:blog-my" %}>Мои посты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="border:none" href={% url "notes:create" %}>Создать публикацию</a>
             </li>
         </ul>
         <div class="card" id="parent_card">
@@ -32,7 +38,35 @@
             </div>
         </div>
     </div>
+    <script>
+      document.querySelectorAll(".like-form").forEach((el) => { el.addEventListener("submit", function(event) {
+          event.preventDefault();
+          var formData = new FormData(this);
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "{% url 'notes:like' %}", true);
+          xhr.onload = function() {
+              if (xhr.status === 200) {
+                  console.log(xhr.responseText);
+              } else {
+                  console.error('Request failed: ' + xhr.status);
+              }
+          };
+          xhr.send(formData);
+      })});
+      document.querySelectorAll(".dislike-form").forEach((el) => { el.addEventListener("submit", function(event) {
+          event.preventDefault();
+          var formData = new FormData(this);
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "{% url 'notes:dislike' %}", true);
+          xhr.onload = function() {
+              if (xhr.status === 200) {
+                  console.log(xhr.responseText);
+              } else {
+                  console.error('Request failed: ' + xhr.status);
+              }
+          };
+          xhr.send(formData);
+      })});
+    </script>
 </div>
 {% endblock %}
-
-{% comment %} style="background-color: #343a39; border: none" {% endcomment %}

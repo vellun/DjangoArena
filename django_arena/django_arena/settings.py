@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "achievements.apps.AchievementsConfig",
     "notes.apps.NoteConfig",
     "tags.apps.TagsConfig",
+    "users.apps.UsersConfig",
     "duel.apps.DuelConfig",
     "submissions.apps.SubmissionsConfig",
     "lobby.apps.LobbyConfig",
@@ -175,3 +176,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "core.User"
 
 ARENA_TESTING_HOST = "localhost:8001"
+
+LOGIN_URL = "/users/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
