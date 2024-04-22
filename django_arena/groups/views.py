@@ -10,18 +10,66 @@ import groups.forms
 import groups.models
 
 
+class GroupPage(django.views.View):
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            context = {
+                "title": "Группа",
+                "item": kwargs.get("pk"),
+                "delete": groups.forms.DeleteForm(),
+                "user": groups.models.GroupUser.objects.get(
+                    user_id=self.request.user.id,
+                    group_id=kwargs.get("pk"),
+                ),
+            }
+            return django.shortcuts.render(
+                self.request,
+                "group/group.html",
+                context,
+            )
+
+        django.contrib.messages.info(self.request, "Вы не аутентифицированы")
+        return django.shortcuts.redirect(
+            django.shortcuts.reverse("homepage:main"),
+        )
+
+    def post(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            form = groups.forms.DeleteForm(self.request.POST)
+            if form.is_valid():
+                if self.request.POST.get("is_delete") == "Удалить":
+                    groups.models.Group.objects.get(
+                        id=kwargs.get("pk"),
+                    ).delete()
+                    django.contrib.messages.info(
+                        self.request,
+                        "Группа успешно удалена",
+                    )
+                    return django.shortcuts.redirect(
+                        django.shortcuts.reverse("homepage:main"),
+                    )
+
+            django.contrib.messages.info(self.request, "Форма не валидна")
+            return django.shortcuts.redirect(
+                django.shortcuts.reverse("homepage:main"),
+            )
+
+        django.contrib.messages.info(self.request, "Вы не аутентифицированы")
+        return django.shortcuts.redirect(
+            django.shortcuts.reverse("homepage:main"),
+        )
+
+
 class GroupView(django.views.View):
     def get(self, *args, **kwargs):
-        sub_request = groups.models.GroupUser.objects.filter(
-            user_id=self.request.user.id,  # TODO optimize
-        ).only("group_id")
-        list_group_id = [x.group_id for x in sub_request]
-        request = groups.models.Group.objects.filter(
-            id__in=list_group_id,
-        ).only("name")
+        user = groups.models.GroupUser.objects.filter(
+            user_id=self.request.user.id,
+        )
         context = {
             "title": "Группы",
-            "groups": request,
+            "groups": user.select_related(
+                "group",
+            ),
         }
         return django.shortcuts.render(
             request=self.request,
@@ -216,7 +264,7 @@ class GroupInviteRequest(django.views.View):
                         username=self.request.POST.get("user"),
                     )
                     group = groups.models.Group.objects.get(
-                        name=self.request.POST.get("groups"),
+                        id=kwargs.get("pk"),
                     )
                 except django.core.exceptions.ObjectDoesNotExist:
                     django.contrib.messages.error(
@@ -229,13 +277,15 @@ class GroupInviteRequest(django.views.View):
                         context,
                     )
 
-                is_leader_moderator = groups.models.GroupUser.objects.filter(
+                user_group = groups.models.GroupUser.objects.get(
                     user_id=self.request.user.id,
+                    group_id=kwargs.get("pk"),
                 )
-                if not (
-                    is_leader_moderator.leader
-                    and is_leader_moderator.moderator
-                ):
+                is_leader, is_moderator = (
+                    user_group.leader,
+                    user_group.moderator,
+                )
+                if not (is_leader or is_moderator):
                     django.contrib.messages.success(
                         self.request,
                         "Вы не являетесь ни лидером, ни модератором группы",
@@ -250,6 +300,7 @@ class GroupInviteRequest(django.views.View):
                     ).id
                     groups.models.GroupUser.objects.get(
                         user_id=user_id,
+                        group_id=kwargs.get("pk"),
                     )
                 except django.core.exceptions.ObjectDoesNotExist:
                     pass
@@ -259,12 +310,15 @@ class GroupInviteRequest(django.views.View):
                         "Пользователь уже состоит в группе",
                     )
                     return django.shortcuts.redirect(
-                        django.shortcuts.reverse("groups:invite_request"),
+                        django.shortcuts.reverse(
+                            "groups:invite_request",
+                            args=[kwargs.get("pk")],
+                        ),
                     )
 
                 groups.models.GroupInvite.objects.create(
-                    user=user.id,
-                    group=group.id,
+                    user=user,
+                    group=group,
                     text=self.request.POST.get("text"),
                 )
                 django.contrib.messages.success(self.request, "Удачно")
@@ -273,10 +327,11 @@ class GroupInviteRequest(django.views.View):
                 )
 
             django.contrib.messages.error(self.request, "Форма не валидна")
-            return django.shortcuts.render(
-                self.request,
-                "group/invite_request",
-                context,
+            return django.shortcuts.redirect(
+                django.shortcuts.reverse(
+                    "groups:invite_request",
+                    args=[kwargs.get("pk")],
+                ),
             )
 
         django.contrib.messages.info(self.request, "Вы не аутентифицированы")

@@ -29,7 +29,6 @@ class EnterGroupForm(django.forms.ModelForm):
 
 class InviteGroupForm(django.forms.Form):
     user = django.forms.CharField(max_length=255)
-    groups = django.forms.CharField(max_length=255)
     text = django.forms.CharField(max_length=255)
 
 
@@ -39,4 +38,11 @@ class AcceptRejectForm(django.forms.ModelForm):
         fields = (groups.models.GroupInvite.accept.field.name,)
 
 
-__all__ = [GroupForm, InviteGroupForm]
+class DeleteForm(django.forms.Form):
+    is_delete = django.forms.CharField(
+        help_text="Напишите слово 'Удалить', чтобы удалить группу",
+        label="Удалить группу",
+    )
+
+
+__all__ = [GroupForm, InviteGroupForm, DeleteForm]

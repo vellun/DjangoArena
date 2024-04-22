@@ -23,7 +23,7 @@ urlpatterns = [
         name="invitations",
     ),
     django.urls.path(
-        "invite_request/",
+        "invite_request/<int:pk>",
         groups.views.GroupInviteRequest.as_view(),
         name="invite_request",
     ),
@@ -31,5 +31,10 @@ urlpatterns = [
         "invitations/<int:pk>/",
         groups.views.GroupInviteCard.as_view(),
         name="invite_card",
+    ),
+    django.urls.path(
+        "groups/<int:pk>/",
+        groups.views.GroupPage.as_view(),
+        name="groups_detail",
     ),
 ]
