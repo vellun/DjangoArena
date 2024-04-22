@@ -17,6 +17,18 @@
         <li class="menu-header__item">
           <a class="menu-header__link" href="{% url 'users:friends' %}">Друзья</a>
         </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'groups:groups' %}">Группы пользователя</a>
+        </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'groups:new_groups' %}">Создать новую группу</a>
+        </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'groups:enter_user_in_group' %}">Присоединиться к публичной группе</a>
+        </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'groups:invitations' %}">Приглашения</a>
+        </li>
       {% endif %}
       {% if request.user.is_staff or request.user.is_admin %}
       <li class="menu-header__item">
