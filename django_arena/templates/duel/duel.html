@@ -32,8 +32,10 @@
                 </a>
                 {% endfor %}
             </ul>
+            <div id="timer">
+            </div>
             <a href={% url "duel:results" uidb %}><button class="btn btn-primary">Submit Tasks</button></a>
-            <a href={% url "homepage:main" %}><button class="btn btn-primary">Leave Duel</button></a>
+            <a href={% url "duel:leave" uidb %}><button class="btn btn-primary">Leave Duel</button></a>
         </div>
     </nav>
 
@@ -85,8 +87,12 @@
             const cache_url = "{% url 'duel:cache-code' uidb %}";
             const task_num = "{{ task_num }}";
             const csrf_token = "{{ csrf_token }}";
+            const duration = "{{ duration }}";
+            const timer_url = "{% url 'duel:timeout' uidb %}";
+            const redirect_url = "{% url 'homepage:main' %}";
         </script>
         <script type="text/javascript" src="{% static 'code_editor.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/duel-timer.js' %}"></script>
     </div>
     </div>
 </body>

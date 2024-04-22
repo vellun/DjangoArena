@@ -1,3 +1,4 @@
+import datetime
 import random
 
 import django.contrib
@@ -5,6 +6,7 @@ import django.core.cache
 import django.db.models
 import django.http
 import django.shortcuts
+import django.urls
 import django.views
 import django.views.generic
 import django.views.generic.edit
@@ -34,8 +36,24 @@ class DuelView(django.views.generic.edit.FormView):
             uuid=uidb,
         )
         tasks = cur_duel.problems.all()
+        task = tasks[task_num - 1]
 
-        context["task"] = tasks[task_num - 1]  # current task
+        duration = datetime.timedelta(
+            seconds=10,
+        )  # Можно пока изменять секунды, это на время разработки
+
+        # А в итоге будет так
+        # duration = datetime.timedelta(
+        #     seconds=sum(task.duration.total_seconds() for task in tasks),
+        # )
+
+        hours = duration.seconds // 3600
+        minutes = (duration.seconds % 3600) // 60
+        seconds = duration.seconds % 60
+
+        context["duration"] = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
+        context["task"] = task  # current task
         context["cnt"] = tasks
         context["task_num"] = task_num
 
@@ -80,6 +98,38 @@ class DuelView(django.views.generic.edit.FormView):
             initial["code"] = code
 
         return initial
+
+
+class DuelTimerView(django.views.generic.View):
+    def get(self, request, *args, **kwargs):
+        duration = request.GET.get("duration")
+        uidb = self.kwargs["uidb"]
+
+        timer = django.core.cache.cache.get(
+            f"duel_{uidb}_timer",
+            duration,
+        )
+
+        return django.http.HttpResponse(timer)
+
+    def post(self, request, *args, **kwargs):
+        request_type = request.POST.get("type")
+        uidb = self.kwargs["uidb"]
+
+        if request_type == "cache":
+            timer = request.POST.get("timer")
+            django.core.cache.cache.set(f"duel_{uidb}_timer", timer)
+        elif request_type == "redirect":
+            django.core.cache.cache.delete(f"duel_{uidb}_timer")
+
+        return django.http.HttpResponse("OK")
+
+
+class LeaveDuelView(django.views.generic.View):
+    def get(self, request, *args, **kwargs):
+        uidb = self.kwargs["uidb"]
+        django.core.cache.cache.delete(f"duel_{uidb}_timer")
+        return django.shortcuts.redirect(django.urls.reverse("homepage:main"))
 
 
 class TestCodeView(django.views.View):

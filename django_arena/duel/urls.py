@@ -16,6 +16,16 @@ urlpatterns = [
         name="results",
     ),
     django.urls.path(
+        "<uidb>/timeout/",
+        duel.views.DuelTimerView.as_view(),
+        name="timeout",
+    ),
+    django.urls.path(
+        "<uidb>/leave/",
+        duel.views.LeaveDuelView.as_view(),
+        name="leave",
+    ),
+    django.urls.path(
         "cache-code/<uidb>/",
         duel.views.CacheCodeView.as_view(),
         name="cache-code",
