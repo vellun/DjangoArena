@@ -2,6 +2,14 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+class UserManager(models.Manager):
+    def is_note_liked(self, note_id):
+        return User.objects.filter(id=self.id, note_likes__id=note_id).exists()
+
+    def is_note_disliked(self, note_id):
+        return User.objects.filter(id=self.id, note_dislikes__id=note_id).exists()
+
+
 class User(AbstractUser):
     shortname = models.CharField(max_length=16, blank=True, null=True)
     username = models.CharField(max_length=16, unique=True)
@@ -18,6 +26,7 @@ class User(AbstractUser):
     easy_problems = models.PositiveIntegerField(default=0)
     medium_problems = models.PositiveIntegerField(default=0)
     hard_problems = models.PositiveIntegerField(default=0)
+    objects = UserManager()
 
     def __str__(self):
         return f"{self.username}"
