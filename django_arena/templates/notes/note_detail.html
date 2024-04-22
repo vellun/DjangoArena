@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
 {{ title }}
 {% endblock %}
@@ -9,4 +10,54 @@
     <a href={% url "notes:update" note.id %}><button class="create-post-btn btn btn-primary">Редактировать</button></a>
     <a href={% url "notes:delete" note.id %}><button class="btn btn-outline-danger">Удалить</button></a>
   {% endif %}
+  {% if request.user.is_authenticated and request.user.id != note.author.id %}
+    <form class="like-form" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="note_id" value="{{ note.id }}">
+      <input type="hidden" name="user_id" value="{{ user.id }}">
+      <button class="like-form__button"
+              value="submit" type="submit">
+        <img src="{% static "images/icons/blog_like.svg" %}" width="50"  alt="">
+      </button>
+    </form>
+    <form class="dislike-form" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="note_id" value="{{ note.id }}">
+      <input type="hidden" name="user_id" value="{{ user.id }}">
+      <button class="dislike-form__button"
+              value="submit" type="submit">
+        <img src="{% static "images/icons/blog_dislike.svg" %}" width="50"  alt="">
+      </button>
+    </form>
+  {% endif %}
+  <script>
+      document.querySelectorAll(".like-form").forEach((el) => { el.addEventListener("submit", function(event) {
+          event.preventDefault();
+          var formData = new FormData(this);
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "{% url 'notes:like' %}", true);
+          xhr.onload = function() {
+              if (xhr.status === 200) {
+                  console.log(xhr.responseText);
+              } else {
+                  console.error('Request failed: ' + xhr.status);
+              }
+          };
+          xhr.send(formData);
+      })});
+      document.querySelectorAll(".dislike-form").forEach((el) => { el.addEventListener("submit", function(event) {
+          event.preventDefault();
+          var formData = new FormData(this);
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "{% url 'notes:dislike' %}", true);
+          xhr.onload = function() {
+              if (xhr.status === 200) {
+                  console.log(xhr.responseText);
+              } else {
+                  console.error('Request failed: ' + xhr.status);
+              }
+          };
+          xhr.send(formData);
+      })});
+  </script>
 {% endblock %}

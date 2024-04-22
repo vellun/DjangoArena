@@ -30,6 +30,8 @@ class Note(django.db.models.Model):
     official_documentation = django.db.models.BooleanField(
         default=False,
     )
+    user_likes = django.db.models.ManyToManyField(core.models.User, related_name="note_likes")
+    user_dislikes = django.db.models.ManyToManyField(core.models.User, related_name="note_dislikes")
 
     class Meta:
         verbose_name = "пост"

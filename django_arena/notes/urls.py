@@ -25,6 +25,16 @@ urlpatterns = [
         name="blog-my",
     ),
     django.urls.path(
+        "like/",
+        notes.views.NoteLikeView.as_view(),
+        name="like",
+    ),
+    django.urls.path(
+        "dislike/",
+        notes.views.NoteDislikeView.as_view(),
+        name="dislike",
+    ),
+    django.urls.path(
         "create/",
         notes.views.NoteCreateView.as_view(),
         name="create",
