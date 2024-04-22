@@ -28,14 +28,17 @@ INSTALLED_APPS = [
     "daphne",
     # Own applications
     "core.apps.CoreConfig",
+    "notifications.apps.NotificationsConfig",
     "homepage.apps.HomepageConfig",
     "problems.apps.ProblemsConfig",
     "groups.apps.GroupsConfig",
     "achievements.apps.AchievementsConfig",
     "notes.apps.NoteConfig",
     "tags.apps.TagsConfig",
+    "users.apps.UsersConfig",
+    "duel.apps.DuelConfig",
     "submissions.apps.SubmissionsConfig",
-    "requests.apps.RequestsConfig",
+    "lobby.apps.LobbyConfig",
     # Django applications
     "django.contrib.admin",
     "django.contrib.auth",
@@ -79,6 +82,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "notifications.context_processors.get_notifications",
             ],
         },
     },
@@ -170,3 +174,9 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "core.User"
+
+ARENA_TESTING_HOST = "localhost:8001"
+
+LOGIN_URL = "/users/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

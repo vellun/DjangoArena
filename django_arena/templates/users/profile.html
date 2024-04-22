@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block content %}
+<div class="profile">
+  <div class="profile__social social-profile">
+    <div class="social-profile__main">
+      <div class="social-profile__image-block">
+        <img class="social-profile__image" src="{% static "images/yanami_ray_yo.png" %}" alt="profile image">
+      </div>
+      <div class="social-profile__info">
+        <span class="text-white social-profile__username">{{ user.username }}</span>
+        {% if user.shortname %}
+          <span class="text-white social-profile__shortname">{{ user.shortname }}</span>
+        {% endif %}
+        <span class="text-white social-profile__rating"><img src="{% static "images/icons/profile_rating.svg" %}" alt="rating_img"> Рейтинг: {{ user.rating }}</span>
+        <span class="text-white social-profile__views"><img src="{% static "images/icons/profile_views.svg" %}" alt="views_img"> Просмотры: {{ user.views }}</span>
+      </div>
+    </div>
+    <div class="text-white social-profile__rank">Ранг: {{ user_rank.0 }}</div>
+    <div class="text-white social-profile__rank">Мемный ранг: {{ user_rank.1 }}</div>
+    <ul class="social-profile__social">
+      <li class="text-white social-profile__social__items">Друзья: 0</li>
+      <li class="text-white social-profile__social__items">Группы: 0</li>
+      <li class="text-white social-profile__social__items">Посты: 0</li>
+      <li class="text-white social-profile__social__items">Задачи: 0</li>
+    </ul>
+    {% if user.gitlab_link or user.github_link %}
+      <span class="text-white social-profile__links-title">Ссылки</span>
+      <ul class="social-profile__links">
+        {% if user.gitlab_link %}
+          <li class="text-white social-profile__links__items">
+            <a href="{{user.gitlab_link}}">
+              <img src="{% static "images/icons/profile_github.svg" %}" alt="github">{% if user.shortname %}{{ user.shortname}}{% endif %}
+            </a>
+          </li>
+        {% endif %}
+        {% if user.gitlab_link %}
+          <li class="text-white social-profile__links__items">
+            <a href="{{ user.github_link}}">
+              <img src="{% static "images/icons/profile_gitlab.svg" %}" alt="gitlab">{% if user.shortname %}{{ user.shortname}}{% endif %}
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    {% endif %}
+    <ul class="social-profile__games">
+      <li class="text-white social-profile__games__items">
+        <img src="{% static "images/icons/profile_duels.svg" %}" alt="duels">Дуэли: {{ user.games_played }}
+      </li>
+      <li class="text-white social-profile__games__items">
+        <img src="{% static "images/icons/profile_wins.svg" %}" alt="wins">Побед: {{ user.games_won }}
+      </li>
+      <li class="text-white social-profile__games__items">
+        Достижений: 0
+      </li>
+    </ul>
+    <ul class="social-profile__tags">
+
+    </ul>
+  </div>
+  <div class="profile__statistics statistic-profile">
+    <div class="statistic-profile__tasks">
+      <div class="statistic-profile__tasks__title">Задачи</div>
+      {% if user.hard_problems != 0 or user.medium_problems != 0 or user.easy_problems != 0 %}
+      <canvas id="statistic-profile-tasks-chart" class="statistic-profile-tasks__chart">
+      </canvas>
+      {% else %}
+        <div class="statistic-profile__tasks__warning">недостаточно данных</div>
+      {% endif %}
+    </div>
+    <div class="statistic-profile__achievments">
+      <div class="statistic-profile__achievments__title">Ачивки</div>
+      <div class="text-white">тут что-то</div>
+    </div>
+    <div class="statistic-profile__rating">
+      <div class="statistic-profile__rating__title">Рейтинг пользователей</div>
+      <canvas id="statistic-profile-rating-chart" class="statistic-profile-rating__chart">
+      </canvas>
+    </div>
+  </div>
+</div>
+<script>
+  data_tasks = {
+    labels: [
+        'Easy',
+        'Medium',
+        'Hard'
+    ],
+    datasets: [{
+        data: [
+            {{ user.easy_problems }},
+            {{ user.medium_problems }},
+            {{ user.hard_problems }},
+        ],
+        backgroundColor: [
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgb(255, 99, 132)'
+        ],
+        hoverOffset: 4,
+    }]
+  };
+  user_rank_distribution = [
+    {rank: "Новичок", count: {{user_rank_distribution.0}}},
+    {rank: "Ученик", count: {{user_rank_distribution.1}}},
+    {rank: "Специалист", count: {{user_rank_distribution.2}}},
+    {rank: "Эксперт", count: {{user_rank_distribution.3}}},
+    {rank: "Кандидат в мастера", count: {{user_rank_distribution.4}}},
+    {rank: "Мастер", count: {{user_rank_distribution.5}}},
+    {rank: "Международный мастер", count: {{user_rank_distribution.6}}},
+    {rank: "Гроссмейстер", count: {{user_rank_distribution.7}}},
+    {rank: "Международный гроссмейстер", count: {{user_rank_distribution.8}}},
+    {rank: "Легендарный гроссмейстер", count: {{user_rank_distribution.9}}},
+    {rank: "Легенда платформы", count: {{user_rank_distribution.10}}},
+  ];
+</script>
+<script src="{% static "js/profile.js" %}"></script>
+{% endblock %}

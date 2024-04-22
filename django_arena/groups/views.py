@@ -195,7 +195,7 @@ class GroupEnterUser(django.views.View):
             )
             django.contrib.messages.success(
                 self.request,
-                f"Вы были добавлены в группу {self.request.POST.get('name')}",
+                "Вы были добавлены в группу" + self.request.POST.get("name"),
             )
             return django.shortcuts.redirect(
                 django.shortcuts.reverse("groups:groups"),

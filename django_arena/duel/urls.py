@@ -6,9 +6,14 @@ app_name = "duel"
 
 urlpatterns = [
     django.urls.path(
-        "<uidb>/",
+        "<uidb>/<int:task_num>/",
         duel.views.DuelView.as_view(),
         name="duel",
+    ),
+    django.urls.path(
+        "<uidb>/results/",
+        duel.views.ResultsView.as_view(),
+        name="results",
     ),
     django.urls.path(
         "cache-code/<uidb>/",
