@@ -7,8 +7,10 @@ import django.shortcuts
 from django.urls import reverse
 import django.views.decorators.http
 
+import core.models
 import duel.models
 import lobby.forms
+import notifications.models
 import problems.models
 
 
@@ -54,6 +56,7 @@ class LobbyView(django.views.View):
             "title": "Лобби",
             "are_you_leader": are_you_leader,
             "game_started": game_started,
+            "game_id": uidb_url,
         }
 
         return django.shortcuts.render(
@@ -162,6 +165,107 @@ class GameplaySettingsView(django.views.View):
             # Flag to know which tab on modal window is should be active
             checked_first = False
 
+        return self.get(request, checked_first=checked_first)
+
+
+class InviteUsersView(django.views.View):
+    def dispatch(self, request, *args, **kwargs):
+        self.invite_strangers_form = lobby.forms.InviteStrangersForm(
+            request.POST or None,
+        )
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, checked_first=True, *args, **kwargs):
+        friends = self.request.user.friends
+
+        context = {
+            "form1": self.invite_strangers_form,
+            "uidb": kwargs.get("uidb"),
+            "friends": friends,
+        }
+
+        return django.shortcuts.render(
+            request,
+            "lobby/invite-form.html",
+            context,
+        )
+
+    def post(self, request, *args, **kwargs):
+        form_type = request.POST.get("form_type")
+        checked_first = True
+        if form_type == "form1" and self.invite_strangers_form.is_valid():
+            success_json = django.http.JsonResponse(
+                {
+                    "success": True,
+                },
+            )
+
+            fail_json = django.http.JsonResponse(
+                {
+                    "success": False,
+                },
+            )
+
+            form = self.invite_strangers_form
+            uidb = kwargs.get("uidb")
+
+            username = form.cleaned_data.get("username")
+            user = core.models.User.objects.get(username=username)
+
+            notification = notifications.models.Notification()
+            notification.sender = self.request.user
+            notification.recipient = user
+            notification.notification_type = (
+                notifications.models.Notification.NotificationTypes.UNKNOWN
+            )
+            notification.text = (
+                "Привет! Подключайся к моей игре по ccылке: "
+                f"<a href='/play/{uidb}'>" + uidb + "</a>"
+            )
+            notification.save()
+
+            if user is None:
+                return fail_json
+
+            return success_json
+
+        if form_type == "form2":
+            success_json = django.http.JsonResponse(
+                {
+                    "success": True,
+                },
+            )
+            fail_json = django.http.JsonResponse(
+                {
+                    "success": False,
+                },
+            )
+
+            uidb = kwargs.get("uidb")
+
+            for key in self.request.POST:
+                if "friend_user_" in key:
+                    cur_user = core.models.User.objects.get(
+                        pk=self.request.POST[key],
+                    )
+                    if not cur_user:
+                        return fail_json
+
+                    notification = notifications.models.Notification()
+                    notification.sender = self.request.user
+                    notification.recipient = cur_user
+                    notification.notification_type = (
+                        notifications.models.Notification.NotificationTypes.FRIEND
+                    )
+                    notification.text = (
+                        "Привет! Подключайся к моей игре по ccылке: "
+                        f"<a href='/play/{uidb}'>" + uidb + "</a>"
+                    )
+                    notification.save()
+
+            return success_json
+
+        checked_first = False
         return self.get(request, checked_first=checked_first)
 
 

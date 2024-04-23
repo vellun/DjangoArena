@@ -11,6 +11,11 @@ urlpatterns = [
         name="gameplay-settings",
     ),
     django.urls.path(
+        "invite-users/<uidb>",
+        lobby.views.InviteUsersView.as_view(),
+        name="invite-users",
+    ),
+    django.urls.path(
         "<uidb>/",
         lobby.views.LobbyView.as_view(),
         name="lobby",
