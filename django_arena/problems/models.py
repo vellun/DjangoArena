@@ -1,9 +1,13 @@
+import datetime
+
 import django.conf
 import django.db.models
 from django.utils.translation import gettext_lazy as _
 
 
 class Problem(django.db.models.Model):
+    DEFAULT_DURATION = datetime.timedelta(minutes=15)
+
     class Status(django.db.models.TextChoices):
         HARD_REJECT = "HR", _("Hard-reject")
         SOFT_REJECT = "SR", _("Soft-reject")
@@ -50,6 +54,11 @@ class Problem(django.db.models.Model):
         help_text="Укажите сложность задачи",
         choices=Difficulty.choices,
         default=Difficulty.EASY,
+    )
+    duration = django.db.models.DurationField(
+        verbose_name="время на выполнение задачи",
+        help_text="Укажите время выполнения задачи",
+        default=DEFAULT_DURATION,
     )
     text = django.db.models.TextField(
         verbose_name="описание",

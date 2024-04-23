@@ -1,3 +1,7 @@
+::selection {
+  background: #5b8c8f;
+}
+
 /* resizable sections */
 
 body {
@@ -33,7 +37,6 @@ nav {
 
 .resizable-column {
   overflow: auto;
-  white-space: nowrap;
   height: 100%;
   border-radius: 10px;
   border: 2px solid #77ddd0;
@@ -132,4 +135,114 @@ nav {
   margin: 0 1em;
   display: inline-block;
   position: relative;
+}
+
+/* section with task description and submissions */
+
+.duel_tab {
+  color: #c1c8c9;
+  border: none;
+  position: relative;
+  display: inline-block;
+  margin: 2% 10%;
+  /* margin-left: 10%; */
+}
+
+.duel_tab::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: 0;
+  height: 2px;
+  background-color: #77ddd0;
+  transition: all 0.3s ease-out;
+  transform: translateX(-50%);
+}
+
+.duel_tab:hover {
+  border-color: transparent;
+  color: #ddf6f8;
+}
+
+.duel_tab:hover::after {
+  width: 70%;
+  transform: translateX(-50%);
+  border-color: transparent;
+}
+
+.duel_tab.duel_active {
+  color: #ddf6f8;
+}
+
+.duel_tab.duel_active::after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  bottom: 0;
+  display: block;
+  width: 80%;
+  height: 2px;
+  background: #77ddd0;
+}
+
+.duel_nav_tabs .nav-link:hover {
+  border-color: transparent;
+  font-size: 18px;
+}
+
+#task_num {
+  margin: 3%;
+  font-size: 19px;
+}
+
+.task_title {
+  color: #77ddd0;
+  font-size: 30px;
+  margin: 2% 5%;
+  width: 90%;
+  display: block;
+}
+
+.diff {
+  font-size: 20px;
+  margin: -2% 5%;
+}
+
+.task_text {
+  margin: 7% 5%;
+  font-size: 18px;
+}
+
+.empty_test_results {
+  text-align: center;
+  margin-top: 10%;
+  font-size: 22px;
+}
+
+#timer {
+  font-size: 17px;
+}
+
+.gradient-button {
+  float: right;
+  margin: -2% 3%;
+  background: linear-gradient(to right, #77ddd0 0%, #92c789 100%);
+  border: none;
+  border-radius: 10px;
+  color: #352727;
+  padding: 7px 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.gradient-button:hover {
+  transition: 0.3s;
+  background: linear-gradient(to right, #7de3bc 0%, #9ad88f 100%);
+}
+
+.players_title {
+  text-align: center;
+  margin-top: 2%;
+  font-size: 20px;
 }

@@ -1,5 +1,7 @@
 import uuid
 
+import django.conf
+import django.contrib.auth
 import django.core.cache
 import django.db.models
 import django.http
@@ -31,7 +33,10 @@ class LobbyView(django.views.View):
             return django.http.HttpResponse("ВОООООООООООООООООН")
 
         cur_lobby.add(self.request.user.id)
-        django.core.cache.cache.set("lobby_users_" + uidb_url, set(cur_lobby))
+
+        django.core.cache.cache.set(
+            "lobby_users_" + uidb_url, set(cur_lobby), 3600 * 5,
+        )
         if django.core.cache.cache.get("lobby_leader_" + uidb_url) is None:
             django.core.cache.cache.set(
                 "lobby_leader_" + uidb_url,
@@ -52,11 +57,16 @@ class LobbyView(django.views.View):
             == self.request.user.id
         )
 
+        players = django.contrib.auth.get_user_model().objects.filter(
+            id__in=cur_lobby,
+        )
+
         context = {
             "title": "Лобби",
             "are_you_leader": are_you_leader,
             "game_started": game_started,
             "game_id": uidb_url,
+            "participants": players,
         }
 
         return django.shortcuts.render(
@@ -72,7 +82,7 @@ class LobbyView(django.views.View):
         return django.shortcuts.redirect(
             django.urls.reverse(
                 "duel:duel",
-                kwargs={"uidb": uidb_url, "task_num": 1},
+                kwargs={"uidb": uidb_url, "task_num": 1, "tab": "description"},
             ),
         )
 
@@ -122,7 +132,7 @@ class GameplaySettingsView(django.views.View):
 
             tasks = problems.models.Problem.objects.filter(
                 difficulty=diff,
-            )[:number_of_tasks]
+            ).order_by("-pk")[:number_of_tasks]
 
             new_duel = duel.models.Duel.objects.create(
                 uuid=uidb,
@@ -144,13 +154,13 @@ class GameplaySettingsView(django.views.View):
 
                 e_tasks = problems.models.Problem.objects.filter(
                     difficulty="easy",
-                )[:easy]
+                ).order_by("-pk")[:easy]
                 m_tasks = problems.models.Problem.objects.filter(
                     difficulty="medium",
-                )[:medium]
+                ).order_by("-pk")[:medium]
                 h_tasks = problems.models.Problem.objects.filter(
                     difficulty="hard",
-                )[:hard]
+                ).order_by("-pk")[:hard]
 
                 tasks = e_tasks | m_tasks | h_tasks
 

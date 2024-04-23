@@ -60,7 +60,7 @@
           <div id="modal" class="modal fade">
             <div id="dialog" class="modal-dialog" hx-target="this"></div>
           </div>
-          <button class="menu-header__link btn btn-primary" hx-get="{% url 'lobby:gameplay-settings' %}" hx-target="#dialog">Начать дуэль</button>
+          <button class="gradient-button" hx-get="{% url 'lobby:gameplay-settings' %}" hx-target="#dialog">Начать дуэль</button>
         </li>
         <li class="menu-header__item">
           <a href="{% url 'users:logout' %}" class="btn btn-primary">Выйти</a>
