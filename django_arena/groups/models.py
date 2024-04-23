@@ -28,7 +28,6 @@ class GroupUser(django.db.models.Model):
     user = django.db.models.ForeignKey(
         core.models.User,
         on_delete=django.db.models.CASCADE,
-        related_name="user",
     )
     group = django.db.models.ForeignKey(
         Group,
