@@ -60,16 +60,35 @@ class GroupPage(django.views.View):
         )
 
 
-class GroupView(django.views.View):
+class GroupMyView(django.views.View):
     def get(self, *args, **kwargs):
-        user = groups.models.GroupUser.objects.filter(
-            user_id=self.request.user.id,
+        user_groups = self.request.user.user.values_list("group", flat=True)
+        selected_groups = groups.models.Group.objects.filter(
+            id__in=user_groups,
         )
+
         context = {
             "title": "Группы",
-            "groups": user.select_related(
-                "group",
-            ),
+            "tab": "my",
+            "groups": selected_groups,
+        }
+        
+        return django.shortcuts.render(
+            request=self.request,
+            template_name="group/user_group.html",
+            context=context,
+        )
+
+
+class GroupAllView(django.views.View):
+    def get(self, *args, **kwargs):
+        selected_groups = groups.models.Group.objects.all().order_by(
+            "-created_at",
+        )
+        context = {
+            "title": "Искать группы",
+            "tab": "all",
+            "groups": selected_groups,
         }
         return django.shortcuts.render(
             request=self.request,
@@ -110,7 +129,7 @@ class GroupCreate(django.views.View):
                 moderator=0,
             )
             return django.shortcuts.redirect(
-                django.shortcuts.reverse("groups:groups"),
+                django.shortcuts.reverse("groups:my"),
             )
 
         return django.shortcuts.render(

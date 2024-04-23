@@ -77,8 +77,6 @@ class DuelView(django.views.generic.edit.FormView):
         context["task_num"] = int(task_num)
         context["tab"] = tab
         context["task"] = self.task  # current task
-        self.task = context["task"]
-        print(self.task)
         context["cnt"] = self.tasks
         context["title"] = "Дуэль"
 

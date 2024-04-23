@@ -2,6 +2,7 @@ import uuid
 
 import django.conf
 import django.contrib.auth
+import django.contrib.messages
 import django.core.cache
 import django.db.models
 import django.http
@@ -35,7 +36,9 @@ class LobbyView(django.views.View):
         cur_lobby.add(self.request.user.id)
 
         django.core.cache.cache.set(
-            "lobby_users_" + uidb_url, set(cur_lobby), 3600 * 5,
+            "lobby_users_" + uidb_url,
+            set(cur_lobby),
+            3600 * 5,
         )
         if django.core.cache.cache.get("lobby_leader_" + uidb_url) is None:
             django.core.cache.cache.set(
@@ -207,12 +210,16 @@ class InviteUsersView(django.views.View):
             success_json = django.http.JsonResponse(
                 {
                     "success": True,
+                    "message": "Приглашение успешно отправлено!",
+                    "type": "information",
                 },
             )
 
             fail_json = django.http.JsonResponse(
                 {
                     "success": False,
+                    "message": "Пользователь не найден",
+                    "type": "error",
                 },
             )
 
@@ -220,7 +227,10 @@ class InviteUsersView(django.views.View):
             uidb = kwargs.get("uidb")
 
             username = form.cleaned_data.get("username")
-            user = core.models.User.objects.get(username=username)
+            try:
+                user = core.models.User.objects.get(username=username)
+            except core.models.User.DoesNotExist:
+                return fail_json
 
             notification = notifications.models.Notification()
             notification.sender = self.request.user
@@ -243,11 +253,15 @@ class InviteUsersView(django.views.View):
             success_json = django.http.JsonResponse(
                 {
                     "success": True,
+                    "message": "Приглашения для друзей успешно отправлены!",
+                    "type": "information",
                 },
             )
             fail_json = django.http.JsonResponse(
                 {
                     "success": False,
+                    "message": "Произошла ошибка",
+                    "type": "error",
                 },
             )
 

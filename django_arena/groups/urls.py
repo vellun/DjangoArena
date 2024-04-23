@@ -6,7 +6,8 @@ app_name = "groups"
 
 
 urlpatterns = [
-    django.urls.path("", groups.views.GroupView.as_view(), name="groups"),
+    django.urls.path("my/", groups.views.GroupMyView.as_view(), name="my"),
+    django.urls.path("all/", groups.views.GroupAllView.as_view(), name="all"),
     django.urls.path(
         "create/",
         groups.views.GroupCreate.as_view(),
