@@ -50,11 +50,6 @@
     width: 20px;
     height: 20px;
 }
-@media(max-width: 991.5px) {
-    .navbar-header__menu {
-        background-color: #2e3433;
-    }
-}
 
 .gradient-button {
     float: right;
@@ -69,8 +64,31 @@
     cursor: pointer;
   }
   
-  .gradient-button:hover {
+.gradient-button:hover {
     transition: 0.3s;
     color: black;
     background: linear-gradient(to right, #7de3bc 0%, #9ad88f 100%);
-  }
+}
+
+.menu-header__link {
+    text-decoration: none;
+}
+
+.profile-dropdown-menu {
+    --bs-dropdown-min-width: none;
+}
+
+.profile-dropdown-menu .dropdown-item {
+    text-align: center;
+}
+
+.profile-dropdown__link {
+    text-decoration: none;
+    color: white;
+}
+
+@media(max-width: 991.5px) {
+    .navbar-header__menu {
+        background-color: #2e3433;
+    }
+}
