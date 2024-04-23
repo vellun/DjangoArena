@@ -55,3 +55,22 @@
         background-color: #2e3433;
     }
 }
+
+.gradient-button {
+    float: right;
+    margin: -2% 3%;
+    background: linear-gradient(to right, #77ddd0 0%, #92c789 100%);
+    border: none;
+    border-radius: 10px;
+    color: #352727;
+    width: 150px;
+    padding: 7px 25px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .gradient-button:hover {
+    transition: 0.3s;
+    color: black;
+    background: linear-gradient(to right, #7de3bc 0%, #9ad88f 100%);
+  }

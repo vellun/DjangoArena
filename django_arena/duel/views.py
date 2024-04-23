@@ -22,6 +22,17 @@ class DuelView(django.views.generic.edit.FormView):
     form_class = duel.forms.DuelCodeForm
     template_name = "duel/duel.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        task_num = self.kwargs.get("task_num", 1)
+        uidb = self.kwargs["uidb"]
+        cur_duel = django.shortcuts.get_object_or_404(
+            duel.models.Duel,
+            uuid=uidb,
+        )
+        self.tasks = cur_duel.problems.all()
+        self.task = self.tasks[int(task_num) - 1]
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return self.request.path
 
@@ -31,19 +42,21 @@ class DuelView(django.views.generic.edit.FormView):
         task_num = self.kwargs.get("task_num", 1)
         tab = self.kwargs["tab"]
 
-        cur_duel = django.shortcuts.get_object_or_404(
-            duel.models.Duel,
-            uuid=uidb,
-        )
-        tasks = cur_duel.problems.all()
-        task = tasks[int(task_num) - 1]
-
         if tab == "submissions":
             subs = submissions.models.Submission.objects.filter(
                 duel__uuid=uidb,
-                problem__id=task.id,
+                problem__id=self.task.id,
             ).order_by("-pk")
             context["submissions"] = subs
+
+        cur_lobby = django.core.cache.cache.get("lobby_users_" + uidb)
+        players = (
+            django.contrib.auth.get_user_model()
+            .objects.filter(
+                id__in=cur_lobby,
+            )
+            .all()
+        )
 
         # duration = datetime.timedelta(
         #     seconds=20,
@@ -51,7 +64,7 @@ class DuelView(django.views.generic.edit.FormView):
 
         # А в итоге будет так
         duration = datetime.timedelta(
-            seconds=sum(task.duration.total_seconds() for task in tasks),
+            seconds=sum(task.duration.total_seconds() for task in self.tasks),
         )
 
         hours = duration.seconds // 3600
@@ -59,11 +72,14 @@ class DuelView(django.views.generic.edit.FormView):
         seconds = duration.seconds % 60
 
         context["duration"] = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+        context["players"] = players
         context["uidb"] = uidb
         context["task_num"] = int(task_num)
         context["tab"] = tab
-        context["task"] = task  # current task
-        context["cnt"] = tasks
+        context["task"] = self.task  # current task
+        self.task = context["task"]
+        print(self.task)
+        context["cnt"] = self.tasks
         context["title"] = "Дуэль"
 
         return context
@@ -87,7 +103,7 @@ class DuelView(django.views.generic.edit.FormView):
         submission = submissions.models.Submission(
             code=code,
             score=random.randrange(100),
-            problem_id=task_num,
+            problem_id=self.task.id,
             user_id=self.request.user.id,
             duel=duel.models.Duel.objects.get(uuid=uidb_url),
         )

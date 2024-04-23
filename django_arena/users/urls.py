@@ -1,5 +1,7 @@
+import django.contrib.auth
 import django.urls
 
+import users.forms
 import users.views
 
 app_name = "users"

@@ -1,9 +1,13 @@
 * {
-    padding: 0;
+  padding: 0;
 }
 
 ul {
-    padding: 0;
+  padding: 0;
+}
+
+::selection {
+  background: #5b8c8f;
 }
 
 .form-control {
@@ -18,44 +22,42 @@ ul {
 }
 
 .container-fluid {
-    padding: 0;
+  padding: 0;
 }
 
 body {
-    height: 100%;
-    color: #cdd5d6;
+  height: 100%;
+  color: #cdd5d6;
 }
 
 .wrapper {
-    position: relative;
-    height: 100%;
-    min-height: 100vh;
+  position: relative;
+  height: 100%;
+  min-height: 100vh;
 }
 
 .flex-container {
-    display: flex;
-    flex-direction: column;
-    flex-direction: column;
-    height: 100%;
-    min-height: 100vh;
-    background-color: #252B2A;
+  display: flex;
+  flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #252b2a;
 }
 
 .flex-vertical {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 nav {
-    background-color: #252b2a;
+  background-color: #252b2a;
 }
 
-
-
 page.page-404 {
-    display: flex;
+  display: flex;
 }
 
 .page-404_link {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
