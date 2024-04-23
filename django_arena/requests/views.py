@@ -14,9 +14,7 @@ class SendInvite(django.views.View):
                 "form": requests.forms.InviteFriendForm(),
             }
             return django.shortcuts.render(
-                self.request,
-                "requests/add_friend.html",
-                context,
+                self.request, "requests/add_friend.html", context,
             )
 
         django.contrib.messages.info(self.request, "Вы не аутентифицированы")
@@ -34,8 +32,7 @@ class SendInvite(django.views.View):
                     )
                 except django.core.exceptions.ObjectDoesNotExist:
                     django.contrib.messages.error(
-                        self.request,
-                        "Такого пользователя не существует",
+                        self.request, "Такого пользователя не существует",
                     )
                     return django.shortcuts.redirect(
                         django.shortcuts.reverse("requests:add_friend"),
@@ -50,8 +47,7 @@ class SendInvite(django.views.View):
                     pass
                 else:
                     django.contrib.messages.error(
-                        self.request,
-                        "Приглашение уже отправлено",
+                        self.request, "Приглашение уже отправлено",
                     )
                     return django.shortcuts.redirect(
                         django.shortcuts.reverse("requests:add_friend"),
@@ -59,15 +55,13 @@ class SendInvite(django.views.View):
 
                 try:
                     core.models.User.objects.get(
-                        friends=user.id,
-                        id=self.request.user.id,
+                        friends=user.id, id=self.request.user.id,
                     )
                 except django.core.exceptions.ObjectDoesNotExist:
                     pass
                 else:
                     django.contrib.messages.error(
-                        self.request,
-                        "Вы уже в друзьях с пользователем",
+                        self.request, "Вы уже в друзьях с пользователем",
                     )
                     return django.shortcuts.redirect(
                         django.shortcuts.reverse("requests:add_friend"),
@@ -88,8 +82,7 @@ class SendInvite(django.views.View):
                     text=self.request.POST.get("text"),
                 )
                 django.contrib.messages.success(
-                    self.request,
-                    "Приглашение отправлено",
+                    self.request, "Приглашение отправлено",
                 )
                 return django.shortcuts.redirect(
                     django.shortcuts.reverse("requests:add_friend"),
@@ -111,9 +104,7 @@ class Invites(django.views.View):
                 ),
             }
             return django.shortcuts.render(
-                self.request,
-                "requests/invite_list.html",
-                context,
+                self.request, "requests/invite_list.html", context,
             )
 
         django.contrib.messages.info(self.request, "Вы не аутентифицированы")
@@ -128,15 +119,12 @@ class InviteCard(django.views.View):
             context = {
                 "title": "Приглашения",
                 "invite": requests.models.InviteModel.objects.get(
-                    user_to=self.request.user.id,
-                    user_from=kwargs.get("pk"),
+                    user_to=self.request.user.id, user_from=kwargs.get("pk"),
                 ),
                 "form": requests.forms.AcceptOrReject(),
             }
             return django.shortcuts.render(
-                self.request,
-                "requests/invite_card.html",
-                context,
+                self.request, "requests/invite_card.html", context,
             )
 
         django.contrib.messages.info(self.request, "Вы не аутентифицированы")
@@ -156,8 +144,7 @@ class InviteCard(django.views.View):
                         id=kwargs.get("pk"),
                     ).friends.add(self.request.user.id)
                     django.contrib.messages.success(
-                        self.request,
-                        "Вы были успешно добавлены в друзья",
+                        self.request, "Вы были успешно добавлены в друзья",
                     )
 
                 requests.models.InviteModel.objects.get(
@@ -171,8 +158,7 @@ class InviteCard(django.views.View):
             django.contrib.messages.error(self.request, "Форма не валидна")
             return django.shortcuts.redirect(
                 django.shortcuts.reverse(
-                    "requests:invite_card",
-                    args=[kwargs.get("pk")],
+                    "requests:invite_card", args=[kwargs.get("pk")],
                 ),
             )
 
