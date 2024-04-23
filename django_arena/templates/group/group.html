@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user.leader or user.moderator %}
+    <a href="{% url 'groups:invite_request' pk=item %}">Добавить в группу</a>
+{% endif %}
+{% if user.leader %}
+    <form method="post">
+        {% csrf_token %}
+        {{ delete }}
+        <button type="submit">Удалить</button>
+    </form>
+{% endif %}
+{% endblock %}
