@@ -12,6 +12,7 @@ import notes.urls
 import notifications.urls
 import submissions.urls
 import users.urls
+import requests.urls
 
 urlpatterns = [
     django.urls.path("", django.urls.include(homepage.urls)),
@@ -20,12 +21,15 @@ urlpatterns = [
         "notifications/",
         django.urls.include(notifications.urls),
     ),
+    django.urls.path(
+        "friends/",
+        django.urls.include(requests.urls),
+    ),
     django.urls.path("duel/", django.urls.include(duel.urls)),
-    django.urls.path("play/", django.urls.include(lobby.urls)),
     django.urls.path("submissions/", django.urls.include(submissions.urls)),
     django.urls.path("groups/", django.urls.include(groups.urls)),
-    django.urls.path("blog/", django.urls.include(notes.urls)),
     django.urls.path("admin/", django.contrib.admin.site.urls),
+    django.urls.path("auth/", django.urls.include(django.contrib.auth.urls)),
 ]
 
 if django.conf.settings.DEBUG:

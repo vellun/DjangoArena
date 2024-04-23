@@ -1,4 +1,3 @@
-{% load static %}
 <header class="header">
   <nav class="header__navbar navbar-header navbar navbar-expand-lg navbar-dark">
     <div class="p-3">
@@ -16,6 +15,12 @@
       {% if request.user.is_authenticated %}
         <li class="menu-header__item">
           <a class="menu-header__link" href="{% url 'users:friends' %}">Друзья</a>
+        </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'requests:add_friend' %}">Добавить в друзья</a>
+        </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'requests:invite_list' %}">Приглашения в друзья</a>
         </li>
         <li class="menu-header__item">
           <a class="menu-header__link" href="{% url 'groups:groups' %}">Группы пользователя</a>

@@ -35,7 +35,9 @@ class LobbyView(django.views.View):
         cur_lobby.add(self.request.user.id)
 
         django.core.cache.cache.set(
-            "lobby_users_" + uidb_url, set(cur_lobby), 3600 * 5,
+            "lobby_users_" + uidb_url,
+            set(cur_lobby),
+            3600 * 5,
         )
         if django.core.cache.cache.get("lobby_leader_" + uidb_url) is None:
             django.core.cache.cache.set(
