@@ -1,9 +1,38 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
-    {{ title }}
+{{ title }}
 {% endblock %}
 {% block content %}
-{% for item in groups %}
-    <a href="{% url 'groups:groups_detail' pk=item.group_id %}">{{ item.group.name }}</a>
-{% endfor %}
+<div class="container">
+    <div class="row">
+        <ul class="nav nav-tabs" style="border: none;margin-bottom: -2px">
+            <li class="nav-item">
+                <a class="nav-link" {% if tab == "all" %}style="background-color: #343a39;border:none" {% else %}
+                    style="border:none" {% endif %} href={% url "groups:all" %}>Искать</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" {% if tab == "my" %}style="background-color: #343a39;border: none;" {% else %}
+                    style="border:none" {% endif %} href={% url "groups:my" %}>Мои группы</a>
+            </li>
+        </ul>
+        <div class="card" id="parent_card">
+            <div class="card-body">
+                {% for group in groups %}
+                <a href="{% url 'groups:groups_detail' group.id %}" style="text-decoration:none">{% include "includes/group.html" %}</a>
+                {% empty %}
+                <div class="no-posts">
+                    <img id="raccoon" alt="" src={% static "images/sad-raccoon.png" %} height="170" loading="lazy">
+                    <div>
+                        <p><span style="color: #74decb">В</span>ы не состоите ни в одной группе! Беда! Срочно ищите
+                            сообщество по интересам или создайте свое!</p>
+                        <a href={% url "notes:create" %}><button class="create-post-btn btn btn-primary">Создать
+                                группу</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

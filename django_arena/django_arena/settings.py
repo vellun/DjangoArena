@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "homepage.apps.HomepageConfig",
     "problems.apps.ProblemsConfig",
     "groups.apps.GroupsConfig",
+    "chatrooms.apps.ChatroomsConfig",
     "achievements.apps.AchievementsConfig",
     "notes.apps.NoteConfig",
     "tags.apps.TagsConfig",
@@ -148,7 +149,7 @@ DJANGO_REDIS_LOG_IGNORED_EXCEPTIONS = True
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 

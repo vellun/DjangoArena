@@ -4,6 +4,10 @@ import core.models
 
 
 class Group(django.db.models.Model):
+    title = django.db.models.CharField(
+        max_length=255,
+        default="Group",
+    )
     name = django.db.models.CharField(
         max_length=255,
         unique=True,
@@ -28,6 +32,7 @@ class GroupUser(django.db.models.Model):
     user = django.db.models.ForeignKey(
         core.models.User,
         on_delete=django.db.models.CASCADE,
+        related_name="group_user",
     )
     group = django.db.models.ForeignKey(
         Group,

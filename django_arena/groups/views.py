@@ -12,15 +12,25 @@ import groups.models
 
 class GroupPage(django.views.View):
     def get(self, *args, **kwargs):
+        group = django.shortcuts.get_object_or_404(
+            groups.models.Group,
+            pk=kwargs.get("pk"),
+        )
+        try:
+            group_user = groups.models.GroupUser.objects.get(
+                user_id=self.request.user.id,
+                group_id=kwargs.get("pk"),
+            )
+        except groups.models.GroupUser.DoesNotExist:
+            group_user = None
+
         if self.request.user.is_authenticated:
             context = {
                 "title": "Группа",
                 "item": kwargs.get("pk"),
+                "group": group,
                 "delete": groups.forms.DeleteForm(),
-                "user": groups.models.GroupUser.objects.get(
-                    user_id=self.request.user.id,
-                    group_id=kwargs.get("pk"),
-                ),
+                "user": group_user,
             }
             return django.shortcuts.render(
                 self.request,
@@ -60,16 +70,37 @@ class GroupPage(django.views.View):
         )
 
 
-class GroupView(django.views.View):
+class GroupMyView(django.views.View):
     def get(self, *args, **kwargs):
-        user = groups.models.GroupUser.objects.filter(
-            user_id=self.request.user.id,
+        user_groups = self.request.user.group_user.values_list(
+            "group", flat=True,
+        )
+        selected_groups = groups.models.Group.objects.filter(
+            id__in=user_groups,
+        )
+
+        context = {
+            "title": "Группы",
+            "tab": "my",
+            "groups": selected_groups,
+        }
+
+        return django.shortcuts.render(
+            request=self.request,
+            template_name="group/user_group.html",
+            context=context,
+        )
+
+
+class GroupAllView(django.views.View):
+    def get(self, *args, **kwargs):
+        selected_groups = groups.models.Group.objects.all().order_by(
+            "-created_at",
         )
         context = {
-            "title": "Группы пользователя",
-            "groups": user.select_related(
-                "group",
-            ),
+            "title": "Искать группы",
+            "tab": "all",
+            "groups": selected_groups,
         }
         return django.shortcuts.render(
             request=self.request,
@@ -110,7 +141,7 @@ class GroupCreate(django.views.View):
                 moderator=0,
             )
             return django.shortcuts.redirect(
-                django.shortcuts.reverse("groups:groups"),
+                django.shortcuts.reverse("groups:my"),
             )
 
         return django.shortcuts.render(

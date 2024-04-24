@@ -143,6 +143,24 @@
         </div>
         <div class="resizable-column" id="column3">
             <p class="players_title">Участники: {{ players.count }}</p>
+            <li class="menu-header__item nav-item dropdown">
+                <a class="menu-header__link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Группы</a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'groups:my' %}">Группы</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'groups:new_groups' %}">Создать новую группу</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'groups:enter_user_in_group' %}">Присоединиться к публичной группе</a>
+                  </li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'groups:invitations' %}">Приглашения</a>
+                  </li>
+                </ul>
+              </li>
             {% for player in players %}
             <p> {{ player.username }}</p>
             {% endfor %}

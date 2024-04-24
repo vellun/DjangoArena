@@ -1,3 +1,6 @@
+import datetime
+
+import django.conf
 import django.contrib.auth.forms
 import django.forms
 
@@ -60,6 +63,35 @@ class CustomAuthenticationForm(
                     )
 
         return super(CustomAuthenticationForm, self).clean()
+
+
+class EditUserProfileForm(
+    django.contrib.auth.forms.UserChangeForm, BootstrapForm,
+):
+    password = None
+
+    class Meta:
+        model = django.contrib.auth.get_user_model()
+        fields = [
+            model.birthday.field.name,
+            model.image.field.name,
+            model.shortname.field.name,
+            model.username.field.name,
+            model.github_link.field.name,
+            model.gitlab_link.field.name,
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super(EditUserProfileForm, self).__init__(*args, **kwargs)
+        self.fields["birthday"].widget = django.forms.DateInput(
+            format="%Y-%m-%d",
+            attrs={
+                "type": "date",
+                "min": datetime.datetime.now().date()
+                - datetime.timedelta(days=365 * 100),
+                "max": datetime.datetime.now().date(),
+            },
+        )
 
 
 def set_custom_form(form):

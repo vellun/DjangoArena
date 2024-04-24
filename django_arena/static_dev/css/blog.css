@@ -2,7 +2,6 @@
   background-color: #343a39;
   border: none;
   border-top-left-radius: 0;
-  /* margin: 2% 0%; */
 }
 
 #note_card {
@@ -26,11 +25,6 @@
 
 .text {
   color: #d6d9d9;
-}
-
-#ava {
-  border: 1px solid #77ddd0;
-  outline-offset: 2px;
 }
 
 .nav-link {

@@ -10,6 +10,18 @@ ul {
   background: #5b8c8f;
 }
 
+::-webkit-scrollbar {
+    background: #343a39;
+    border-radius: 10px;
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(75, 104, 99, 0.5);
+    opacity: 0.5;
+    border-radius: 10px;
+}
+
 .form-control {
   background-color: #252b2a;
   border: 2px solid #77ddd0;
