@@ -25,6 +25,7 @@ urlpatterns = [
     django.urls.path(
         "friends/",
         django.urls.include(invitations.urls),
+        django.urls.include(invitations.urls),
     ),
     django.urls.path("duel/", django.urls.include(duel.urls)),
     django.urls.path("play/", django.urls.include(lobby.urls)),
