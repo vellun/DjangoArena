@@ -17,23 +17,23 @@
         <li class="menu-header__item">
           <a class="menu-header__link" href="{% url 'users:friends' %}">Друзья</a>
         </li>
-        <li class="menu-header__item nav-item dropdown">
-          <a class="menu-header__link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Группы</a>
-          <ul class="dropdown-menu dropdown-menu-dark">
-            <li>
-              <a class="dropdown-item" href="{% url 'groups:groups' %}">Группы пользователя</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'groups:new_groups' %}">Создать новую группу</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'groups:enter_user_in_group' %}">Присоединиться к публичной группе</a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <a class="dropdown-item" href="{% url 'groups:invitations' %}">Приглашения</a>
-            </li>
-          </ul>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'requests:add_friend' %}">Добавить в друзья</a>
+        </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'requests:invite_list' %}">Приглашения в друзья</a>
+        </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'groups:groups' %}">Группы пользователя</a>
+        </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'groups:new_groups' %}">Создать новую группу</a>
+        </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'groups:enter_user_in_group' %}">Присоединиться к публичной группе</a>
+        </li>
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'groups:invitations' %}">Приглашения в группу</a>
         </li>
       {% endif %}
       {% if request.user.is_staff or request.user.is_admin %}
