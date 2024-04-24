@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  {{ invite.user_from }}
+  {{ invite.text }}
+  {% include "includes/form.html" %}
+  <button type="submit">Сохранить</button>
+</form>
+{% endblock %}

@@ -1,8 +1,11 @@
 {% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock %}
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {{ group_form }}
+    {% include "includes/form.html" %}
     <button type="submit">Создать группу</button>
 </form>
 {% endblock %}

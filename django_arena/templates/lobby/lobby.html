@@ -14,10 +14,10 @@
       <span class="text-white participants__title">Участники</span>
       {% if are_you_leader %}
         <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
-        <div id="modal" class="modal fade">
-          <div id="dialog" class="modal-dialog" hx-target="this"></div>
+        <div id="modal1" class="modal fade">
+          <div id="dialog1" class="modal-dialog" data-hx-target="this"></div>
         </div>
-        <button class="menu-header__link btn btn-primary" hx-get="{% url 'lobby:invite-users' game_id %}" hx-target="#dialog">Пригласить участников</button>
+        <button class="menu-header__link btn btn-primary" data-hx-get="{% url 'lobby:invite-users' game_id %}" data-hx-target="#dialog">Пригласить участников</button>
       {% endif %}
       <ul class="participants__list">
         {% for participant in participants %}

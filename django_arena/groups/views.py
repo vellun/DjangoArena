@@ -110,8 +110,8 @@ class GroupCreate(django.views.View):
     def get(self, *args, **kwargs):
         form = groups.forms.GroupForm()
         context = {
-            "title": "Группа",
-            "group_form": form,
+            "title": "Создать группу",
+            "form": form,
         }
         return django.shortcuts.render(
             self.request,
@@ -152,7 +152,7 @@ class GroupEnterUser(django.views.View):
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             context = {
-                "title": "Добавить пользователя в группу",
+                "title": "Присоединиться к группе",
                 "form": groups.forms.EnterGroupForm(),
             }
             return django.shortcuts.render(

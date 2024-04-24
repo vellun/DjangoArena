@@ -64,9 +64,9 @@
         <li class="menu-header__item">
           <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
           <div id="modal" class="modal fade">
-            <div id="dialog" class="modal-dialog" hx-target="this"></div>
+            <div id="dialog" class="modal-dialog" data-hx-target="this"></div>
           </div>
-          <button class="gradient-button" hx-get="{% url 'lobby:gameplay-settings' %}" hx-target="#dialog">Начать дуэль</button>
+          <button class="gradient-button" data-hx-get="{% url 'lobby:gameplay-settings' %}" data-hx-target="#dialog">Начать дуэль</button>
         </li>
         <div class="dropdown-center">
           <a class="profile-dropdown__link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

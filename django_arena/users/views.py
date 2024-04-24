@@ -92,6 +92,7 @@ class FriendsView(django.views.View):
         friends = cur_user.friends.all()
         context = {
             "friends": friends,
+            "title": "Друзья",
         }
         return django.shortcuts.render(
             self.request,
