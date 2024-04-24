@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,14 +5,15 @@
     <meta charset="utf-8">
     <title>{{ title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
     <script type="text/javascript" src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
-    <link type="text/css" rel="stylesheet" href="{% static 'codemirror/css/codemirror.min.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static 'codemirror/css/dracula.min.css' %}">
-    <script type="text/javascript" src="{% static 'codemirror/js/codemirror.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'codemirror/js/python.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'codemirror/js/matchbrackets.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'codemirror/js/closebrackets.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'resizable-sections.js' %}"></script>
+    <link type="text/css" rel="stylesheet" href="{% static "codemirror/css/codemirror.min.css" %}">
+    <link type="text/css" rel="stylesheet" href="{% static "codemirror/css/dracula.min.css" %}">
+    <script type="text/javascript" src="{% static "codemirror/js/codemirror.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "codemirror/js/python.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "codemirror/js/matchbrackets.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "codemirror/js/closebrackets.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "resizable-sections.js" %}"></script>
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "swiper/css/swiper-bundle.min.css" %}" rel="stylesheet">
     <link href="{% static "css/duel.css" %}" rel="stylesheet">
@@ -26,7 +26,7 @@
 
             <ul>
                 {% for i in cnt %}
-                <a href={% url "duel:duel" uidb forloop.counter "description" %} style="text-decoration: none;">
+                <a href="{% url 'duel:duel' uidb forloop.counter 'description' %}" style="text-decoration: none;">
                     <li {% if forloop.counter == task_num %} class="li_task_active" {% else %}class="li_task"
                         {% endif %}>{{ forloop.counter }}</li>
                 </a>
@@ -48,6 +48,10 @@
                 <ul class="duel_nav_tabs nav nav-tabs" style="border: none;margin-top: 1%;font-size:18px">
                     <li class="duel_nav_item nav-item">
                         <a class="duel_tab {% if tab == "description" %} duel_active {% endif %} nav-link"
+                            href={% url "duel:duel" uidb task_num "description" %}>Условие</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="duel_tab {% if tab == "submissions" %} duel_active {% endif %} nav-link"
                             href={% url "duel:duel" uidb task_num "description" %}>Условие</a>
                     </li>
                     <li class="nav-item">

@@ -192,6 +192,7 @@ class ResultsView(django.views.generic.View):
 
         context = {
             "user_score": user_score,
+            "title": "Результаты",
         }
 
         return django.shortcuts.render(request, "duel/results.html", context)

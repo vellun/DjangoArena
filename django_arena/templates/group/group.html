@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock %}
 {% block content %}
 {% if user.leader or user.moderator %}
     <a href="{% url 'groups:invite_request' pk=item %}">Добавить в группу</a>

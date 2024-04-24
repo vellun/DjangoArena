@@ -10,7 +10,7 @@ class SendInvite(django.views.View):
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             context = {
-                "title": "Пригласить в группу",
+                "title": "Добавить в друзья",
                 "form": requests.forms.InviteFriendForm(),
             }
             return django.shortcuts.render(
@@ -98,7 +98,7 @@ class Invites(django.views.View):
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             context = {
-                "title": "Приглашения",
+                "title": "Приглашения в друзья",
                 "invations": requests.models.InviteModel.objects.filter(
                     user_to=self.request.user.id,
                 ),

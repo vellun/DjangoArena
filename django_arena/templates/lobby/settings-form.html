@@ -11,7 +11,7 @@
         <input {% if not checked_first %} checked {% endif %} id="tab-btn-2" name="tab-btn" type="radio" value="">
         <label for="tab-btn-2">Детальная настройка</label>
         <div class="tab-content" id="content-1">
-            <form hx-post="{{ request.path }}">
+            <form data-hx-post="{{ request.path }}">
                 <input name="form_type" value="form1" style="display: none"></input>
                 {% with form=form1 %}
                 {% include "includes/form.html" %}
@@ -20,7 +20,7 @@
             </form>
         </div>
         <div class="tab-content" id="content-2">
-            <form hx-post="{{ request.path }}">
+            <form data-hx-post="{{ request.path }}">
                 <input name="form_type" value="form2" style="display: none"></input>
                 {% with form=form2  %}
                 {% include "includes/form.html" %}
