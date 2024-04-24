@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "tags.apps.TagsConfig",
     "users.apps.UsersConfig",
     "duel.apps.DuelConfig",
-    "requests.apps.RequestsConfig",
+    "invitations.apps.InvitationsConfig",
     "submissions.apps.SubmissionsConfig",
     "lobby.apps.LobbyConfig",
     # Django applications
