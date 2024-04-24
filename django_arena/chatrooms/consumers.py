@@ -1,9 +1,8 @@
-import asgiref.sync
 import json
 
-import django.contrib.auth
-
+import asgiref.sync
 import channels.generic.websocket
+import django.contrib.auth
 
 import chatrooms.models
 

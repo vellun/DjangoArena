@@ -73,7 +73,8 @@ class GroupPage(django.views.View):
 class GroupMyView(django.views.View):
     def get(self, *args, **kwargs):
         user_groups = self.request.user.group_user.values_list(
-            "group", flat=True,
+            "group",
+            flat=True,
         )
         selected_groups = groups.models.Group.objects.filter(
             id__in=user_groups,

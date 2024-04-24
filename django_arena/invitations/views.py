@@ -1,10 +1,10 @@
 import django.contrib
 import django.shortcuts
 import django.views
-
-import core.models
 import invitations.forms
 import invitations.models
+
+import core.models
 
 
 class SendInvite(django.views.View):

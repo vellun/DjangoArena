@@ -1,5 +1,4 @@
 import datetime
-import random
 from threading import Thread
 
 import django.contrib
@@ -81,16 +80,16 @@ class DuelView(django.views.generic.edit.FormView):
 
         if last_submission:
             testing_finished = django.core.cache.cache.get(
-                code_tester.get_finish_parameter(last_submission.id)
+                code_tester.get_finish_parameter(last_submission.id),
             )
             testing_score = django.core.cache.cache.get(
-                code_tester.get_score_parameter(last_submission.id)
+                code_tester.get_score_parameter(last_submission.id),
             )
             testing_exec_time = django.core.cache.cache.get(
-                code_tester.get_exec_time_parameter(last_submission.id)
+                code_tester.get_exec_time_parameter(last_submission.id),
             )
             testing_verdict = django.core.cache.cache.get(
-                code_tester.get_verdict_parameter(last_submission.id)
+                code_tester.get_verdict_parameter(last_submission.id),
             )
 
             if testing_finished == "Finished":
@@ -120,7 +119,6 @@ class DuelView(django.views.generic.edit.FormView):
     def form_valid(self, form):
         code = form.cleaned_data.get("code")
         uidb_url = self.kwargs.get("uidb")
-        task_num = self.kwargs.get("task_num", 1)
 
         submission = submissions.models.Submission(
             code=code,
