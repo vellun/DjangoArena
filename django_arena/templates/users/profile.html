@@ -22,9 +22,9 @@
     <div class="text-white social-profile__rank">Ранг: {{ user_rank.0 }}</div>
     <div class="text-white social-profile__rank">Мемный ранг: {{ user_rank.1 }}</div>
     <ul class="social-profile__social">
-      <li class="text-white social-profile__social__items">Друзья: 0</li>
-      <li class="text-white social-profile__social__items">Группы: 0</li>
-      <li class="text-white social-profile__social__items">Посты: 0</li>
+      <li class="text-white social-profile__social__items">Друзья: {{ user.friends.count }}</li>
+      <li class="text-white social-profile__social__items">Группы: {{ user.user.count }} </li>
+      <li class="text-white social-profile__social__items">Посты: {{ user.notes.count }}</li>
       <li class="text-white social-profile__social__items">Задачи: 0</li>
     </ul>
     {% if user.gitlab_link or user.github_link %}
