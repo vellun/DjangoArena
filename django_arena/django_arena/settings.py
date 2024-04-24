@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "homepage.apps.HomepageConfig",
     "problems.apps.ProblemsConfig",
     "groups.apps.GroupsConfig",
+    "chatrooms.apps.ChatroomsConfig",
     "achievements.apps.AchievementsConfig",
     "notes.apps.NoteConfig",
     "tags.apps.TagsConfig",

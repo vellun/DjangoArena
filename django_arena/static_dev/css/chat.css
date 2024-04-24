@@ -1,0 +1,55 @@
+.chat {
+  height: 80vh;
+  width: 50vw;
+}
+
+.messages {
+    height: 100%;
+    overflow: auto;
+}
+
+.chat-card {
+  background-color: #343a39;
+  border: none;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.chat-title {
+  color: #77ddd0;
+  margin-left: 10px;
+}
+
+.chat-title:hover {
+  transition: 0.3s;
+  color: #499c91;
+}
+
+.chat-nav {
+  background-color: #454d4c;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.chat-item {
+    display: flex;
+    margin: 2%;
+}
+
+.message-card {
+    background-color: #283d38;
+    margin-left: 1%;
+    width: 20vw
+}
+
+.message-text {
+    color: #c2cbcc;
+    margin: 15px;
+}
+
+.msg-date {
+    color: #888e8f;
+    float: right;
+    margin-right: 5px;
+    font-size: 15px;
+}

@@ -4,6 +4,7 @@ import django.contrib.admin
 import django.contrib.auth.urls
 import django.urls
 
+import chatrooms.urls
 import duel.urls
 import groups.urls
 import homepage.urls
@@ -22,6 +23,7 @@ urlpatterns = [
     ),
     django.urls.path("duel/", django.urls.include(duel.urls)),
     django.urls.path("play/", django.urls.include(lobby.urls)),
+    django.urls.path("chat/", django.urls.include(chatrooms.urls)),
     django.urls.path("submissions/", django.urls.include(submissions.urls)),
     django.urls.path("groups/", django.urls.include(groups.urls)),
     django.urls.path("blog/", django.urls.include(notes.urls)),

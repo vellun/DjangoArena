@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="chat container">
+  <div class="chat-card card">
+    <nav class="chat-nav navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="chat-title navbar-brand" href="{% url "groups:groups_detail" chat.group.id %}"><img id="ava" alt=""
+            src={% static "images/yanami_ray_yo.png" %} height="50" width="50" loading="lazy" class="rounded-circle">
+          {{ chat.group.title }}</a>
+      </div>
+    </nav>
+    <div class="messages" id="messages">
+      {% for message in messages %}
+      <div class="chat-item">
+        <img id="ava" alt="" src={% static "images/yanami_ray_yo.png" %} height="30" width="30" loading="lazy"
+          class="rounded-circle">
+        <div class="message-card card">
+          <div><a class="chat-title navbar-brand" href="{% url "users:profile" message.user.id %}">{{ message.user.username }}</a><span class="msg-date">{{ message.created_at }}</span></div>
+          <p class="message-text">
+            {{ message.content }}
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+      <input id="message-input" class="form-control" type="text" placeholder="Расскажите о том, как вам нравятся еноты"></input>
+      <button type="submit" id="send-message-button">Отправить</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const cur_url = new URL(window.location.href);
+  const path = cur_url.pathname;
+  const pathComponents = path.split("/");
+  const roomId = pathComponents[pathComponents.length - 2];
+  const user_id = {{request.user.id}}
+
+  let profileUrl = '{% url "users:profile" request.user.id %}';
+  let ava_url = '{% static "images/yanami_ray_yo.png" %}';
+
+  const username = "{{request.user.username}}"
+
+  const chatSocket = new WebSocket(
+    "ws://" + window.location.host + "/chat" + `/${roomId}/`
+  );
+
+  chatSocket.onmessage = function (e) {
+    console.log("onmessage");
+    const data = JSON.parse(e.data);
+    if (data.message) {
+      let html = '<div class="chat-item">'
+        html += '<img id="ava" alt="" src="' + ava_url + '" height="30" width="30" loading="lazy" class="rounded-circle">'
+        html += '<div class="message-card card">';
+      html += '<a class="chat-title navbar-brand" href="' + profileUrl + '">';
+      html += data.username + '</a>';
+      html += '<p class="message-text">' + data.message + '</p></div></div>'
+
+      document.querySelector("#messages").innerHTML += html;
+
+      scrollToBottom();
+    } else {
+      console.log("empty message!")
+    }
+  };
+
+  chatSocket.onclose = function (e) {
+    console.error("Chat socket closed unexpectedly");
+  };
+
+  document.querySelector('#send-message-button').onclick = function (e) {
+    e.preventDefault();
+    const messageInputDom = document.querySelector('#message-input')
+    const message = messageInputDom.value
+    chatSocket.send(JSON.stringify({
+      "message": message,
+      "user_id": user_id,
+      "username": username,
+      "room": roomId,
+    }));
+
+    messageInputDom.value = '';
+    return false
+  };
+
+  function scrollToBottom() {
+    const objDiv = document.querySelector("#messages")
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
+
+  scrollToBottom();
+</script>
+{% endblock %}

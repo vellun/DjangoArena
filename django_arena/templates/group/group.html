@@ -3,6 +3,7 @@
 {% if user.leader or user.moderator %}
     <a href="{% url 'groups:invite_request' pk=item %}">Добавить в группу</a>
 {% endif %}
+<a href={% url "chat:group-chat" group.chat.id %}>Групповой чат</a>
 {% if user.leader %}
     <form method="post">
         {% csrf_token %}

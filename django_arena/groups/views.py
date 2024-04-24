@@ -12,10 +12,14 @@ import groups.models
 
 class GroupPage(django.views.View):
     def get(self, *args, **kwargs):
+        group = django.shortcuts.get_object_or_404(
+            groups.models.Group, pk=kwargs.get("pk"),
+        )
         if self.request.user.is_authenticated:
             context = {
                 "title": "Группа",
                 "item": kwargs.get("pk"),
+                "group": group,
                 "delete": groups.forms.DeleteForm(),
                 "user": groups.models.GroupUser.objects.get(
                     user_id=self.request.user.id,
@@ -72,7 +76,7 @@ class GroupMyView(django.views.View):
             "tab": "my",
             "groups": selected_groups,
         }
-        
+
         return django.shortcuts.render(
             request=self.request,
             template_name="group/user_group.html",
