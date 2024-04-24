@@ -86,7 +86,7 @@
             <div class="resizable-column" id="code-section">
                 <form method="post">
                     {% csrf_token %}
-                    <div><button type="submit" class="gradient-button">Submit</button></div>
+                    <div><button type="submit" {% if not testing_finished %}class="btn gradient-button btn-danger" disabled{% else %}class="gradient-button"{% endif %}>Submit</button></div>
                     <div class="code">
                         {{ form.code }}
                     </div>
@@ -99,8 +99,39 @@
                     <div class="circle2"></div>
                 </div>
             </div>
-            <div class="resizable-column" id="tests-section">
-                <p class="empty_test_results">Здесь появятся результаты тестов</p>
+            <div class="resizable-column results__block" id="tests-section">
+                {% if false %}
+                    <p class="empty_test_results">Здесь появятся результаты тестов</p>
+                {% else %}
+                    <div class="table__wrapper">
+                      <table class="results__table" border="1">
+                          <caption>Отправки</caption>
+                          <tr>
+                              <th>Идентификатор</th>
+                              <th>Пред. баллы</th>
+                              <th>Вердикт</th>
+                              <th>Время</th>
+                              <th>Отослано</th>
+                          </tr>
+                          {% for submission in submissions %}
+                            <tr>
+                                <td>№{{ submission.id }}</td>
+                                {% if submission.verdict == "" or submission.score == -1 or submission.exec_time == -1 %}
+                                    <td>Pending or Cancelled</td>
+                                    <td>Pending or Cancelled</td>
+                                    <td>Pending or Cancelled</td>
+                                {% else %}
+                                    <td>{{ submission.score }}</td>
+                                    <td>{{ submission.verdict }}</td>
+                                    <td>{{ submission.exec_time }}мс</td>
+                                {% endif %}
+                                <td>{{ submission.created_at }}</td>
+                            </tr>
+                          {% endfor %}
+                      </table>
+                    </div>
+
+                {% endif %}
             </div>
         </div>
         <div class="resizer" id="resizer2">
