@@ -1,8 +1,8 @@
 import django.conf
 import django.conf.urls.static
 import django.contrib.admin
-import django.contrib.auth.urls
 import django.urls
+import requests.urls
 
 import chatrooms.urls
 import duel.urls
@@ -13,7 +13,7 @@ import notes.urls
 import notifications.urls
 import submissions.urls
 import users.urls
-import requests.urls
+
 
 urlpatterns = [
     django.urls.path("", django.urls.include(homepage.urls)),
