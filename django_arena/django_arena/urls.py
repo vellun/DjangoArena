@@ -2,12 +2,12 @@ import django.conf
 import django.conf.urls.static
 import django.contrib.admin
 import django.urls
-import invitations.urls
 
 import chatrooms.urls
 import duel.urls
 import groups.urls
 import homepage.urls
+import invitations.urls
 import lobby.urls
 import notes.urls
 import notifications.urls
@@ -24,6 +24,7 @@ urlpatterns = [
     ),
     django.urls.path(
         "friends/",
+        django.urls.include(invitations.urls),
         django.urls.include(invitations.urls),
     ),
     django.urls.path("duel/", django.urls.include(duel.urls)),
