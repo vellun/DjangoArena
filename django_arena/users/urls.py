@@ -37,6 +37,11 @@ urlpatterns = [
         users.views.SignupView.as_view(),
         name="signup",
     ),
+    django.urls.path(
+        "edit/",
+        users.views.EditUserProfileView.as_view(),
+        name="edit",
+    ),
     django.urls.path("logout/", logout_view, name="logout"),
 ]
 

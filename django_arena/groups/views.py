@@ -15,16 +15,21 @@ class GroupPage(django.views.View):
         group = django.shortcuts.get_object_or_404(
             groups.models.Group, pk=kwargs.get("pk"),
         )
+        try:
+            group_user = groups.models.GroupUser.objects.get(
+                        user_id=self.request.user.id,
+                        group_id=kwargs.get("pk"),
+                    )
+        except groups.models.GroupUser.DoesNotExist:
+            group_user = None
+
         if self.request.user.is_authenticated:
             context = {
                 "title": "Группа",
                 "item": kwargs.get("pk"),
                 "group": group,
                 "delete": groups.forms.DeleteForm(),
-                "user": groups.models.GroupUser.objects.get(
-                    user_id=self.request.user.id,
-                    group_id=kwargs.get("pk"),
-                ),
+                "user": group_user,
             }
             return django.shortcuts.render(
                 self.request,

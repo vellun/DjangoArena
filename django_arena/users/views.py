@@ -1,4 +1,5 @@
 import django.http
+import django.urls
 import django.views.decorators.http
 
 import core.models
@@ -97,6 +98,23 @@ class FriendsView(django.views.View):
             template_name="users/friends.html",
             context=context,
         )
+
+
+class EditUserProfileView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.edit.UpdateView,
+):
+    form_class = users.forms.EditUserProfileForm
+    template_name = "users/edit_profile.html"
+
+    def get_success_url(self):
+        return django.urls.reverse(
+            "users:profile",
+            args=[self.request.user.id],
+        )
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 __all__ = []

@@ -19,7 +19,7 @@
         <div class="card" id="parent_card">
             <div class="card-body">
                 {% for group in groups %}
-                <a href="{% url 'groups:groups_detail' group.id %}">{% include "includes/group.html" %}</a>
+                <a href="{% url 'groups:groups_detail' group.id %}" style="text-decoration:none">{% include "includes/group.html" %}</a>
                 {% empty %}
                 <div class="no-posts">
                     <img id="raccoon" alt="" src={% static "images/sad-raccoon.png" %} height="170" loading="lazy">

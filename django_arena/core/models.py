@@ -1,22 +1,72 @@
+import datetime
+import pathlib
+import uuid
+
 import django.contrib.auth.models
+import django.core.exceptions
 import django.db.models
+import pytz
+
+
+def valid_birthday(value):
+    if value > datetime.datetime.now(pytz.utc).date():
+        raise django.core.exceptions.ValidationError(
+            message="""Путешествий во времени не бывает!
+            Или..кхм, в любом случае, вернитесь в настоящее
+            и укажите корректную дату рождения!""",
+        )
+
+
+def get_path_image(instance, filename):
+    file_extension = pathlib.Path(filename).suffix
+    return f"users/{uuid.uuid4()}{file_extension}"
 
 
 class User(django.contrib.auth.models.AbstractUser):
     shortname = django.db.models.CharField(
+        verbose_name="имя",
+        help_text="Введите свое имя(настояшее или вымышленное, \
+            главное - чемпионское)",
         max_length=16,
         blank=True,
         null=True,
     )
-    username = django.db.models.CharField(max_length=16, unique=True)
+    birthday = django.db.models.DateField(
+        "дата рождения",
+        help_text="Укажите дату рождения",
+        null=True,
+        blank=True,
+        validators=[valid_birthday],
+    )
+    username = django.db.models.CharField(
+        verbose_name="имя пользователя",
+        help_text="Придумайте уникальное имя пользователя",
+        max_length=16,
+        unique=True,
+    )
+    image = django.db.models.ImageField(
+        "аватарка",
+        help_text="Загрузите аватарку",
+        upload_to=get_path_image,
+        null=True,
+        blank=True,
+    )
     rating = django.db.models.IntegerField(default=1000)
     views = django.db.models.PositiveIntegerField(default=0)
     friends = django.db.models.ManyToManyField(
         "self",
         blank=True,
     )
-    github_link = django.db.models.URLField(blank=True, null=True)
-    gitlab_link = django.db.models.URLField(blank=True, null=True)
+    github_link = django.db.models.URLField(
+        verbose_name="ссылка на ваш github",
+        blank=True,
+        null=True,
+    )
+    gitlab_link = django.db.models.URLField(
+        verbose_name="ссылка на ваш gitlab",
+        blank=True,
+        null=True,
+    )
     games_played = django.db.models.PositiveIntegerField(default=0)
     games_won = django.db.models.PositiveIntegerField(default=0)
     easy_problems = django.db.models.PositiveIntegerField(default=0)
