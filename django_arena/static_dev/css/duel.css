@@ -246,3 +246,15 @@ nav {
   margin-top: 2%;
   font-size: 20px;
 }
+
+.results__table {
+  width: 100%;
+}
+
+.results__block {
+  scrollbar-width: none;
+}
+
+td, th {
+  border-width: 1px !important;
+}

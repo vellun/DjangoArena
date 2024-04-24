@@ -1,3 +1,4 @@
+import time
 import json
 import os
 from pathlib import Path
@@ -35,12 +36,12 @@ urlpatterns = [
 
 
 def testing(request, uidb):
-    uidb = "start" + uidb
-    print(uidb)
     if request.method == "POST":
+        json_data = json.loads(request.body)
+        submission_id = json_data["submission_id"]
+        uidb = "start" + str(submission_id) + uidb
         os.system("python manage.py startapp " + uidb)
         os.system("cd " + uidb)
-        json_data = json.loads(request.body)
         code = json_data["code"]
         tests = json_data["tests"]
         tests = tests.replace("~~~", uidb)
@@ -59,19 +60,24 @@ def testing(request, uidb):
                 f"import {uidb}.views\n",
                 f'urlpatterns += [path("{uidb}/", {uidb}'
                 ".views.SolutionView.as_view(), "
-                "name='{uidb}')]\n",
+                f"name='{uidb}')]\n",
             ]
             file.writelines(new_url)
 
+        start_time = time.time()
         output = subprocess.Popen(
             "python manage.py test " + uidb,
             shell=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-        ).communicate()[-1]
+            ).communicate()[-1]
+        end_time = time.time()
+        elapsed_time = end_time - start_time
         output = output.decode("utf-8")
+        print(output)
         ran_tests_count = re.search(r"Ran (\d+)", output)
         failures_count = re.search(r"failures=(\d+)", output)
+        errors_count = re.search(r"errors=(\d+)", output)
         if ran_tests_count:
             ran_tests_count = int(ran_tests_count.group(1))
         else:
@@ -81,6 +87,20 @@ def testing(request, uidb):
             failures_count = int(failures_count.group(1))
         else:
             failures_count = 0
+
+        if errors_count:
+            errors_count = int(errors_count.group(1))
+        else:
+            errors_count = 0
+
+        failed_tests_count = failures_count + errors_count
+
+        if failed_tests_count == 0:
+            verdict = "Accepted"
+        else:
+            verdict = str(failed_tests_count) + " failures"
+
+        time.sleep(15)
 
         os.system("cd ..")
         shutil.rmtree(uidb)
@@ -96,7 +116,9 @@ def testing(request, uidb):
         return django.http.JsonResponse(
             {
                 "ran_tests_count": ran_tests_count,
-                "failures_count": failures_count,
+                "failures_count": failed_tests_count,
+                "elapsed_time": elapsed_time,
+                "verdict": verdict,
             },
             status=200,
         )
