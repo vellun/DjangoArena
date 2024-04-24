@@ -33,7 +33,7 @@
           <a class="menu-header__link" href="{% url 'groups:enter_user_in_group' %}">Присоединиться к публичной группе</a>
         </li>
         <li class="menu-header__item">
-          <a class="menu-header__link" href="{% url 'groups:invitations' %}">Приглашения</a>
+          <a class="menu-header__link" href="{% url 'groups:invitations' %}">Приглашения в группу</a>
         </li>
       {% endif %}
       {% if request.user.is_staff or request.user.is_admin %}
@@ -68,12 +68,19 @@
           </div>
           <button class="gradient-button" hx-get="{% url 'lobby:gameplay-settings' %}" hx-target="#dialog">Начать дуэль</button>
         </li>
-        <li class="menu-header__item">
-          <a href="{% url 'users:logout' %}" class="btn btn-primary">Выйти</a>
-        </li>
-        <li class="menu-header__item">
-          <a class="menu-header__link" href="{% url 'users:profile' request.user.id %}">Профиль</a>
-        </li>
+        <div class="dropdown-center">
+          <a class="profile-dropdown__link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img width="40" src="{% static "images/yanami_ray_yo.png" %}" alt="">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end profile-dropdown-menu">
+            <li class="dropdown-item menu-header__item">
+              <a class="menu-header__link" href="{% url 'users:profile' request.user.id %}">Профиль</a>
+            </li>
+            <li class="dropdown-item menu-header__item">
+              <a href="{% url 'users:logout' %}" class="btn btn-outline-danger">Выйти</a>
+            </li>
+          </ul>
+        </div>
       {% else %}
         <li class="menu-header__item">
           <a href="{% url 'users:login' %}" class="btn btn-primary">Войти</a>
