@@ -18,8 +18,8 @@ class CodeTester:
         )
         task_id = submission.problem_id
         return (
-            f"duel_{ self.duel_uidb }_{ self.user_id }"
-            f"_finish_parameter_{ task_id }_submission_{ submission_id }"
+            f"duel_{self.duel_uidb}_{self.user_id}"
+            f"_finish_parameter_{task_id}_submission_{submission_id}"
         )
 
     def get_score_parameter(self, submission_id):
@@ -28,8 +28,8 @@ class CodeTester:
         )
         task_id = submission.problem_id
         return (
-            f"duel_{ self.duel_uidb }_{ self.user_id }"
-            f"_score_task_{ task_id }_submission_{ submission_id }"
+            f"duel_{self.duel_uidb}_{self.user_id}"
+            f"_score_task_{task_id}_submission_{submission_id}"
         )
 
     def get_verdict_parameter(self, submission_id):
@@ -38,8 +38,8 @@ class CodeTester:
         )
         task_id = submission.problem_id
         return (
-            f"duel_{ self.duel_uidb }_{ self.user_id }"
-            f"_verdict_{ task_id }_submission_{ submission_id }"
+            f"duel_{self.duel_uidb}_{self.user_id}"
+            f"_verdict_{task_id}_submission_{submission_id}"
         )
 
     def get_exec_time_parameter(self, submission_id):
@@ -48,8 +48,8 @@ class CodeTester:
         )
         task_id = submission.problem_id
         return (
-            f"duel_{ self.duel_uidb }_{ self.user_id }"
-            f"_exec_time_{ task_id }_submission_{ submission_id }"
+            f"duel_{self.duel_uidb}_{self.user_id}"
+            f"_exec_time_{task_id}_submission_{submission_id}"
         )
 
     def get_code_parameter(self, submission_id):
@@ -58,8 +58,8 @@ class CodeTester:
         )
         task_id = submission.problem_id
         return (
-            f"duel_{ self.duel_uidb }_{ self.user_id }"
-            f"_code_{ task_id }_submission_{ submission_id }"
+            f"duel_{self.duel_uidb}_{self.user_id}"
+            f"_code_{task_id}_submission_{submission_id}"
         )
 
     def prepare_parameters(self, submission_id):

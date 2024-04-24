@@ -1,10 +1,10 @@
-import time
 import json
 import os
 from pathlib import Path
 import re
 import shutil
 import subprocess
+import time
 
 import django.core.cache
 import django.db.models
@@ -70,7 +70,7 @@ def testing(request, uidb):
             shell=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            ).communicate()[-1]
+        ).communicate()[-1]
         end_time = time.time()
         elapsed_time = end_time - start_time
         output = output.decode("utf-8")
