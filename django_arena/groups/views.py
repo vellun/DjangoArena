@@ -13,13 +13,14 @@ import groups.models
 class GroupPage(django.views.View):
     def get(self, *args, **kwargs):
         group = django.shortcuts.get_object_or_404(
-            groups.models.Group, pk=kwargs.get("pk"),
+            groups.models.Group,
+            pk=kwargs.get("pk"),
         )
         try:
             group_user = groups.models.GroupUser.objects.get(
-                        user_id=self.request.user.id,
-                        group_id=kwargs.get("pk"),
-                    )
+                user_id=self.request.user.id,
+                group_id=kwargs.get("pk"),
+            )
         except groups.models.GroupUser.DoesNotExist:
             group_user = None
 
@@ -71,7 +72,9 @@ class GroupPage(django.views.View):
 
 class GroupMyView(django.views.View):
     def get(self, *args, **kwargs):
-        user_groups = self.request.user.user.values_list("group", flat=True)
+        user_groups = self.request.user.group_user.values_list(
+            "group", flat=True,
+        )
         selected_groups = groups.models.Group.objects.filter(
             id__in=user_groups,
         )
