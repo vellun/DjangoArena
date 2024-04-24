@@ -9,7 +9,6 @@ flake8:
   stage: flake
   image: registry.gitlab.com/pipeline-components/flake8:latest
   script:
-    - cd django
     - flake8 .
 
 
