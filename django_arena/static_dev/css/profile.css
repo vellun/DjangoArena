@@ -1,0 +1,146 @@
+.profile {
+    padding-bottom: 40px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 2fr 5fr;
+    grid-gap: 10px;
+}
+
+.profile__social {
+    padding: 10px;
+    border: 3px solid #77DDD0;
+    border-radius: 5px;
+}
+
+.social-profile__social {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+    list-style: none;
+}
+
+.social-profile__social__items {
+    border-radius: 20px;
+    background-color: #424949;
+    text-align: center;
+    color: #8DBBD6 !important;
+}
+
+.social-profile__rank {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.social-profile__main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.social-profile__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.social-profile__image {
+    width: 100px;
+    height: 100px;
+}
+
+.social-profile__username {
+    font-size: 36px;
+    color: #C0E6FB !important;
+}
+
+.social-profile__links-title {
+    font-size: 26px;
+}
+
+.social-profile__links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-profile__links__items {
+    border-radius: 20px;
+    background-color: #424949;
+    text-align: center;
+    color: #8DBBD6 !important;
+}
+
+.social-profile__games {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-profile__games__items {
+    border-radius: 20px;
+    background-color: #424949;
+    text-align: center;
+    color: #8DBBD6 !important;
+}
+
+.profile__statistics {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: "tasks achievments"
+                         "rating rating";
+}
+
+.statistic-profile__tasks {
+    grid-area: tasks;
+}
+
+.statistic-profile-tasks__chart {
+    max-height: 300px;
+}
+
+.statistic-profile__rating {
+    grid-area: rating;
+}
+
+.statistic-profile-rating__chart {
+    max-height: 300px;
+}
+
+.statistic-profile__achievments {
+    max-height: 300px;
+    grid-area: achievments;
+}
+
+.statistic-profile__achievments {
+    min-height: 100%;
+}
+
+.statistic-profile__rating, .statistic-profile__tasks, .statistic-profile__achievments {
+    max-width: 100%;
+    padding: 10px;
+    border: 3px solid #77DDD0;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.statistic-profile__chart {
+    max-width: 100%;
+}
+
+.statistic-profile__tasks__title, .statistic-profile__tasks__warning {
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.statistic-profile__rating__title {
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.statistic-profile__achievments__title {
+    width: 100%;
+    color: white;
+    text-align: center;
+}

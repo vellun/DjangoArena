@@ -1,23 +1,102 @@
+{% load static %}
 <header class="header">
-  <ul>
-    <li>
-      <a href="{% url 'homepage:main' %}">Главная</a>
-    </li>
-    {% if request.user.is_authenticated %}
-    <li>
-      <a href="{% url 'groups:groups' %}">Группы пользователя</a>
-    </li>
-        <li>
-      <a href="{% url 'groups:new_groups' %}">Создать новую группу</a>
-    </li>
-    <li>
-      <a href="{% url 'groups:enter_user_in_group' %}">Присоединиться к группе</a>
-    </li>
-    {% endif %}
-    {% if request.user.is_staff or request.user.is_admin %}
-      <li>
-        <a href="{% url 'homepage:test_code' %}">Тестик</a>
+  <nav class="header__navbar navbar-header navbar navbar-expand-lg navbar-dark">
+    <div class="p-3">
+      <a class="menu-header__link" href="{% url 'homepage:main' %}">
+        <img src="{% static "logo.jpg" %}" alt="" height="37" class="d-inline-block align-text-top">
+      </a>
+    </div>
+    <ul class="navbar-header__menu navbar-header__menu-left menu-header p-3">
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'homepage:main' %}">Главная</a>
       </li>
-    {% endif %}
-  </ul>
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'notes:blog-all' %}">Блог</a>
+      </li>
+      {% if request.user.is_authenticated %}
+        <li class="menu-header__item">
+          <a class="menu-header__link" href="{% url 'users:friends' %}">Друзья</a>
+        </li>
+        <li class="menu-header__item nav-item dropdown">
+          <a class="menu-header__link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Группы</a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li>
+              <a class="dropdown-item" href="{% url 'groups:my' %}">Группы</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'groups:new_groups' %}">Создать новую группу</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'groups:enter_user_in_group' %}">Присоединиться к публичной группе</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item" href="{% url 'groups:invitations' %}">Приглашения</a>
+            </li>
+          </ul>
+        </li>
+      {% endif %}
+      {% if request.user.is_staff or request.user.is_admin %}
+      <li class="menu-header__item">
+        <a class="menu-header__link" href="{% url 'admin:index' %}">Админ-панель</a>
+      </li>
+      {% endif %}
+      <li class="menu-header__item" id="header-notifications-button">
+        <img class="menu-header__img" src="{% static "images/icons/header_notifications.svg" %}" alt="">
+        <div id="menu-header-notifications-list" class="menu-header__notifications-list" style="display: none">
+          {% if notifications|length > 0 %}
+            <ul class="menu-header__notifications-list__list">
+              {% for notification in notifications %}
+                <li>
+                  <span class="menu-header__notifications-list__text">{{ notification|safe }}</span>
+                  <div class="menu-header__notifications-list__remove" data-delete="{{ notification.id }}"><img class="menu-header__notifications-list__remove__img" src="{% static "images/icons/header_remove.svg" %}" alt=""></div>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            Не обнаружено новых уведомлений
+          {% endif %}
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-header__menu navbar-header__menu-right menu-header p-3">
+      {% if request.user.is_authenticated %}
+        <li class="menu-header__item">
+          <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
+          <div id="modal" class="modal fade">
+            <div id="dialog" class="modal-dialog" data-hx-target="this"></div>
+          </div>
+          <button class="gradient-button" data-hx-get="{% url 'lobby:gameplay-settings' %}" data-hx-target="#dialog">Начать дуэль</button>
+        </li>
+        <div class="dropdown-center">
+          <a class="profile-dropdown__link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img id="ava" class="social-profile__image rounded-circle" alt=""
+                src={% if request.user.image %}"{{ request.user.image.url }}"{% else %}{% static "images/avatar.png" %}{% endif %}
+                loading="lazy">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end profile-dropdown-menu">
+            <li class="dropdown-item menu-header__item">
+              <a class="menu-header__link" href="{% url 'users:profile' request.user.id %}">Профиль</a>
+            </li>
+            <li class="dropdown-item menu-header__item">
+              <a class="menu-header__link" href="{% url 'users:edit' %}">Настройки профиля</a>
+            </li>
+            <li class="dropdown-item menu-header__item">
+              <a href="{% url 'users:logout' %}" class="btn btn-outline-danger">Выйти</a>
+            </li>
+          </ul>
+        </div>
+      {% else %}
+        <li class="menu-header__item">
+          <a href="{% url 'users:login' %}" class="btn btn-primary">Войти</a>
+        </li>
+        <li class="menu-header__item">
+          <a href="{% url 'users:signup' %}" class="btn btn-primary">Зарегистрироваться</a>
+        </li>
+      {% endif %}
+      <script src={% static "htmx/htmx.min.js" %}></script>
+      <script src={% static "bootstrap/js/bootstrap.bundle.min.js" %}></script>
+      <script src={% static "popup/popup.js" %}></script>
+    </ul>
+  </nav>
 </header>

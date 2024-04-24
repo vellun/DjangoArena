@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="chat container">
+  <div class="chat-card card">
+    <nav class="chat-nav navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="chat-title navbar-brand" href="{% url "groups:groups_detail" chat.group.id %}"><img id="ava" alt=""
+            src={% static "images/yanami_ray_yo.png" %} height="50" width="50" loading="lazy" class="rounded-circle">
+          {{ chat.group.title }}</a>
+      </div>
+    </nav>
+    <div class="messages" id="messages">
+      {% for message in messages %}
+      {% ifchanged message.created_at|date:"F j, Y" %}
+      <div class="message-date"><span>{{ message.created_at|date:"F j, Y" }}</span></div>
+      {% endifchanged %}
+      <div class="chat-item {% if message.user.id == request.user.id %} my-message {% endif %}">
+        <img id="ava" class="social-profile__image rounded-circle" alt=""
+                src={% if message.user.image %}"{{ message.user.image.url }}"{% else %}{% static "images/avatar.png" %}{% endif %}
+                loading="lazy">
+        <div class="message-card card">
+          <div><a class="chat-title navbar-brand" href="{% url "users:profile" message.user.id %}">{{ message.user.username }}</a>
+            <span class="msg-date">{{ message.created_at|date:"g:i a" }}</span></div>
+          <p class="message-text">
+            {{ message.content }}
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+      <div class="input-group mb-3">
+        <input id="message-input" type="text" class="form-control" placeholder="Имя получателя" aria-label="Имя получателя" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button type="submit" id="send-message-button" class="btn btn-outline-secondary" type="button">Отправить</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const cur_url = new URL(window.location.href);
+  const path = cur_url.pathname;
+  const pathComponents = path.split("/");
+  const roomId = pathComponents[pathComponents.length - 2];
+  const user_id = {{request.user.id}}
+  const currentDate = new Date().toLocaleString();
+
+  const dateObject = new Date();
+  const hours = dateObject.getHours();
+  const minutes = dateObject.getMinutes().toString().padStart(2, "0");
+  const ampm = hours >= 12 ? "p.m." : "a.m.";
+  const formattedTime = `${hours % 12 || 12}:${minutes} ${ampm}`;
+
+  let profileUrl = '{% url "users:profile" request.user.id %}';
+
+  var ava_url = "{% static 'images/avatar.png' %}";
+
+  {% if request.user.image %}
+    ava_url = "{{ request.user.image.url }}"; 
+  {% endif %}
+  
+  const username = "{{request.user.username}}"
+
+  const chatSocket = new WebSocket(
+    "ws://" + window.location.host + "/chat" + `/${roomId}/`
+  );
+
+  chatSocket.onmessage = function (e) {
+    console.log("onmessage");
+    const data = JSON.parse(e.data);
+    if (data.message) {
+      let html = '<div class="chat-item ' + (data.user_id == user_id ? 'my-message' : '') + '">';
+      html+= '<img id="ava" alt="" src=' + ava_url + ' class="rounded-circle">'
+      html += '<div class="message-card card">';
+      html += '<div><a class="chat-title navbar-brand" href="' + profileUrl + '">';
+      html += data.username + '</a>' + '<span class="msg-date">' + formattedTime + '</span></div>';
+      html += '<p class="message-text">' + data.message + '</p></div></div>'
+
+      document.querySelector("#messages").innerHTML += html;
+
+      scrollToBottom();
+    } else {
+      console.log("empty message!")
+    }
+  };
+
+  chatSocket.onclose = function (e) {
+    console.error("Chat socket closed unexpectedly");
+  };
+
+  document.querySelector('#send-message-button').onclick = function (e) {
+    e.preventDefault();
+    const messageInputDom = document.querySelector('#message-input')
+    const message = messageInputDom.value
+    chatSocket.send(JSON.stringify({
+      "message": message,
+      "user_id": user_id,
+      "username": username,
+      "room": roomId,
+    }));
+
+    messageInputDom.value = '';
+    return false
+  };
+
+  function scrollToBottom() {
+    const objDiv = document.querySelector("#messages")
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
+
+  scrollToBottom();
+</script>
+{% endblock %}

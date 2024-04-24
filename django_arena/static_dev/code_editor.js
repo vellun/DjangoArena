@@ -14,6 +14,7 @@ editor.on("change", function () {
     type: "POST",
     data: {
       code: editor.getValue(),
+      task_num: task_num,
       csrfmiddlewaretoken: csrf_token,
     },
     success: function (data) {

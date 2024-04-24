@@ -1,0 +1,36 @@
+{% load static %}
+<div class="card" id="note_card">
+    <div class="card-body" style="display: flex; justify-content: space-between">
+        <div style="display: flex">
+            <img id="ava" alt="" src={% static "images/yanami_ray_yo.png" %} height="50" width="50" loading="lazy"
+                class="rounded-circle">
+            <div style=" margin-left: 10px">
+                <h5><span class="username">{{ note.author.username }}: </span><span
+                        class="title">{{ note.title }}</span></h5>
+                <p class="text">{{ note.text }}</p>
+                {% if request.user.is_authenticated and request.user.id != note.author.id %}
+                    <form class="like-form" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="note_id" value="{{ note.id }}">
+                      <input type="hidden" name="user_id" value="{{ user.id }}">
+                      <button class="like-form__button"
+                          value="submit" type="submit">
+                        <img src="{% static "images/icons/blog_like.svg" %}" width="50"  alt="">
+                      </button>
+                    </form>
+                    <form class="dislike-form" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="note_id" value="{{ note.id }}">
+                      <input type="hidden" name="user_id" value="{{ user.id }}">
+                      <button class="dislike-form__button"
+                           value="submit" type="submit">
+                          <img src="{% static "images/icons/blog_dislike.svg" %}" width="50"  alt="">
+                      </button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        <p><img style="float:right" src="{% static "images/icons/blog_star.png" %}" alt="star" height="30" width="30">
+        </p>
+    </div>
+</div>

@@ -1,59 +1,181 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Бойня!!!</title>
+    <title>{{ title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
-    <link type="text/css" rel="stylesheet" href="{% static 'codemirror/css/codemirror.min.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static 'codemirror/css/dracula.min.css' %}">
-    <script type="text/javascript" src="{% static 'codemirror/js/codemirror.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'codemirror/js/python.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'codemirror/js/matchbrackets.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'codemirror/js/closebrackets.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'resizable-sections.js' %}"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static "jquery/jquery-3.7.1.min.js" %}"></script>
+    <link type="text/css" rel="stylesheet" href="{% static "codemirror/css/codemirror.min.css" %}">
+    <link type="text/css" rel="stylesheet" href="{% static "codemirror/css/dracula.min.css" %}">
+    <script type="text/javascript" src="{% static "codemirror/js/codemirror.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "codemirror/js/python.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "codemirror/js/matchbrackets.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "codemirror/js/closebrackets.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "resizable-sections.js" %}"></script>
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "swiper/css/swiper-bundle.min.css" %}" rel="stylesheet">
-    <link href="{% static "style.css" %}" rel="stylesheet">
+    <link href="{% static "css/duel.css" %}" rel="stylesheet">
 </head>
 
 <body class="flex-container">
     <nav class="navbar navbar-expand-lg navbar-dark p-3">
         <div class="container-fluid">
             <img src="{% static "logo.jpg" %}" alt="" height="37" class="d-inline-block align-text-top">
+
+            <ul>
+                {% for i in cnt %}
+                <a href="{% url 'duel:duel' uidb forloop.counter 'description' %}" style="text-decoration: none;">
+                    <li {% if forloop.counter == task_num %} class="li_task_active" {% else %}class="li_task"
+                        {% endif %}>{{ forloop.counter }}</li>
+                </a>
+                {% endfor %}
+            </ul>
+            <a href={% url "duel:results" uidb %}><button class="btn btn-primary">Submit Tasks</button></a>
+            <div style="display:flex; gap: 25px;">
+                <div style="margin-top: 7px">Осталось времени: <span id="timer">
+                    </span>
+                </div>
+                <a href={% url "duel:leave" uidb %}><button class="btn btn-outline-danger">Покинуть дуэль</button></a>
+            </div>
         </div>
     </nav>
+
     <div class="content">
         <div class="resizable-column" id="column1">
-            Column 1
+            <div style="display:flex; justify-content: space-between;">
+                <ul class="duel_nav_tabs nav nav-tabs" style="border: none;margin-top: 1%;font-size:18px">
+                    <li class="duel_nav_item nav-item">
+                        <a class="duel_tab {% if tab == "description" %} duel_active {% endif %} nav-link"
+                            href={% url "duel:duel" uidb task_num "description" %}>Условие</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="duel_tab {% if tab == "submissions" %} duel_active {% endif %} nav-link"
+                            href={% url "duel:duel" uidb task_num "description" %}>Условие</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="duel_tab {% if tab == "submissions" %} duel_active {% endif %} nav-link"
+                            href={% url "duel:duel" uidb task_num "submissions" %}>Отправки</a>
+                    </li>
+                </ul>
+                <p id="task_num"><span style="color:#ED9B6D">Задача:</span> {{ task_num }}/{{ cnt.count }}</p>
+            </div>
+            {% if tab == "submissions" %}
+            {% for sb in submissions %}
+            <div>{{ sb.created_at }}</div>
+            {% endfor %}
+            {% else %}
+            <div>
+                <div class="task_title">{{ task.title }}</div>
+                <p class="diff" {% if task.difficulty == "easy" %} style="color:#82CA9B"
+                    {% elif task.difficulty == "hard" %}style="color:#FF6A73" {% else %} style="color:#ED9B6D"
+                    {% endif %}>{{ task.difficulty }}</p>
+            </div>
+            <div class="task_text">{{ task.text }}</div>
+            {% endif %}
         </div>
-        <div class="resizer" id="resizer1"></div>
+        <div class="resizer" id="resizer1">
+            <div class="circles">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
         <div class="flex-vertical" id="column2">
             <div class="resizable-column" id="code-section">
                 <form method="post">
                     {% csrf_token %}
-                    <button type="submit">Submit</button>
+                    <div><button type="submit" {% if not testing_finished %}class="btn gradient-button btn-danger" disabled{% else %}class="gradient-button"{% endif %}>Submit</button></div>
                     <div class="code">
                         {{ form.code }}
                     </div>
                 </form>
             </div>
-            <div class="resizer2" id="resizer3"></div>
-            <div class="resizable-column" id="tests-section">
-                Column 4
+            <div class="resizer2" id="resizer3">
+                <div class="circles2">
+                    <div class="circle2"></div>
+                    <div class="circle2"></div>
+                    <div class="circle2"></div>
+                </div>
+            </div>
+            <div class="resizable-column results__block" id="tests-section">
+                {% if false %}
+                    <p class="empty_test_results">Здесь появятся результаты тестов</p>
+                {% else %}
+                    <div class="table__wrapper">
+                      <table class="results__table" border="1">
+                          <caption>Отправки</caption>
+                          <tr>
+                              <th>Идентификатор</th>
+                              <th>Пред. баллы</th>
+                              <th>Вердикт</th>
+                              <th>Время</th>
+                              <th>Отослано</th>
+                          </tr>
+                          {% for submission in submissions %}
+                            <tr>
+                                <td>№{{ submission.id }}</td>
+                                {% if submission.verdict == "" or submission.score == -1 or submission.exec_time == -1 %}
+                                    <td>Pending or Cancelled</td>
+                                    <td>Pending or Cancelled</td>
+                                    <td>Pending or Cancelled</td>
+                                {% else %}
+                                    <td>{{ submission.score }}</td>
+                                    <td>{{ submission.verdict }}</td>
+                                    <td>{{ submission.exec_time }}мс</td>
+                                {% endif %}
+                                <td>{{ submission.created_at }}</td>
+                            </tr>
+                          {% endfor %}
+                      </table>
+                    </div>
+
+                {% endif %}
             </div>
         </div>
-        <div class="resizer" id="resizer2"></div>
+        <div class="resizer" id="resizer2">
+            <div class="circles">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
         <div class="resizable-column" id="column3">
-            Column 3
+            <p class="players_title">Участники: {{ players.count }}</p>
+            <li class="menu-header__item nav-item dropdown">
+                <a class="menu-header__link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Группы</a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'groups:my' %}">Группы</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'groups:new_groups' %}">Создать новую группу</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'groups:enter_user_in_group' %}">Присоединиться к публичной группе</a>
+                  </li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'groups:invitations' %}">Приглашения</a>
+                  </li>
+                </ul>
+              </li>
+            {% for player in players %}
+            <p> {{ player.username }}</p>
+            {% endfor %}
         </div>
         <script>
             const cache_url = "{% url 'duel:cache-code' uidb %}";
+            const task_num = "{{ task_num }}";
             const csrf_token = "{{ csrf_token }}";
+            const duration = "{{ duration }}";
+            const timer_url = "{% url 'duel:timeout' uidb %}";
+            const redirect_url = "{% url 'duel:results' uidb %}";
         </script>
         <script type="text/javascript" src="{% static 'code_editor.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/duel-timer.js' %}"></script>
+        <script src="{% static "bootstrap/js/bootstrap.bundle.min.js" %}"></script>
     </div>
     </div>
 </body>

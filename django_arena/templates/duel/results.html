@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+<div class="results">
+  <div class="text-white results__title">Результаты</div>
+  <div class="text-white results__user-score">
+    Ваш рейтинг: {{ user_score }}
+  </div>
+</div>
+{% endblock %}
