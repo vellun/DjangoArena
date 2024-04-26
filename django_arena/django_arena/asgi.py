@@ -18,8 +18,8 @@ application = ProtocolTypeRouter(
         "websocket": AllowedHostsOriginValidator(
             AuthMiddlewareStack(
                 URLRouter(
-                    lobby.routing.websocket_urlpatterns +
-                    chatrooms.routing.websocket_urlpatterns,
+                    lobby.routing.websocket_urlpatterns
+                    + chatrooms.routing.websocket_urlpatterns,
                 ),
             ),
         ),

@@ -1,5 +1,3 @@
-{% load i18n %}
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,12 +32,12 @@
                 </a>
                 {% endfor %}
             </ul>
-            <a href={% url "duel:results" uidb %}><button class="btn btn-primary">{% translate "Отправить задания" %}</button></a>
+            <a href={% url "duel:results" uidb %}><button class="btn btn-primary">Submit Tasks</button></a>
             <div style="display:flex; gap: 25px;">
-                <div style="margin-top: 7px">{% translate "Осталось времени" %}: <span id="timer">
+                <div style="margin-top: 7px">Осталось времени: <span id="timer">
                     </span>
                 </div>
-                <a href={% url "duel:leave" uidb %}><button class="btn btn-outline-danger">{% translate "Покинуть дуэль" %}</button></a>
+                <a href={% url "duel:leave" uidb %}><button class="btn btn-outline-danger">Покинуть дуэль</button></a>
             </div>
         </div>
     </nav>
@@ -50,15 +48,11 @@
                 <ul class="duel_nav_tabs nav nav-tabs" style="border: none;margin-top: 1%;font-size:18px">
                     <li class="duel_nav_item nav-item">
                         <a class="duel_tab {% if tab == "description" %} duel_active {% endif %} nav-link"
-                            href={% url "duel:duel" uidb task_num "description" %}>{% translate "Условие" %}</a>
+                            href={% url "duel:duel" uidb task_num "description" %}>Условие</a>
                     </li>
                     <li class="nav-item">
                         <a class="duel_tab {% if tab == "submissions" %} duel_active {% endif %} nav-link"
-                            href={% url "duel:duel" uidb task_num "description" %}>{% translate "Условие" %}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="duel_tab {% if tab == "submissions" %} duel_active {% endif %} nav-link"
-                            href={% url "duel:duel" uidb task_num "submissions" %}>{% translate "Отправки" %}</a>
+                            href={% url "duel:duel" uidb task_num "submissions" %}>Отправки</a>
                     </li>
                 </ul>
                 <p id="task_num"><span style="color:#ED9B6D">Задача:</span> {{ task_num }}/{{ cnt.count }}</p>
@@ -103,25 +97,25 @@
             </div>
             <div class="resizable-column results__block" id="tests-section">
                 {% if false %}
-                    <p class="empty_test_results">{% translate "Здесь появятся результаты тестов" %}</p>
+                    <p class="empty_test_results">Здесь появятся результаты тестов</p>
                 {% else %}
                     <div class="table__wrapper">
                       <table class="results__table" border="1">
-                          <caption>{% translate "Отправки" %}</caption>
+                          <caption>Отправки</caption>
                           <tr>
-                              <th>{% translate "Идентификатор" %}Идентификатор</th>
-                              <th>{% translate "Пред. баллы" %}Пред. баллы</th>
-                              <th>{% translate "Вердикт" %}Вердикт</th>
-                              <th>{% translate "Время" %}Время</th>
-                              <th>{% translate "Отослано" %}Отослано</th>
+                              <th>Идентификатор</th>
+                              <th>Пред. баллы</th>
+                              <th>Вердикт</th>
+                              <th>Время</th>
+                              <th>Отослано</th>
                           </tr>
                           {% for submission in submissions %}
                             <tr>
                                 <td>№{{ submission.id }}</td>
                                 {% if submission.verdict == "" or submission.score == -1 or submission.exec_time == -1 %}
-                                    <td>{% translate "Обрабатывается либо отмененно" %}</td>
-                                    <td>{% translate "Обрабатывается либо отмененно" %}</td>
-                                    <td>{% translate "Обрабатывается либо отмененно" %}</td>
+                                    <td>Pending or Cancelled</td>
+                                    <td>Pending or Cancelled</td>
+                                    <td>Pending or Cancelled</td>
                                 {% else %}
                                     <td>{{ submission.score }}</td>
                                     <td>{{ submission.verdict }}</td>
@@ -145,24 +139,6 @@
         </div>
         <div class="resizable-column" id="column3">
             <p class="players_title">Участники: {{ players.count }}</p>
-            <li class="menu-header__item nav-item dropdown">
-                <a class="menu-header__link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Группы</a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li>
-                    <a class="dropdown-item" href="{% url 'groups:my' %}">Группы</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{% url 'groups:new_groups' %}">Создать новую группу</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{% url 'groups:enter_user_in_group' %}">Присоединиться к публичной группе</a>
-                  </li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li>
-                    <a class="dropdown-item" href="{% url 'groups:invitations' %}">Приглашения</a>
-                  </li>
-                </ul>
-              </li>
             {% for player in players %}
             <p> {{ player.username }}</p>
             {% endfor %}

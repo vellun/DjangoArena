@@ -66,7 +66,8 @@ class CustomAuthenticationForm(
 
 
 class EditUserProfileForm(
-    django.contrib.auth.forms.UserChangeForm, BootstrapForm,
+    django.contrib.auth.forms.UserChangeForm,
+    BootstrapForm,
 ):
     password = None
 

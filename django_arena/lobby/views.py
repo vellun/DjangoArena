@@ -278,8 +278,9 @@ class InviteUsersView(django.views.View):
                     notification = notifications.models.Notification()
                     notification.sender = self.request.user
                     notification.recipient = cur_user
+                    model = notifications.models
                     notification.notification_type = (
-                        notifications.models.Notification.NotificationTypes.FRIEND
+                        model.Notification.NotificationTypes.FRIEND
                     )
                     notification.text = (
                         "Привет! Подключайся к моей игре по ccылке: "

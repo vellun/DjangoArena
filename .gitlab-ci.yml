@@ -1,16 +1,19 @@
 stages:
-  - linting
+  - flake
+  - black
+
+before_script:
+  - pip install -r requirements/test.txt
 
 flake8:
-  stage: linting
+  stage: flake
   image: registry.gitlab.com/pipeline-components/flake8:latest
-  before_script:
-    - pip install -r requirements/test.txt
   script:
-    - flake8 --append-config setup.cfg .
+    - flake8 .
+
 
 black:
-  stage: linting
+  stage: black
   image: registry.gitlab.com/pipeline-components/black:latest
   script:
-    - black --diff --check --verbose -- .
+    - black --check .

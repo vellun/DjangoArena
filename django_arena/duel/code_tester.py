@@ -14,38 +14,53 @@ class CodeTester:
 
     def get_finish_parameter(self, submission_id):
         submission = submissions.models.Submission.objects.get(
-            pk=submission_id
+            pk=submission_id,
         )
         task_id = submission.problem_id
-        return f"duel_{ self.duel_uidb }_{ self.user_id }_finish_parameter_{ task_id }_submission_{ submission_id }"
+        return (
+            f"duel_{self.duel_uidb}_{self.user_id}"
+            f"_finish_parameter_{task_id}_submission_{submission_id}"
+        )
 
     def get_score_parameter(self, submission_id):
         submission = submissions.models.Submission.objects.get(
-            pk=submission_id
+            pk=submission_id,
         )
         task_id = submission.problem_id
-        return f"duel_{ self.duel_uidb }_{ self.user_id }_score_task_{ task_id }_submission_{ submission_id }"
+        return (
+            f"duel_{self.duel_uidb}_{self.user_id}"
+            f"_score_task_{task_id}_submission_{submission_id}"
+        )
 
     def get_verdict_parameter(self, submission_id):
         submission = submissions.models.Submission.objects.get(
-            pk=submission_id
+            pk=submission_id,
         )
         task_id = submission.problem_id
-        return f"duel_{ self.duel_uidb }_{ self.user_id }_verdict_{ task_id }_submission_{ submission_id }"
+        return (
+            f"duel_{self.duel_uidb}_{self.user_id}"
+            f"_verdict_{task_id}_submission_{submission_id}"
+        )
 
     def get_exec_time_parameter(self, submission_id):
         submission = submissions.models.Submission.objects.get(
-            pk=submission_id
+            pk=submission_id,
         )
         task_id = submission.problem_id
-        return f"duel_{ self.duel_uidb }_{ self.user_id }_exec_time_{ task_id }_submission_{ submission_id }"
+        return (
+            f"duel_{self.duel_uidb}_{self.user_id}"
+            f"_exec_time_{task_id}_submission_{submission_id}"
+        )
 
     def get_code_parameter(self, submission_id):
         submission = submissions.models.Submission.objects.get(
-            pk=submission_id
+            pk=submission_id,
         )
         task_id = submission.problem_id
-        return f"duel_{ self.duel_uidb }_{ self.user_id }_code_{ task_id }_submission_{ submission_id }"
+        return (
+            f"duel_{self.duel_uidb}_{self.user_id}"
+            f"_code_{task_id}_submission_{submission_id}"
+        )
 
     def prepare_parameters(self, submission_id):
         self.finish_parameter = self.get_finish_parameter(submission_id)
@@ -60,13 +75,14 @@ class CodeTester:
             uuid=self.duel_uidb,
         )
         submission = submissions.models.Submission.objects.get(
-            pk=submission_id
+            pk=submission_id,
         )
         current_tasks = current_duel.problems.all()
         task_num = 1
         for task in current_tasks:
             if task.id == submission.problem_id:
                 break
+
             task_num += 1
 
         self.task_num = task_num
@@ -114,6 +130,7 @@ class CodeTester:
                 current_user.medium_problems += 1
             else:
                 current_user.hard_problems += 1
+
             current_user.save()
 
         user_score = (
