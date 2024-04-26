@@ -10,4 +10,3 @@ class RedirectUserTests(django.test.TestCase):
         response = django.test.Client().get(url)
         self.assertEqual(response.status_code, http.HTTPStatus.OK)
         self.assertEqual(response1.status_code, response.status_code)
-
