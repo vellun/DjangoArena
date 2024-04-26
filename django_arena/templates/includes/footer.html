@@ -1,6 +1,7 @@
 {% load static %}
+{% load i18n %}
 <footer class="footer">
-  <div class="footer__copyright">Copyright © 2024 LeetCode</div>
-  <a class="footer__support" href="">Help Center</a>
-  <div class="footer__love">Made with love (and chatgpt)</div>
+  <div class="footer__copyright">{% translate "Copyright © 2024 ДжангоАрена" %}</div>
+  <a class="footer__support" href="{% url 'feedback:feedback' %}">{% translate "Помощь" %}</a>
+  <div class="footer__love">{% translate "С щепоткой любви (и чатгпт)" %}</div>
 </footer>

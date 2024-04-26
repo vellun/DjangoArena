@@ -25,7 +25,7 @@
     <div class="text-white social-profile__rank">Мемный ранг: {{ user_rank.1 }}</div>
     <ul class="social-profile__social">
       <li class="text-white social-profile__social__items">Друзья: {{ user.friends.count }}</li>
-      <li class="text-white social-profile__social__items">Группы: {{ user.user.count }} </li>
+      <li class="text-white social-profile__social__items">Группы: {{ user.groups.count }} </li>
       <li class="text-white social-profile__social__items">Посты: {{ user.notes.count }}</li>
       <li class="text-white social-profile__social__items">Задачи: 0</li>
     </ul>
@@ -84,6 +84,35 @@
     </div>
   </div>
 </div>
+<style>
+  .social-profile__username {
+    color:
+        {% if user.rating < 1200 %}
+            gray
+        {% elif 1200 <= user.rating and user.rating < 1400 %}
+            white
+        {% elif 1400 <= user.rating and user.rating < 1600 %}
+            #25ba00
+        {% elif 1600 <= user.rating and user.rating < 1900 %}
+            #f0e400
+        {% elif 1900 <= user.rating and user.rating < 2200 %}
+            cyan
+        {% elif 2200 <= user.rating and user.rating < 2300 %}
+            violet
+        {% elif 2300 <= user.rating and user.rating < 2400 %}
+            #f000bc
+        {% elif 2400 <= user.rating and user.rating < 2600 %}
+            orange
+        {% elif 2600 <= user.rating and user.rating < 2900 %}
+            #8f0000
+        {% elif 2900 <= user.rating and user.rating < 3200 %}
+            red
+        {% elif 3200 <= user.rating %}
+            red !important; } .social-profile__username::first-letter {
+                              color:white
+        {% endif %}
+  !important;}
+</style>
 <script>
   data_tasks = {
     labels: [

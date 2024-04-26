@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <header class="header">
   <nav class="header__navbar navbar-header navbar navbar-expand-lg navbar-dark">
@@ -8,39 +9,53 @@
     </div>
     <ul class="navbar-header__menu navbar-header__menu-left menu-header p-3">
       <li class="menu-header__item">
-        <a class="menu-header__link" href="{% url 'homepage:main' %}">Главная</a>
+        <a class="menu-header__link" href="{% url 'homepage:main' %}">{% translate "Главная" %}</a>
       </li>
       <li class="menu-header__item">
-        <a class="menu-header__link" href="{% url 'notes:blog-all' %}">Блог</a>
+        <a class="menu-header__link" href="{% url 'notes:blog-all' %}">{% translate "Блог" %}</a>
       </li>
       {% if request.user.is_authenticated %}
         <li class="menu-header__item">
-          <a class="menu-header__link" href="{% url 'users:friends' %}">Друзья</a>
+          <a class="menu-header__link" href="{% url 'users:friends' %}">{% translate "Друзья" %}</a>
         </li>
         <li class="menu-header__item nav-item dropdown">
-          <a class="menu-header__link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Группы</a>
+          <a class="menu-header__link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{% translate "Группы" %}</a>
           <ul class="dropdown-menu dropdown-menu-dark">
             <li>
-              <a class="dropdown-item" href="{% url 'groups:my' %}">Группы</a>
+              <a class="dropdown-item" href="{% url 'groups:my' %}">{% translate "Группы" %}</a>
             </li>
             <li>
-              <a class="dropdown-item" href="{% url 'groups:new_groups' %}">Создать новую группу</a>
+              <a class="dropdown-item" href="{% url 'groups:new_groups' %}">{% translate "Создать новую группу" %}</a>
             </li>
             <li>
-              <a class="dropdown-item" href="{% url 'groups:enter_user_in_group' %}">Присоединиться к публичной группе</a>
+              <a class="dropdown-item" href="{% url 'groups:enter_user_in_group' %}">{% translate "Присоединиться к публичной группе" %}</a>
             </li>
             <li><hr class="dropdown-divider"></li>
             <li>
-              <a class="dropdown-item" href="{% url 'groups:invitations' %}">Приглашения</a>
+              <a class="dropdown-item" href="{% url 'groups:invitations' %}">{% translate "Приглашения" %}</a>
             </li>
           </ul>
         </li>
       {% endif %}
       {% if request.user.is_staff or request.user.is_admin %}
       <li class="menu-header__item">
-        <a class="menu-header__link" href="{% url 'admin:index' %}">Админ-панель</a>
+        <a class="menu-header__link" href="{% url 'admin:index' %}">{% translate "Админ-панель" %}</a>
       </li>
       {% endif %}
+      <form action="{% url 'set_language' %}" method="post" style="display:flex; gap: 10px;">{% csrf_token %}
+          <input name="next" type="hidden" value="{{ redirect_to }}">
+          <select name="language" style="height: 30px;">
+              {% get_current_language as LANGUAGE_CODE %}
+              {% get_available_languages as LANGUAGES %}
+              {% get_language_info_list for LANGUAGES as languages %}
+              {% for language in languages %}
+                  <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                      {{ language.name_local }} ({{ language.code }})
+                  </option>
+              {% endfor %}
+          </select>
+          <input class="btn btn-secondary" style="height: 30px;" type="submit" value="Select">
+      </form>
       <li class="menu-header__item" id="header-notifications-button">
         <img class="menu-header__img" src="{% static "images/icons/header_notifications.svg" %}" alt="">
         <div id="menu-header-notifications-list" class="menu-header__notifications-list" style="display: none">
@@ -54,7 +69,7 @@
               {% endfor %}
             </ul>
           {% else %}
-            Не обнаружено новых уведомлений
+            {% translate "Не обнаружено новых уведомлений" %}
           {% endif %}
         </div>
       </li>
@@ -66,7 +81,7 @@
           <div id="modal" class="modal fade">
             <div id="dialog" class="modal-dialog" data-hx-target="this"></div>
           </div>
-          <button class="gradient-button" data-hx-get="{% url 'lobby:gameplay-settings' %}" data-hx-target="#dialog">Начать дуэль</button>
+          <button class="gradient-button" data-hx-get="{% url 'lobby:gameplay-settings' %}" data-hx-target="#dialog">{% translate "Начать дуэль" %}</button>
         </li>
         <div class="dropdown-center">
           <a class="profile-dropdown__link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,22 +91,22 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end profile-dropdown-menu">
             <li class="dropdown-item menu-header__item">
-              <a class="menu-header__link" href="{% url 'users:profile' request.user.id %}">Профиль</a>
+              <a class="menu-header__link" href="{% url 'users:profile' request.user.id %}">{% translate "Профиль" %}</a>
             </li>
             <li class="dropdown-item menu-header__item">
-              <a class="menu-header__link" href="{% url 'users:edit' %}">Настройки профиля</a>
+              <a class="menu-header__link" href="{% url 'users:edit' %}">{% translate "Настройки профиля" %}</a>
             </li>
             <li class="dropdown-item menu-header__item">
-              <a href="{% url 'users:logout' %}" class="btn btn-outline-danger">Выйти</a>
+              <a href="{% url 'users:logout' %}" class="btn btn-outline-danger">{% translate "Выйти" %}</a>
             </li>
           </ul>
         </div>
       {% else %}
         <li class="menu-header__item">
-          <a href="{% url 'users:login' %}" class="btn btn-primary">Войти</a>
+          <a href="{% url 'users:login' %}" class="btn btn-primary">{% translate "Войти" %}</a>
         </li>
         <li class="menu-header__item">
-          <a href="{% url 'users:signup' %}" class="btn btn-primary">Зарегистрироваться</a>
+          <a href="{% url 'users:signup' %}" class="btn btn-primary">{% translate "Зарегистрироваться" %}</a>
         </li>
       {% endif %}
       <script src={% static "htmx/htmx.min.js" %}></script>

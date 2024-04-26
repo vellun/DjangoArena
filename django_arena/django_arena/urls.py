@@ -5,6 +5,7 @@ import django.contrib.auth.urls
 import django.urls
 
 import chatrooms.urls
+import feedback.urls
 import duel.urls
 import groups.urls
 import homepage.urls
@@ -13,7 +14,7 @@ import notes.urls
 import notifications.urls
 import submissions.urls
 import users.urls
-import requests.urls
+import invitations.urls
 
 urlpatterns = [
     django.urls.path("", django.urls.include(homepage.urls)),
@@ -24,7 +25,7 @@ urlpatterns = [
     ),
     django.urls.path(
         "friends/",
-        django.urls.include(requests.urls),
+        django.urls.include(invitations.urls),
     ),
     django.urls.path("duel/", django.urls.include(duel.urls)),
     django.urls.path("play/", django.urls.include(lobby.urls)),
@@ -32,7 +33,9 @@ urlpatterns = [
     django.urls.path("submissions/", django.urls.include(submissions.urls)),
     django.urls.path("groups/", django.urls.include(groups.urls)),
     django.urls.path("blog/", django.urls.include(notes.urls)),
+    django.urls.path("feedback/", django.urls.include(feedback.urls)),
     django.urls.path("admin/", django.contrib.admin.site.urls),
+    django.urls.path("i18n/", django.urls.include("django.conf.urls.i18n")),
 ]
 
 if django.conf.settings.DEBUG:

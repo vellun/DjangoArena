@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}Выход{% endblock %}
 {% block content %}
-  <h2>Вы вышли из учетной записи</h2>
-  <a href="{% url "users:login" %}">Войти снова?</a>
+  <h2>{% translate "Вы вышли из учетной записи" %}</h2>
+  <a href="{% url "users:login" %}">{% translate "Войти снова?" %}</a>
 {% endblock content %}

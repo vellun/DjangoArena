@@ -3,6 +3,8 @@ from pathlib import Path
 
 import dotenv
 
+from django.utils.translation import gettext_lazy as _
+
 dotenv.load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +33,7 @@ INSTALLED_APPS = [
     "notifications.apps.NotificationsConfig",
     "homepage.apps.HomepageConfig",
     "problems.apps.ProblemsConfig",
+    "feedback.apps.FeedbackConfig",
     "groups.apps.GroupsConfig",
     "chatrooms.apps.ChatroomsConfig",
     "achievements.apps.AchievementsConfig",
@@ -38,7 +41,7 @@ INSTALLED_APPS = [
     "tags.apps.TagsConfig",
     "users.apps.UsersConfig",
     "duel.apps.DuelConfig",
-    "requests.apps.RequestsConfig",
+    "invitations.apps.InvitationsConfig",
     "submissions.apps.SubmissionsConfig",
     "lobby.apps.LobbyConfig",
     # Django applications
@@ -54,6 +57,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -179,6 +183,15 @@ AUTH_USER_MODEL = "core.User"
 
 ARENA_TESTING_HOST = "localhost:8001"
 
+LOCALE_PATHS = [
+    BASE_DIR / "locale/",
+]
+
 LOGIN_URL = "/users/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+LANGUAGES = [
+    ("ru", _("Russian")),
+    ("en", _("English")),
+]
