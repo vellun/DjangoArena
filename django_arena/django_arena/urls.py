@@ -5,16 +5,16 @@ import django.contrib.auth.urls
 import django.urls
 
 import chatrooms.urls
-import feedback.urls
 import duel.urls
+import feedback.urls
 import groups.urls
 import homepage.urls
+import invitations.urls
 import lobby.urls
 import notes.urls
 import notifications.urls
 import submissions.urls
 import users.urls
-import invitations.urls
 
 urlpatterns = [
     django.urls.path("", django.urls.include(homepage.urls)),

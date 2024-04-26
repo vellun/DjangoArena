@@ -1,9 +1,9 @@
 import os
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
 import dotenv
 
-from django.utils.translation import gettext_lazy as _
 
 dotenv.load_dotenv()
 

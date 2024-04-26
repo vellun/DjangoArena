@@ -25,7 +25,7 @@ class FeedbackView(django.views.View):
 
     def post(self, request):
         if self.feedback_form.is_valid():
-            feedback = self.feedback_form.save()
+            self.feedback_form.save()
             django.contrib.messages.success(
                 request,
                 "Ваш отзыв успешно отправлен!",
@@ -34,3 +34,6 @@ class FeedbackView(django.views.View):
             return django.shortcuts.redirect(request.path)
 
         return self.get(request)
+
+
+__all__ = []
