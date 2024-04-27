@@ -12,9 +12,13 @@ import notes.models
 class HomeView(django.views.View):
     def get(self, *args, **kwargs):
         a_week_ago = django.utils.timezone.now() - datetime.timedelta(weeks=1)
-        note_of_a_week = notes.models.Note.objects.filter(
-            created_at__gte=a_week_ago,
-        ).order_by("-likes").first()
+        note_of_a_week = (
+            notes.models.Note.objects.filter(
+                created_at__gte=a_week_ago,
+            )
+            .order_by("-likes")
+            .first()
+        )
         top_users = core.models.User.objects.order_by("-rating")[:5]
         context = {
             "title": "Главная",
