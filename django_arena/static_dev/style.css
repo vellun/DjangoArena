@@ -73,3 +73,15 @@ page.page-404 {
 .page-404_link {
   text-decoration: none !important;
 }
+
+td, th {
+  border-width: 1px !important;
+}
+
+.main__top__table {
+  width: 100%;
+}
+
+.main__top__title {
+  font-size: 20px !important;
+}

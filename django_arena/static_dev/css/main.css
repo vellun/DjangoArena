@@ -1,0 +1,11 @@
+td, th {
+  border-width: 1px !important;
+}
+
+.main__top__table {
+  width: 100%;
+}
+
+.main__top__title, .main__note-of-a-week__title {
+  font-size: 20px !important;
+}
