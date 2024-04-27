@@ -58,9 +58,33 @@
                 <p id="task_num"><span style="color:#ED9B6D">Задача:</span> {{ task_num }}/{{ cnt.count }}</p>
             </div>
             {% if tab == "submissions" %}
-            {% for sb in submissions %}
-            <div>{{ sb.created_at }}</div>
-            {% endfor %}
+            <div class="table__wrapper">
+                <table class="results__table" border="2">
+                    <caption>Отправки</caption>
+                    <tr>
+                        <th>Id</th>
+                        <th>Пред. баллы</th>
+                        <th>Вердикт</th>
+                        <th>Время</th>
+                        <th>Отослано</th>
+                    </tr>
+                    {% for submission in submissions %}
+                      <tr>
+                          <td>№{{ submission.id }}</td>
+                          {% if submission.verdict == "" or submission.score == -1 or submission.exec_time == -1 %}
+                              <td>Pending or Cancelled</td>
+                              <td>Pending or Cancelled</td>
+                              <td>Pending or Cancelled</td>
+                          {% else %}
+                              <td>{{ submission.score }}</td>
+                              <td>{{ submission.verdict }}</td>
+                              <td>{{ submission.exec_time }}мс</td>
+                          {% endif %}
+                          <td>{{ submission.created_at }}</td>
+                      </tr>
+                    {% endfor %}
+                </table>
+              </div>
             {% else %}
             <div>
                 <div class="task_title">{{ task.title }}</div>
@@ -82,7 +106,9 @@
             <div class="resizable-column" id="code-section">
                 <form method="post">
                     {% csrf_token %}
-                    <div><button type="submit" {% if not testing_finished %}class="btn gradient-button btn-danger" disabled{% else %}class="gradient-button"{% endif %}>Submit</button></div>
+                    <div><button type="submit" id="submit-btn" 
+                        {% if not testing_finished %}class="btn gradient-button btn-danger" disabled{% else %}
+                        class="gradient-button"{% endif %}>Отправить</button></div>
                     <div class="code">
                         {{ form.code }}
                     </div>
@@ -96,43 +122,16 @@
                 </div>
             </div>
             <div class="resizable-column results__block" id="tests-section">
-                {% if false %}
-                    <p class="empty_test_results">Здесь появятся результаты тестов</p>
-                {% else %}
-                    <div class="table__wrapper">
-                      <table class="results__table" border="1">
-                          <caption>Отправки</caption>
-                          <tr>
-                              <th>Идентификатор</th>
-                              <th>Пред. баллы</th>
-                              <th>Вердикт</th>
-                              <th>Время</th>
-                              <th>Отослано</th>
-                          </tr>
-                          {% for submission in submissions %}
-                            <tr>
-                                <td>№{{ submission.id }}</td>
-                                {% if submission.verdict == "" or submission.score == -1 or submission.exec_time == -1 %}
-                                    <td>Pending or Cancelled</td>
-                                    <td>Pending or Cancelled</td>
-                                    <td>Pending or Cancelled</td>
-                                {% else %}
-                                    <td>{{ submission.score }}</td>
-                                    <td>{{ submission.verdict }}</td>
-                                    <td>{{ submission.exec_time }}мс</td>
-                                {% endif %}
-                                <td>{{ submission.created_at }}</td>
-                            </tr>
-                          {% endfor %}
-                      </table>
-                    </div>
-
-                {% endif %}
+                <div id="cur_task_results_{{ task_num }}" class="empty_test_results">{% if test_results %}{{test_results|safe}}
+                    {% else %}Здесь появятся результаты тестов{% endif %}
+                    <div id="loading" style="display: none;" ><div class="spinner-border text-info" role="status"></div> Тестирование...</div>
+                </div>
             </div>
         </div>
         <div class="resizer" id="resizer2">
             <div class="circles">
                 <div class="circle"></div>
+
                 <div class="circle"></div>
                 <div class="circle"></div>
             </div>
@@ -154,8 +153,52 @@
         <script type="text/javascript" src="{% static 'code_editor.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/duel-timer.js' %}"></script>
         <script src="{% static "bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+        <script>
+            $("#submit-btn").click(function(){
+                localStorage.setItem("loaderActive_{{ task_num }}", true);
+                
+            });
+            if (localStorage.getItem("loaderActive_{{ task_num }}")) {
+                loading.style.display = 'block';
+                document.querySelector("#cur_task_results_{{ task_num }}").innerHTML = '<div class="spinner-border text-info" role="status"></div> Тестирование...';
+            }
+            const wsStart = new WebSocket("ws://" + window.location.host + "/testing/" + "{{uidb}}/" + {{task_num}} + "/" + {{request.user.id}} + "/");
+        
+            wsStart.onmessage = function(event) {
+                console.log("loaderActive_{{ task_num }}")
+                const data = JSON.parse(event.data);
+                localStorage.removeItem("loaderActive_{{ task_num }}");
+                if (data) {
+                    console.log(data)
+                    if (data.verdict) {
+                        let html_data = "<div><div>Вердикт:" +
+                            data.html + "</div>" + "<div>Всего тестов:" + data.ran_tests_count + "</div>" + "<div>Непройденных тестов:" + data.failures_count + "</div></div>"
+                        document.querySelector("#cur_task_results_{{ task_num }}").innerHTML = html_data;
+                        document.querySelector("#submit-btn").removeAttribute('disabled');
+                        cacheResult(html_data)
+                    }
+                }
+
+                function cacheResult(html) {
+                    $.ajax({
+                        url: "{% url 'duel:cache-result' uidb %}",
+                        type: "POST",
+                        data: {
+                          result: html,
+                          task_num: task_num,
+                          csrfmiddlewaretoken: csrf_token,
+                        },
+                        success: function (data) {
+                          console.log("Tests result cached successfully");
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                          console.log("Error caching tests result: " + errorThrown);
+                        },
+                      });
+                }
+            };
+            </script>
     </div>
     </div>
 </body>
-
-</html>
+</html> 

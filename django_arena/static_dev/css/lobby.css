@@ -1,24 +1,62 @@
 .lobby {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  margin-top: 18vh;
 }
+
 .cur-player-status {
-    width: 100%;
-    font-size: 32px;
+  width: 100%;
+  font-size: 32px;
 }
 .start-game-form {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 .participants {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 .participants__title {
-    font-size: 26px;
+  font-size: 26px;
 }
 .participants__list {
-    margin-top: 10px;
-    list-style: none;
+  margin-top: 10px;
+  list-style: none;
 }
 .participants__item {
-    color: white;
+  color: white;
+}
+
+#lobby_card {
+  background-color: rgb(54, 67, 66);
+  display: float;
+  margin: auto;
+  width: 65vw;
+}
+
+#lobby-card-body {
+    overflow-x: auto;
+}
+
+.lobby_users {
+  display: flex;
+  margin: auto;
+  gap: 20px;
+}
+
+.user_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.users_title {
+  color: rgb(161, 191, 194);
+  flex-grow: 1;
+  text-align: center;
+}
+
+.invite-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }

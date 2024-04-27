@@ -1,3 +1,4 @@
+import django.contrib.auth.mixins
 import django.contrib.messages
 import django.core.exceptions
 import django.db.models
@@ -95,8 +96,12 @@ class GroupMyView(django.views.View):
 
 class GroupAllView(django.views.View):
     def get(self, *args, **kwargs):
-        selected_groups = groups.models.Group.objects.all().order_by(
-            "-created_at",
+        selected_groups = (
+            groups.models.Group.objects.all()
+            .prefetch_related("group")
+            .order_by(
+                "-created_at",
+            )
         )
         context = {
             "title": "Искать группы",
@@ -110,46 +115,27 @@ class GroupAllView(django.views.View):
         )
 
 
-class GroupCreate(django.views.View):
-    def get(self, *args, **kwargs):
-        form = groups.forms.GroupForm()
-        context = {
-            "title": "Создать группу",
-            "form": form,
-        }
-        return django.shortcuts.render(
-            self.request,
-            "group/new_group.html",
-            context,
+class GroupCreateView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.CreateView,
+):
+    model = groups.models.Group
+    template_name = "group/new_group.html"
+    form_class = groups.forms.GroupForm
+    success_url = django.urls.reverse_lazy("groups:my")
+
+    def form_valid(self, form):
+        self.object = form.save()
+        object_id = self.object.id
+
+        groups.models.GroupUser.objects.create(
+            user_id=self.request.user.id,
+            group_id=object_id,
+            leader=1,
+            moderator=0,
         )
 
-    def post(self, *args, **kwargs):
-        form = groups.forms.GroupForm(self.request.POST)
-        context = {
-            "title": "Группа",
-            "group_form": form,
-        }
-        if form.is_valid():
-            form.save()
-            group_id = groups.models.Group.objects.get(
-                name=self.request.POST.get("name"),
-            ).id
-            user_id = self.request.user.id
-            groups.models.GroupUser.objects.create(
-                user_id=user_id,
-                group_id=group_id,
-                leader=1,
-                moderator=0,
-            )
-            return django.shortcuts.redirect(
-                django.shortcuts.reverse("groups:my"),
-            )
-
-        return django.shortcuts.render(
-            self.request,
-            "group/new_group.html",
-            context,
-        )
+        return super().form_valid(form)
 
 
 class GroupEnterUser(django.views.View):

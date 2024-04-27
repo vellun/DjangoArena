@@ -6,5 +6,8 @@ class GroupsConfig(AppConfig):
     name = "groups"
     verbose_name = "Группы"
 
+    def ready(self):
+        import groups.signals
+
 
 __all__ = []

@@ -1,35 +1,168 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}
-{{ title }}
-{% endblock title %}
-{% block content %}
-<div class="lobby">
-  {% if are_you_leader %}
-  <span class="text-white cur-player-status">Ты лидер</span>
-  {% else %}
-  <span class="text-white cur-player-status">Ты участник</span>
-  {% endif %}
-  <div class="participants">
-      <span class="text-white participants__title">Участники</span>
-      {% if are_you_leader %}
-        <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
-        <div id="modal1" class="modal fade">
-          <div id="dialog1" class="modal-dialog" data-hx-target="this"></div>
-        </div>
-        <button class="menu-header__link btn btn-primary" data-hx-get="{% url 'lobby:invite-users' game_id %}" data-hx-target="#dialog">Пригласить участников</button>
-      {% endif %}
-      <ul class="participants__list">
-        {% for participant in participants %}
-          <li class="participants__item">{{ participant }}</li>
-        {% endfor %}
-      </ul>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+  {% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static "swiper/css/swiper-bundle.min.css" %}" rel="stylesheet">
+  <link href="{% static "css/duel.css" %}" rel="stylesheet">
+  <link href="{% static "css/lobby.css" %}" rel="stylesheet">
+  <link href="{% static "css/lobby-chat.css" %}" rel="stylesheet">
+  <link href="{% static "popup/popup.css" %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+</head>
+
+<body class="main flex-container">
+  <button id="modal-button" style="display: none;" data-toggle="modal" data-target="#modal1"></button>
+  <div id="modal1" class="modal fade">
+    <div id="dialog1" class="modal-dialog" data-hx-target="this">{% include "includes/leader_leave_lobby.html" %}</div>
   </div>
-  {% if are_you_leader %}
-  <form class="start-game-form" method="post">
-    {% csrf_token %}
-    <button class="btn btn-primary" type="submit" id="start-button" style="background-color:green;color:white;">Начать игру</button>
-  </form>
-  {% endif %}
-</div>
-{% endblock content %}
+  <button id="leave-lobby-btn" style="float:right;"
+    class="invite-btn menu-header__link btn btn-outline-danger">Уйти</button>
+  <div class="lobby">
+    <h2 style="text-align: center;color:#77ddd0">Комната ожидания</h2>
+    <h5 style="text-align: center">Добро пожаловать, <span
+        style="color:#77ddd0">{% if request.user.shortname %}{{request.user.shortname}}
+        {% else %}{{request.user.username}}{% endif %}</span>!
+      Проходи, располагайся и готовься к битве!
+    </h5>
+    {% if are_you_leader %}
+    <span style="text-align:center;margin-bottom: 2%;">Ты лидер. Начинай дуэль!
+      <form class="start-game-form" method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary" id="start-button" style="background-color:green;color:white;">Начать
+          игру</button>
+      </form>
+    </span>
+    {% else %}
+    <span style="text-align:center;margin-bottom: 2%;">Ты участник. Лидер скоро начнет дуэль!</span>
+    {% endif %}
+    <div class="card" id="lobby_card">
+      <div class="user_header">
+        <h4 class="users_title">Участники</h4>
+        {% if are_you_leader %}
+        <button style="float:right;" class="invite-btn menu-header__link btn btn-outline-light"
+          data-hx-get="{% url 'lobby:invite-users' game_id %}" data-hx-target="#dialog">Пригласить</button>
+        {% endif %}
+      </div>
+      <div class="card-body" id="lobby-card-body" style="display: flex; justify-content: space-between">
+        <div class="lobby_users" id="lobby_users">
+          {% for participant in participants %}
+          <div class="lobby_user" id="lobby__user_{{participant.username}}">
+            <img id="ava" alt=""
+              src={% if participant.image %}"{{ participant.image.url }}"{% else %}{% static "images/avatar.png" %}{% endif %}
+              height="50" width="50" loading="lazy" class="rounded-circle">
+            <div class="participants__item">{{ participant }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="participants">
+    {% if are_you_leader %}
+    <link rel="stylesheet" type="text/css" href="{% static 'popup/popup.css' %}">
+    <div id="modal" class="modal fade">
+      <div id="dialog" class="modal-dialog" data-hx-target="this"></div>
+    </div>
+    {% endif %}
+  </div>
+  </div>
+  <script type="text/javascript" src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
+  <script>
+    const url = new URL(window.location.href);
+    const path = url.pathname;
+    const pathComponents = path.split('/');
+    const roomId = pathComponents[pathComponents.length - 2];
+
+    if (document.querySelector('#start-button')) {
+      document.querySelector('#start-button').onclick = function (e) {
+        chatSocket.send(JSON.stringify({
+          'command': 'start'
+        }));
+      }
+    }
+
+    const chatSocket = new WebSocket(
+      'ws://' +
+      window.location.host +
+      `/play/${roomId}/`
+    );
+
+    chatSocket.onmessage = function (e) {
+      const data = JSON.parse(e.data);
+      const username = data['username'];
+
+      if (data["todo"] === "start_game") {
+        window.location.href = data["game_url"];
+      }
+
+      if (data["todo"] === "del_user") {
+        console.log(data["is_leader"])
+        if (data["is_leader"]) {
+          const modal1 = new bootstrap.Modal(document.getElementById("modal1"), {
+            backdrop: "static",
+          });
+          modal1.show()
+        }
+        $("#lobby__user_" + username).remove();
+        new Noty({
+          text: username + "больше не в лобби",
+          type: "information",
+          theme: "relax",
+          layout: "centerRight",
+          timeout: 3000,
+        }).show();
+      } else {
+        const image = data['image'];
+
+        var ava_url = "{% static 'images/avatar.png' %}";
+
+        if (image) {
+          ava_url = image;
+        }
+
+        var divElement = document.getElementById('lobby_users');
+
+        let html = '<div class="lobby_user" id="lobby__user_' + username + '">';
+        html += '<img id="ava" alt=""';
+        html += 'src=' + ava_url + ' height="50" width="50" loading="lazy" class="rounded-circle">';
+        html += '<div class="participants__item">' + username + '</div></div>';
+
+        if (!divElement.innerHTML.includes(username) && (data["todo"] !== "start_game")) {
+          divElement.innerHTML += html;
+          new Noty({
+            text: username + " теперь в лобби!",
+            type: "information",
+            theme: "relax",
+            layout: "centerRight",
+            timeout: 3000,
+
+          }).show();
+        }
+      }
+    };
+
+    chatSocket.onclose = function (e) {
+      console.error('Chat socket closed unexpectedly');
+    };
+
+    $("#leave-lobby-btn").click(function () {
+      chatSocket.send(JSON.stringify({
+        'command': 'disconnect_user',
+        'user_id': '{{ request.user.id }}',
+        'username': '{{ request.user.username }}',
+        'uidb': roomId,
+      }));
+    });
+  </script>
+  <script src={% static "htmx/htmx.min.js" %}></script>
+  <script src={% static "bootstrap/js/bootstrap.bundle.min.js" %}></script>
+  <script src={% static "popup/popup.js" %}></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+</body>
+
+</html>

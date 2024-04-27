@@ -1,5 +1,7 @@
 import uuid
 
+import asgiref.sync
+import channels.layers
 import django.conf
 import django.contrib.auth
 import django.contrib.messages
@@ -44,6 +46,7 @@ class LobbyView(django.views.View):
             django.core.cache.cache.set(
                 "lobby_leader_" + uidb_url,
                 self.request.user.id,
+                3600 * 10,
             )
 
         if (
@@ -62,6 +65,19 @@ class LobbyView(django.views.View):
 
         players = django.contrib.auth.get_user_model().objects.filter(
             id__in=cur_lobby,
+        )
+
+        channel_layer = channels.layers.get_channel_layer()
+        image = (
+            self.request.user.image.url if self.request.user.image else None
+        )
+        asgiref.sync.async_to_sync(channel_layer.group_send)(
+            f"lobby_id_{uidb_url}",
+            {
+                "type": "add_player",
+                "username": self.request.user.username,
+                "image": image,
+            },
         )
 
         context = {

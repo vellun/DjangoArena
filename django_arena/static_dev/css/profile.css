@@ -8,8 +8,8 @@
 
 .profile__social {
     padding: 10px;
-    border: 3px solid #77DDD0;
-    border-radius: 5px;
+    border: 2px solid #77DDD0;
+    border-radius: 10px;
 }
 
 .social-profile__social {
@@ -118,8 +118,8 @@
 .statistic-profile__rating, .statistic-profile__tasks, .statistic-profile__achievments {
     max-width: 100%;
     padding: 10px;
-    border: 3px solid #77DDD0;
-    border-radius: 5px;
+    border: 2px solid #77DDD0;
+    border-radius: 10px;
     height: 100%;
 }
 

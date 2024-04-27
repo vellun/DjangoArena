@@ -1,26 +1,19 @@
-{% extends "base.html" %}
 {% load static %}
-{% block content %}
 <div class="chat container">
   <div class="chat-card card">
     <nav class="chat-nav navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
-        <a class="chat-title navbar-brand" href="{% url "groups:groups_detail" chat.group.id %}"><img id="ava" alt=""
-          src={% if group.image %}"{{ group.image.url }}"{% else %}{% static "images/group-avatar2.jpg" %}{% endif %} height="50" width="50" loading="lazy" class="rounded-circle">
-          {{ chat.group.title }}</a>
+        <span class="chat-title navbar-brand">Комнатный чатик</span>
       </div>
     </nav>
     <div class="messages" id="messages">
       {% for message in messages %}
-      {% ifchanged message.created_at|date:"F j, Y" %}
-      <div class="message-date"><span>{{ message.created_at|date:"F j, Y" }}</span></div>
-      {% endifchanged %}
       <div class="chat-item {% if message.user.id == request.user.id %} my-message {% endif %}">
         <img id="ava" class="social-profile__image rounded-circle" alt=""
                 src={% if message.user.image %}"{{ message.user.image.url }}"{% else %}{% static "images/avatar.png" %}{% endif %}
                 loading="lazy">
         <div class="message-card card">
-          <div><a class="chat-title navbar-brand" href="{% url "users:profile" message.user.id %}">{{ message.user.username }}</a>
+          <div><span class="chat-title navbar-brand">{{ message.user.username }}</span>
             <span class="msg-date">{{ message.created_at|date:"g:i a" }}</span></div>
           <p class="message-text">
             {{ message.content }}
@@ -32,7 +25,7 @@
 
     <form method="post" enctype="multipart/form-data">
       <div class="input-group mb-3">
-        <input id="message-input" type="text" class="form-control" placeholder="Имя получателя" aria-label="Имя получателя" aria-describedby="basic-addon2">
+        <input id="message-input" type="text" class="form-control" placeholder="Обсудите предстоящую дуэль" aria-label="Имя получателя" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button type="submit" id="send-message-button" class="btn btn-outline-secondary" type="button">Отправить</button>
         </div>
@@ -41,7 +34,7 @@
   </div>
 </div>
 
-<script>
+{% comment %} <script>
   const cur_url = new URL(window.location.href);
   const path = cur_url.pathname;
   const pathComponents = path.split("/");
@@ -113,5 +106,4 @@
   }
 
   scrollToBottom();
-</script>
-{% endblock %}
+</script> {% endcomment %}

@@ -30,4 +30,9 @@ urlpatterns = [
         duel.views.CacheCodeView.as_view(),
         name="cache-code",
     ),
+    django.urls.path(
+        "cache-result/<uidb>/",
+        duel.views.CacheTestsResultView.as_view(),
+        name="cache-result",
+    ),
 ]

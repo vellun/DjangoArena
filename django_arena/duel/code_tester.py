@@ -1,3 +1,7 @@
+import json
+
+import asgiref.sync
+import channels.layers
 from django.conf import settings
 import django.core.cache
 import requests
@@ -110,6 +114,8 @@ class CodeTester:
         print(payload)
         response = requests.post(url, json=payload)
 
+        # РЕСПОНС: {'ran_tests_count': 1, 'failures_count': 0, 'elapsed_time': 1.7065153121948242, 'verdict': 'Accepted'}
+
         return response.json()
 
     def save_results(self, response_data, submission_id):
@@ -151,7 +157,18 @@ class CodeTester:
     def test_task(self, submission_id):
         self.prepare_parameters(submission_id)
         response_data = self.run_testing(submission_id)
-        self.save_results(response_data, submission_id)
+
+        if not response_data.get("error"):
+            self.save_results(response_data, submission_id)
+
+        print("ОТВЕТ", response_data)
+
+        # Send tests result to display on the page
+        channel_layer = channels.layers.get_channel_layer()
+        asgiref.sync.async_to_sync(channel_layer.group_send)(
+            f"testing_{self.duel_uidb}_{self.task_num}_{self.user_id}",
+            {"type": "tests_result", "result": json.dumps(response_data)},
+        )
 
 
 __all__ = []

@@ -17,7 +17,7 @@
                 {% with form=form1 %}
                 {% include "includes/form.html" %}
                 {% endwith %}
-                <button type="submit" name="submit_button">Пригласить</button>
+                <button class="gradient-button" type="submit" name="submit_button">Пригласить</button>
             </form>
         </div>
         <div class="tab-content" id="content-2">
@@ -29,7 +29,7 @@
                     <input type="checkbox" id="{{ friend.username }}{{ friend.id }}" name="friend_user_{{ friend.username }}{{ friend.id }}" value="{{ friend.id }}">
                     <label for="{{ friend.username }}{{ friend.id }}">{{ friend.username }}</label>
                 {% endfor %}
-                <button type="submit" name="submit_button">Пригласить</button>
+                <button class="gradient-button" type="submit" name="submit_button">Пригласить</button>
             </form>
         </div>
       </div>

@@ -10,7 +10,7 @@ urlpatterns = [
     django.urls.path("all/", groups.views.GroupAllView.as_view(), name="all"),
     django.urls.path(
         "create/",
-        groups.views.GroupCreate.as_view(),
+        groups.views.GroupCreateView.as_view(),
         name="new_groups",
     ),
     django.urls.path(

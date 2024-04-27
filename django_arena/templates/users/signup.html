@@ -3,6 +3,11 @@
   Регистрация
 {% endblock %}
 {% block content %}
+<div id="register-modal" class="modal fade">
+  <div id="register-dialog" class="modal-dialog" role="dialog">
+    {% include "includes/register-dialog.html" %}
+  </div>
+</div>
   <div class="container py-5 h-100 w-50">
     <div class="card shadow-2-strong bg-dark" style="border-radius: 1rem">
       <div class="card-body p-5" style="color: #DCDCDC">
@@ -23,4 +28,7 @@
       </div>
     </div>
   </div>
+  <script>$(document).ready(function(){
+    $("#register-modal").modal('show');
+});</script>
 {% endblock content %}

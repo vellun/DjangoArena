@@ -88,10 +88,11 @@
         </div>
       {% else %}
         <li class="menu-header__item">
-          <a href="{% url 'users:login' %}" class="btn btn-primary">Войти</a>
+          <a href="{% url 'users:login' %}" class="gradient-button btn btn-primary">Вход</a>
         </li>
         <li class="menu-header__item">
-          <a href="{% url 'users:signup' %}" class="btn btn-primary">Зарегистрироваться</a>
+          <a href="{% url 'users:signup' %}" class="gradient-button btn btn-primary" data-toggle="modal" 
+          data-target="#register-dialog" id="register-btn">Регистрация</a>
         </li>
       {% endif %}
       <script src={% static "htmx/htmx.min.js" %}></script>

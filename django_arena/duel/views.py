@@ -102,12 +102,24 @@ class DuelView(django.views.generic.edit.FormView):
         else:
             testing_finished = True
 
+        test_results = django.core.cache.cache.get(
+            f"result_{uidb}_user_"
+            + f"{str(self.request.user.id)}_task_{str(task_num)}",
+        )
+
+        result_loading = django.core.cache.cache.get(
+            f"result_loading_{uidb}_{self.request.user.id}_{task_num}",
+        )
+        print("ЗАГРУЗКУ ПОКАЖЕМ НЕТ", result_loading)
+
         context["duration"] = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+        context["test_results"] = test_results
         context["players"] = players
         context["uidb"] = uidb
         context["task_num"] = int(task_num)
         context["tab"] = tab
         context["task"] = self.task
+        context["result_loading"] = result_loading
         self.task = context["task"]
         context["cnt"] = self.tasks
         context["title"] = "Дуэль"
@@ -119,6 +131,8 @@ class DuelView(django.views.generic.edit.FormView):
     def form_valid(self, form):
         code = form.cleaned_data.get("code")
         uidb_url = self.kwargs.get("uidb")
+        task_num = self.kwargs.get("task_num")
+        print("ФОРМА САБМИТ", uidb_url, task_num)
 
         submission = submissions.models.Submission(
             code=code,
@@ -130,6 +144,12 @@ class DuelView(django.views.generic.edit.FormView):
             verdict="",
         )
         submission.save()
+
+        cache_key = (
+            f"result_loading_{uidb_url}_{self.request.user.id}_{task_num}",
+        )
+        django.core.cache.cache.set(cache_key, True)
+        print("КУШИРОВАН ДА", cache_key)
 
         code_tester = CodeTester(
             duel_uidb=uidb_url,
@@ -171,6 +191,7 @@ class DuelTimerView(django.views.generic.View):
             f"duel_{uidb}_timer",
             duration,
         )
+        print(timer)
 
         return django.http.HttpResponse(timer)
 
@@ -180,8 +201,9 @@ class DuelTimerView(django.views.generic.View):
 
         if request_type == "cache":
             timer = request.POST.get("timer")
-            django.core.cache.cache.set(f"duel_{uidb}_timer", timer)
+            django.core.cache.cache.set(f"duel_{uidb}_timer", timer, 3600 * 10)
         elif request_type == "redirect":
+            print("AAAAAAAAAA РЕДИРЕКТ")
             django.core.cache.cache.delete(f"duel_{uidb}_timer")
 
         return django.http.HttpResponse("OK")
@@ -214,7 +236,7 @@ class ResultsView(django.views.generic.View):
                 user_id=self.request.user.id,
             ).order_by("-id")
             last_submission = task_submissions.first()
-            if last_submission.score != -1:
+            if last_submission and last_submission.score != -1:
                 user_score += last_submission.score
 
         context = {
@@ -240,6 +262,25 @@ class CacheCodeView(django.views.generic.View):
             f"duel_submission_code_{uidb_url}_user_"
             + f"{str(self.request.user.id)}_task_{str(task_num)}",
             code,
+            3600 * 10,
+        )
+
+        return django.http.JsonResponse({"result": "Success"})
+
+
+class CacheTestsResultView(django.views.generic.View):
+    http_method_names = ["post"]
+
+    def post(self, request, *args, **kwargs):
+        result_html = request.POST.get("result")
+        task_num = request.POST.get("task_num")
+        uidb_url = self.kwargs.get("uidb")
+
+        django.core.cache.cache.set(
+            f"result_{uidb_url}_user_"
+            + f"{str(self.request.user.id)}_task_{str(task_num)}",
+            result_html,
+            3600 * 10,
         )
 
         return django.http.JsonResponse({"result": "Success"})

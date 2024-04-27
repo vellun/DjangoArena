@@ -2,7 +2,7 @@
 // const path = url.pathname;
 // const pathComponents = path.split('/');
 // const roomId = pathComponents[pathComponents.length - 2];
-//
+
 // const chatSocket = new WebSocket(
 //     'ws://'
 //     + window.location.host

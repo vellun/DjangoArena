@@ -1,20 +1,53 @@
+import pathlib
+import uuid
+
 import django.db.models
 
 import core.models
 
 
+def get_path_image(instance, filename):
+    file_extension = pathlib.Path(filename).suffix
+    return f"groups/{uuid.uuid4()}{file_extension}"
+
+
 class Group(django.db.models.Model):
     title = django.db.models.CharField(
+        verbose_name="название",
+        help_text="Придумайте крутое название для своей группы",
         max_length=255,
         default="Group",
     )
     name = django.db.models.CharField(
+        verbose_name="никнейм",
+        help_text="Придумайте уникальное название",
         max_length=255,
         unique=True,
     )
-    description = django.db.models.TextField()
+    theme = django.db.models.CharField(
+        verbose_name="тематика",
+        help_text="Определитесь с тематикой группы(например 'для развлечения'"
+        + "'друзья' и тд.)",
+        max_length=30,
+        default="Для развлечения",
+        blank=True,
+    )
+
+    image = django.db.models.ImageField(
+        "аватарка",
+        help_text="Загрузите аватарку",
+        upload_to=get_path_image,
+        null=True,
+        blank=True,
+    )
+    description = django.db.models.TextField(
+        verbose_name="описание",
+        help_text="Опишите группу",
+    )
     is_public = django.db.models.BooleanField(
         default=False,
+        verbose_name="публичная ли группа?",
+        help_text="В публичную группу могут вступить все желающие",
     )
     created_at = django.db.models.DateTimeField(
         auto_now_add=True,

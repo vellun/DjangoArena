@@ -9,3 +9,15 @@ class StaticURLTests(django.test.TestCase):
             django.urls.reverse("~~~"),
         )
         self.assertEqual(resp.status_code, http.HTTPStatus.OK)
+    
+    def test_item_endpoint(self):
+        resp = django.test.Client().get(
+            django.urls.reverse("~~~"),
+        )
+        self.assertEqual(resp.status_code, http.HTTPStatus.OK)
+    
+    def test_list_endpoint(self):
+        resp = django.test.Client().get(
+            django.urls.reverse("~~~"),
+        )
+        self.assertEqual(resp.status_code, http.HTTPStatus.OK)
