@@ -1,10 +1,12 @@
 import django.conf
 import django.conf.urls.static
 import django.contrib.admin
+import django.contrib.auth.urls
 import django.urls
 
 import chatrooms.urls
 import duel.urls
+import feedback.urls
 import groups.urls
 import homepage.urls
 import invitations.urls
@@ -13,7 +15,6 @@ import notes.urls
 import notifications.urls
 import submissions.urls
 import users.urls
-
 
 urlpatterns = [
     django.urls.path("", django.urls.include(homepage.urls)),
@@ -32,7 +33,9 @@ urlpatterns = [
     django.urls.path("submissions/", django.urls.include(submissions.urls)),
     django.urls.path("groups/", django.urls.include(groups.urls)),
     django.urls.path("blog/", django.urls.include(notes.urls)),
+    django.urls.path("feedback/", django.urls.include(feedback.urls)),
     django.urls.path("admin/", django.contrib.admin.site.urls),
+    django.urls.path("i18n/", django.urls.include("django.conf.urls.i18n")),
 ]
 
 if django.conf.settings.DEBUG:

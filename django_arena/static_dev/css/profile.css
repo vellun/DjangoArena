@@ -92,10 +92,15 @@
 
 .statistic-profile__tasks {
     grid-area: tasks;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .statistic-profile-tasks__chart {
     max-height: 300px;
+    max-width: 300px;
 }
 
 .statistic-profile__rating {

@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-26 22:10+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\django_arena\settings.py:195
+msgid "Russian"
+msgstr "Russian"
+
+#: .\django_arena\settings.py:196
+msgid "English"
+msgstr "English"
+
+#: .\notifications\models.py:8
+msgid "System notification"
+msgstr "System notification"
+
+#: .\notifications\models.py:9
+msgid "Group notification"
+msgstr "Group notification"
+
+#: .\notifications\models.py:10
+msgid "Friend notification"
+msgstr "Friend notification"
+
+#: .\notifications\models.py:11
+msgid "Unknown notification"
+msgstr ""
+
+#: .\notifications\models.py:12
+msgid "Other notification"
+msgstr ""
+
+#: .\problems\models.py:12
+msgid "Hard-reject"
+msgstr ""
+
+#: .\problems\models.py:13
+msgid "Soft-reject"
+msgstr ""
+
+#: .\problems\models.py:14
+msgid "Accepted"
+msgstr ""
+
+#: .\problems\models.py:17
+msgid "Easy"
+msgstr ""
+
+#: .\problems\models.py:18
+msgid "Medium"
+msgstr ""
+
+#: .\problems\models.py:19
+msgid "Hard"
+msgstr ""
+
+#: .\templates\includes\header.html:12
+msgid "Главная"
+msgstr "Homepage"
+
+#: .\templates\includes\header.html:15
+msgid "Блог"
+msgstr "Blog"
+
+#: .\templates\includes\header.html:42
+msgid "Админ-панель"
+msgstr "Admin-panel"
+
+#: .\templates\includes\header.html:84
+msgid "Начать дуэль"
+msgstr "Start duel"
+
+#: .\templates\includes\header.html:94
+msgid "Профиль"
+msgstr "Profile"
+
+#: .\templates\includes\header.html:97
+msgid "Настройки профиля"
+msgstr "Profile settings"
+
+#: .\templates\includes\header.html:100
+msgid "Выйти"
+msgstr "Logout"
+
+#: .\templates\includes\header.html:106
+msgid "Войти"
+msgstr "Login"
+
+#: .\templates\includes\header.html:109
+msgid "Зарегистрироваться"
+msgstr "Signup"
