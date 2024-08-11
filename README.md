@@ -49,13 +49,13 @@ required django version - 4.2
 - Go to the project directory
 
   ```bash
-  cd team-5
+  cd DjangoArena
   ```
 
 - Create virtual environment
 
   ```bash
-  python -m venv venv
+  python3 -m venv venv
   ```
 
 - Activate your virtual environment
@@ -113,14 +113,14 @@ required django version - 4.2
 - Make and apply migrations:
 
   ```bash
-  python manage.py makemigrations
-  python migrate
+  python3 manage.py makemigrations
+  python3 manage.py migrate
   ```
 
 - Run the main application:
 
   ```bash
-  python manage.py runserver
+  python3 manage.py runserver
   ```
 
 ### Running the application for testing
@@ -148,11 +148,11 @@ required django version - 4.2
 - Apply default django migrations:
 
   ```bash
-  python migrate
+  python3 manage.py migrate
   ```
 
 - Run the application for testing:
 
   ```bash
-  python manage.py runserver 8001 --noreload
+  python3 manage.py runserver 8001 --noreload
   ```
