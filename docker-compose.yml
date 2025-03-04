@@ -1,0 +1,27 @@
+services:
+  backend:
+    build: ./app_server
+    volumes:
+      - static_files:/usr/src/app/static
+      - media_files:/usr/src/app/media
+      - /tmp:/tmp
+    depends_on:
+      - redis
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+
+  redis:
+    image: redis:alpine
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 5
+    ports:
+      - "6379:6379"
+
+volumes:
+  static_files:
+  media_files:

@@ -1,6 +1,0 @@
-{% extends "base.html" %}
-{% block content %}
-{% for item in invations %}
-    <a href="{% url 'requests:invite_card' pk=item.user_from_id %}">{{ item.user_from }}</a>
-{% endfor %}
-{% endblock %}

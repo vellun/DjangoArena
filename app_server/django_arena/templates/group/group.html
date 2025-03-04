@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+{% if group_user and group_user.leader or user.moderator %}
+    <a href="{% url 'groups:invite_request' pk=item %}">Добавить в группу</a>
+{% endif %}
+<a href={% url "chat:group-chat" group.chat.id %}>Групповой чат</a>
+{% if group_user and group_user.leader %}
+    <form method="post">
+        {% csrf_token %}
+        {{ delete }}
+        <button type="submit">Удалить</button>
+    </form>
+{% endif %}
+{% endblock %}

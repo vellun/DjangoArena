@@ -1,0 +1,2619 @@
+[
+{
+  "model": "core.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$AKLBoMbE2xuVFZtBtqkp3K$2Rfj1JAfnUMHWtLHJsVdKb1wnw98H9jqP4TRQLUJkds=",
+    "last_login": "2024-04-24T15:54:56.059Z",
+    "is_superuser": true,
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@admin.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-04-07T13:44:56.740Z",
+    "shortname": null,
+    "birthday": null,
+    "username": "admin",
+    "image": "users/fc3cceaf-5f04-4cad-88d0-932111ce0f24.jpg",
+    "rating": 1000,
+    "views": 0,
+    "github_link": null,
+    "gitlab_link": null,
+    "games_played": 0,
+    "games_won": 0,
+    "easy_problems": 0,
+    "medium_problems": 0,
+    "hard_problems": 0,
+    "groups": [],
+    "user_permissions": [],
+    "friends": [
+      2
+    ]
+  }
+},
+{
+  "model": "core.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$PvqsYueWFPLhOhXjol7aVv$4mxHQHIurubPaFuIht+cbFBJTCEms12mEPgXCI7cyoI=",
+    "last_login": "2024-04-24T15:53:14.858Z",
+    "is_superuser": true,
+    "first_name": "",
+    "last_name": "",
+    "email": "admin2@admin.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-04-08T09:36:46Z",
+    "shortname": "Аянами рей",
+    "birthday": null,
+    "username": "admin2",
+    "image": "users/6fd625a1-5e71-4d44-b536-c0853a3221dd.jpg",
+    "rating": 1000,
+    "views": 0,
+    "github_link": null,
+    "gitlab_link": null,
+    "games_played": 0,
+    "games_won": 0,
+    "easy_problems": 0,
+    "medium_problems": 0,
+    "hard_problems": 0,
+    "groups": [],
+    "user_permissions": [],
+    "friends": [
+      1
+    ]
+  }
+},
+{
+  "model": "core.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$AJP5lwH3zMQA6PljJCOZ0t$oRvLQ2WO9IXDBiFF5nR2J7MhtNxFmoNzJrV5KLT6YGo=",
+    "last_login": "2024-04-20T14:10:26.587Z",
+    "is_superuser": true,
+    "first_name": "",
+    "last_name": "",
+    "email": "123@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-04-18T14:13:43.171Z",
+    "shortname": null,
+    "birthday": null,
+    "username": "123",
+    "image": "",
+    "rating": 7000,
+    "views": 0,
+    "github_link": null,
+    "gitlab_link": null,
+    "games_played": 0,
+    "games_won": 0,
+    "easy_problems": 1,
+    "medium_problems": 1,
+    "hard_problems": 1,
+    "groups": [],
+    "user_permissions": [],
+    "friends": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$LxY5vJO9pISYVif4XL2kIc$0Lb8Edp0Z54zoG0uBXM4dZcQR5nuQEevSHXxidbXSoo=",
+    "last_login": "2024-04-24T20:48:58.143Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "email": "d@mail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-04-24T20:48:53.113Z",
+    "shortname": null,
+    "birthday": null,
+    "username": "smesharik777",
+    "image": "",
+    "rating": 1000,
+    "views": 0,
+    "github_link": null,
+    "gitlab_link": null,
+    "games_played": 0,
+    "games_won": 0,
+    "easy_problems": 0,
+    "medium_problems": 0,
+    "hard_problems": 0,
+    "groups": [],
+    "user_permissions": [],
+    "friends": []
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 5,
+  "fields": {
+    "sender": 2,
+    "recipient": 3,
+    "notification_type": "UN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/2392646a98cf484a9f4bf51bbe2bfcb1'>2392646a98cf484a9f4bf51bbe2bfcb1</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 34,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/b75b23568b034f4e833fb939de2fb680'>b75b23568b034f4e833fb939de2fb680</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 35,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/b75b23568b034f4e833fb939de2fb680'>b75b23568b034f4e833fb939de2fb680</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 36,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "UN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/b75b23568b034f4e833fb939de2fb680'>b75b23568b034f4e833fb939de2fb680</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 38,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/b75b23568b034f4e833fb939de2fb680'>b75b23568b034f4e833fb939de2fb680</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 40,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/b75b23568b034f4e833fb939de2fb680'>b75b23568b034f4e833fb939de2fb680</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 41,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/873956bcda934263a60099463cb93c62'>873956bcda934263a60099463cb93c62</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 42,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/3fedd48854174339b0f07f61342cf807'>3fedd48854174339b0f07f61342cf807</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 43,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/403bb150265249edac5bb498de7fc31b'>403bb150265249edac5bb498de7fc31b</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 44,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/59dcf27172a64846853f270ccbf2f64a'>59dcf27172a64846853f270ccbf2f64a</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 45,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "UN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/59dcf27172a64846853f270ccbf2f64a'>59dcf27172a64846853f270ccbf2f64a</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 46,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/59dcf27172a64846853f270ccbf2f64a'>59dcf27172a64846853f270ccbf2f64a</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 47,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "UN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/59dcf27172a64846853f270ccbf2f64a'>59dcf27172a64846853f270ccbf2f64a</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 48,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "UN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/cbe4195a8f4d49d59c30bcc2308306b1'>cbe4195a8f4d49d59c30bcc2308306b1</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 49,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "UN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/cbe4195a8f4d49d59c30bcc2308306b1'>cbe4195a8f4d49d59c30bcc2308306b1</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 50,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/cbe4195a8f4d49d59c30bcc2308306b1'>cbe4195a8f4d49d59c30bcc2308306b1</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 51,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/cbe4195a8f4d49d59c30bcc2308306b1'>cbe4195a8f4d49d59c30bcc2308306b1</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 52,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/cbe4195a8f4d49d59c30bcc2308306b1'>cbe4195a8f4d49d59c30bcc2308306b1</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 53,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/cbe4195a8f4d49d59c30bcc2308306b1'>cbe4195a8f4d49d59c30bcc2308306b1</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 54,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/bd1db6abd0674c579272de84b57b520c'>bd1db6abd0674c579272de84b57b520c</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 57,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/bd1db6abd0674c579272de84b57b520c'>bd1db6abd0674c579272de84b57b520c</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 58,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/bd1db6abd0674c579272de84b57b520c'>bd1db6abd0674c579272de84b57b520c</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 60,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/dd99affb1ff3451ba8d0a1015e9bb578'>dd99affb1ff3451ba8d0a1015e9bb578</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 61,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/bb14a5dbf2064558a7bab1fa33b11457'>bb14a5dbf2064558a7bab1fa33b11457</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 62,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/bb14a5dbf2064558a7bab1fa33b11457'>bb14a5dbf2064558a7bab1fa33b11457</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 63,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/bb14a5dbf2064558a7bab1fa33b11457'>bb14a5dbf2064558a7bab1fa33b11457</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 64,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/bb14a5dbf2064558a7bab1fa33b11457'>bb14a5dbf2064558a7bab1fa33b11457</a>"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 65,
+  "fields": {
+    "sender": 2,
+    "recipient": 1,
+    "notification_type": "FN",
+    "text": "Привет! Подключайся к моей игре по ccылке: <a href='/play/bb14a5dbf2064558a7bab1fa33b11457'>bb14a5dbf2064558a7bab1fa33b11457</a>"
+  }
+},
+{
+  "model": "problems.problem",
+  "pk": 1,
+  "fields": {
+    "author": null,
+    "title": "test task",
+    "tests_file": "tasks_attaches/tests/tests_eTdvGvz.py",
+    "answer_file": "tasks_attaches/answers/7ca65f9e18d0bfd84d4e672bcb2d2fd0.jpg",
+    "status": "AC",
+    "difficulty": "easy",
+    "duration": "00:15:00",
+    "text": "",
+    "hard_reject_accumulation": 0,
+    "day_task": false,
+    "week_task": false,
+    "created_at": "2024-04-10T14:32:32.691Z",
+    "updated_at": "2024-04-20T14:35:38.554Z"
+  }
+},
+{
+  "model": "problems.problem",
+  "pk": 2,
+  "fields": {
+    "author": null,
+    "title": "medium task",
+    "tests_file": "tasks_attaches/tests/tests_1PCKCRo.py",
+    "answer_file": "tasks_attaches/answers/2c24c5eecfad0351c1277faaec13cf6c.jpg",
+    "status": "AC",
+    "difficulty": "medium",
+    "duration": "00:15:00",
+    "text": "реши блин ее",
+    "hard_reject_accumulation": 0,
+    "day_task": false,
+    "week_task": false,
+    "created_at": "2024-04-16T11:38:23.362Z",
+    "updated_at": "2024-04-22T19:04:15.564Z"
+  }
+},
+{
+  "model": "problems.problem",
+  "pk": 3,
+  "fields": {
+    "author": null,
+    "title": "hard task",
+    "tests_file": "tasks_attaches/tests/tests.py",
+    "answer_file": "tasks_attaches/answers/загруженное_3.jpg",
+    "status": "AC",
+    "difficulty": "hard",
+    "duration": "00:15:00",
+    "text": "эту реши",
+    "hard_reject_accumulation": 0,
+    "day_task": false,
+    "week_task": false,
+    "created_at": "2024-04-16T11:38:55.008Z",
+    "updated_at": "2024-04-22T19:04:22.744Z"
+  }
+},
+{
+  "model": "problems.problem",
+  "pk": 4,
+  "fields": {
+    "author": 1,
+    "title": "Джанго - фреймворк для мазохистов с дедлайнами",
+    "tests_file": "tasks_attaches/tests/test.txt",
+    "answer_file": "tasks_attaches/answers/test.txt",
+    "status": "AC",
+    "difficulty": "easy",
+    "duration": "00:15:00",
+    "text": "Напишите cbv возвращающий шаблон \"home.html\" и передающий в context параметр \"ilovedjango\" с любым значением",
+    "hard_reject_accumulation": 0,
+    "day_task": false,
+    "week_task": false,
+    "created_at": "2024-04-23T05:16:22.300Z",
+    "updated_at": "2024-04-23T05:16:22.302Z"
+  }
+},
+{
+  "model": "groups.group",
+  "pk": 1,
+  "fields": {
+    "title": "отважные джангисты",
+    "name": "djangists_group",
+    "description": "мы отважные очень",
+    "is_public": true,
+    "created_at": "2024-04-23T17:34:31.496Z"
+  }
+},
+{
+  "model": "groups.groupuser",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "group": 1,
+    "leader": true,
+    "moderator": false
+  }
+},
+{
+  "model": "chatrooms.chatroom",
+  "pk": 1,
+  "fields": {
+    "group": 1
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 45,
+  "fields": {
+    "room": 1,
+    "user": 2,
+    "content": "всем привет",
+    "created_at": "2024-04-24T10:44:49.413Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 46,
+  "fields": {
+    "room": 1,
+    "user": 2,
+    "content": "хейхей",
+    "created_at": "2024-04-24T10:45:14.153Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 47,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "о привет",
+    "created_at": "2024-04-24T10:45:24.243Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 48,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "как дела",
+    "created_at": "2024-04-24T10:45:27.786Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 49,
+  "fields": {
+    "room": 1,
+    "user": 2,
+    "content": "вау, чат работает",
+    "created_at": "2024-04-24T10:45:36.080Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 50,
+  "fields": {
+    "room": 1,
+    "user": 2,
+    "content": "я в шоке",
+    "created_at": "2024-04-24T10:45:55.614Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 51,
+  "fields": {
+    "room": 1,
+    "user": 2,
+    "content": "бебебеб",
+    "created_at": "2024-04-24T11:00:43.060Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 52,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "прив",
+    "created_at": "2024-04-24T16:13:20.978Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 53,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "тест авы",
+    "created_at": "2024-04-24T16:19:34.740Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 54,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "приветик тестик",
+    "created_at": "2024-04-24T16:26:21.799Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 55,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "d",
+    "created_at": "2024-04-24T16:27:12.503Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 56,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "",
+    "created_at": "2024-04-24T16:28:01.322Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 57,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "s",
+    "created_at": "2024-04-24T16:29:31.134Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 58,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "a",
+    "created_at": "2024-04-24T16:30:42.557Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 59,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "w",
+    "created_at": "2024-04-24T16:31:34.405Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 60,
+  "fields": {
+    "room": 1,
+    "user": 2,
+    "content": "хей хей",
+    "created_at": "2024-04-24T16:31:50.176Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 61,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "прив",
+    "created_at": "2024-04-24T16:33:38.918Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 62,
+  "fields": {
+    "room": 1,
+    "user": 1,
+    "content": "рррр",
+    "created_at": "2024-04-24T16:52:40.786Z"
+  }
+},
+{
+  "model": "chatrooms.message",
+  "pk": 63,
+  "fields": {
+    "room": 1,
+    "user": 4,
+    "content": "а вот и я",
+    "created_at": "2024-04-24T20:50:45.435Z"
+  }
+},
+{
+  "model": "notes.note",
+  "pk": 1,
+  "fields": {
+    "title": "приветик",
+    "text": "привет привет привет",
+    "created_at": "2024-04-18T12:57:11.775Z",
+    "updated_at": "2024-04-22T12:25:24.138Z",
+    "author": 1,
+    "likes": 0,
+    "dislikes": 1,
+    "is_on_main": false,
+    "official_documentation": false,
+    "user_likes": [],
+    "user_dislikes": [
+      2
+    ]
+  }
+},
+{
+  "model": "notes.note",
+  "pk": 2,
+  "fields": {
+    "title": "влырорывол",
+    "text": "хаааааааааааааай",
+    "created_at": "2024-04-18T13:23:53.640Z",
+    "updated_at": "2024-04-23T17:05:25.902Z",
+    "author": 1,
+    "likes": 0,
+    "dislikes": 1,
+    "is_on_main": false,
+    "official_documentation": false,
+    "user_likes": [],
+    "user_dislikes": [
+      2
+    ]
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 1,
+  "fields": {
+    "uuid": "dcc34c14-f3f4-4e17-a30a-3d9e6d4504ee",
+    "started_at": "2024-04-22T18:28:16.719Z",
+    "problems": [
+      1
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 2,
+  "fields": {
+    "uuid": "c2385674-2637-4f7a-80b0-0ca8a8b3b060",
+    "started_at": "2024-04-22T18:56:08.019Z",
+    "problems": [
+      1
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 3,
+  "fields": {
+    "uuid": "9b1e4c4a-236c-4a30-9ec4-2ae2e391df6f",
+    "started_at": "2024-04-22T19:02:25.809Z",
+    "problems": [
+      1
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 4,
+  "fields": {
+    "uuid": "a11d8b66-8650-44dd-b6dd-e2649b52715d",
+    "started_at": "2024-04-22T19:04:42.270Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 5,
+  "fields": {
+    "uuid": "2f51d6a6-086b-4410-8c11-2c2f4ef488ba",
+    "started_at": "2024-04-22T19:07:08.861Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 6,
+  "fields": {
+    "uuid": "2db2a7db-68aa-47a1-b8e3-8618f2503181",
+    "started_at": "2024-04-22T19:32:47.636Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 7,
+  "fields": {
+    "uuid": "7fb9f9f2-e9b8-46e1-94b4-e8b4ae826507",
+    "started_at": "2024-04-22T19:41:11.142Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 8,
+  "fields": {
+    "uuid": "80588318-e7d4-4e6c-afb8-09d9a4507066",
+    "started_at": "2024-04-22T19:41:57.295Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 9,
+  "fields": {
+    "uuid": "dc43ba28-1f9e-405a-b731-48add3b2ade2",
+    "started_at": "2024-04-22T19:42:39.682Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 10,
+  "fields": {
+    "uuid": "2392646a-98cf-484a-9f4b-f51bbe2bfcb1",
+    "started_at": "2024-04-22T19:45:07.708Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 11,
+  "fields": {
+    "uuid": "6b3f0f18-09ff-4382-b765-75c70cd64acc",
+    "started_at": "2024-04-22T19:51:45.063Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 12,
+  "fields": {
+    "uuid": "a6960535-82fc-4d39-be3f-f48a84f6cd63",
+    "started_at": "2024-04-22T20:23:38.818Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 13,
+  "fields": {
+    "uuid": "95a45536-9b36-47a2-a58a-6b5fd95c34a4",
+    "started_at": "2024-04-22T20:31:55.818Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 14,
+  "fields": {
+    "uuid": "453abb4e-9193-4c35-9db5-e889f9ed52d5",
+    "started_at": "2024-04-22T21:27:33.791Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 15,
+  "fields": {
+    "uuid": "e000f406-dd59-4b67-8123-3d04535afd14",
+    "started_at": "2024-04-22T22:18:17.074Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 16,
+  "fields": {
+    "uuid": "9d2e9475-7895-4c71-9607-20733115eb2c",
+    "started_at": "2024-04-22T23:06:39.393Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 17,
+  "fields": {
+    "uuid": "e3dc33b3-c420-48af-9d65-3989e0bc956c",
+    "started_at": "2024-04-22T23:47:53.342Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 18,
+  "fields": {
+    "uuid": "731d21c8-987a-4e73-9cd2-04190988767d",
+    "started_at": "2024-04-23T05:00:00.328Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 19,
+  "fields": {
+    "uuid": "1e413857-f193-4ca2-be1e-6ad20b0553f9",
+    "started_at": "2024-04-23T05:16:43.019Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 20,
+  "fields": {
+    "uuid": "763c4ebc-5782-4f3e-87b9-1b3558c2748e",
+    "started_at": "2024-04-23T05:18:39.271Z",
+    "problems": [
+      1,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 21,
+  "fields": {
+    "uuid": "9b53abc7-3d28-41c9-abf9-fa735c07c21f",
+    "started_at": "2024-04-23T06:31:37.536Z",
+    "problems": [
+      1,
+      2,
+      3
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 22,
+  "fields": {
+    "uuid": "ca7a1efa-163b-4767-a458-e2a4f22d7c63",
+    "started_at": "2024-04-23T06:34:00.888Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 23,
+  "fields": {
+    "uuid": "ebc50ffa-b918-46f4-95ec-7d59af6535cf",
+    "started_at": "2024-04-23T09:01:59.821Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 24,
+  "fields": {
+    "uuid": "b75b2356-8b03-4f4e-833f-b939de2fb680",
+    "started_at": "2024-04-23T11:30:39.131Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 25,
+  "fields": {
+    "uuid": "873956bc-da93-4263-a600-99463cb93c62",
+    "started_at": "2024-04-23T12:10:06.257Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 26,
+  "fields": {
+    "uuid": "3fedd488-5417-4339-b0f0-7f61342cf807",
+    "started_at": "2024-04-23T12:15:35.074Z",
+    "problems": [
+      1,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 27,
+  "fields": {
+    "uuid": "2c2893c2-e451-43f1-88cd-be7b743ebbb8",
+    "started_at": "2024-04-23T13:03:00.415Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 28,
+  "fields": {
+    "uuid": "e717a70f-af1a-4f27-ac9f-7f86bb319a6c",
+    "started_at": "2024-04-23T13:03:45.682Z",
+    "problems": [
+      1,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 29,
+  "fields": {
+    "uuid": "403bb150-2652-49ed-ac5b-b498de7fc31b",
+    "started_at": "2024-04-23T13:03:52.690Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 30,
+  "fields": {
+    "uuid": "59dcf271-72a6-4846-853f-270ccbf2f64a",
+    "started_at": "2024-04-23T13:05:03.767Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 31,
+  "fields": {
+    "uuid": "cbe4195a-8f4d-49d5-9c30-bcc2308306b1",
+    "started_at": "2024-04-23T13:46:20.494Z",
+    "problems": [
+      1,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 32,
+  "fields": {
+    "uuid": "bd1db6ab-d067-4c57-9272-de84b57b520c",
+    "started_at": "2024-04-23T13:59:08.328Z",
+    "problems": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 33,
+  "fields": {
+    "uuid": "ece1269e-26ec-4616-b9ba-d885c2340148",
+    "started_at": "2024-04-23T14:59:17.162Z",
+    "problems": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 34,
+  "fields": {
+    "uuid": "754e69d3-8f2d-45d8-ba6e-b56ba662ccd3",
+    "started_at": "2024-04-23T16:51:52.528Z",
+    "problems": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 35,
+  "fields": {
+    "uuid": "59273458-8109-4811-a73d-e29f1eda47be",
+    "started_at": "2024-04-23T17:07:18.434Z",
+    "problems": [
+      1,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 36,
+  "fields": {
+    "uuid": "8846ebd9-3230-4dd9-a93a-0bb97d0986e6",
+    "started_at": "2024-04-23T17:53:12.770Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 37,
+  "fields": {
+    "uuid": "cc4e2498-a34c-4ca1-bc9c-f12c3e56987d",
+    "started_at": "2024-04-23T18:56:26.394Z",
+    "problems": [
+      1,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 38,
+  "fields": {
+    "uuid": "940f24d0-aa81-4b02-aa26-68c9a5bbee24",
+    "started_at": "2024-04-24T02:07:38.609Z",
+    "problems": [
+      1,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 39,
+  "fields": {
+    "uuid": "abb3070e-c9e3-4099-aa36-57c8f4d840ca",
+    "started_at": "2024-04-24T02:13:32.126Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 40,
+  "fields": {
+    "uuid": "51bfd041-9594-4ccb-b49a-31c6668497a0",
+    "started_at": "2024-04-24T02:42:21.344Z",
+    "problems": [
+      1,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 41,
+  "fields": {
+    "uuid": "43fbccb5-3fd9-4d60-a9d7-7ab254b7eb7f",
+    "started_at": "2024-04-24T02:55:09.935Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 42,
+  "fields": {
+    "uuid": "dd99affb-1ff3-451b-a8d0-a1015e9bb578",
+    "started_at": "2024-04-24T03:05:00.626Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 43,
+  "fields": {
+    "uuid": "66cbd013-a573-458d-a7a6-b85ddd779ba7",
+    "started_at": "2024-04-24T15:37:34.342Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 44,
+  "fields": {
+    "uuid": "0b2ab3e2-c133-4551-9990-9d9d752364cb",
+    "started_at": "2024-04-24T15:40:21.351Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 45,
+  "fields": {
+    "uuid": "bb14a5db-f206-4558-a7ba-b1fa33b11457",
+    "started_at": "2024-04-24T15:53:35.656Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 46,
+  "fields": {
+    "uuid": "4b40448d-f4e4-4270-8f0d-dec911639076",
+    "started_at": "2024-04-24T16:33:55.461Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 47,
+  "fields": {
+    "uuid": "afd76ad4-a6d2-498f-a189-bcf7a25e7c86",
+    "started_at": "2024-04-24T16:53:36.823Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "duel.duel",
+  "pk": 48,
+  "fields": {
+    "uuid": "b6d76779-369f-4f5e-a817-8bdce3545018",
+    "started_at": "2024-04-24T20:35:53.670Z",
+    "problems": [
+      2,
+      3,
+      4
+    ],
+    "competitors": []
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 1,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 14,
+    "created_at": "2024-04-22T18:31:23.244Z",
+    "problem": 1,
+    "duel": 1,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 2,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 46,
+    "created_at": "2024-04-22T18:31:43.582Z",
+    "problem": 1,
+    "duel": 1,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 3,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 79,
+    "created_at": "2024-04-22T19:27:40.930Z",
+    "problem": 1,
+    "duel": 5,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 4,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 52,
+    "created_at": "2024-04-22T19:27:51.203Z",
+    "problem": 1,
+    "duel": 5,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 5,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 62,
+    "created_at": "2024-04-22T19:30:02.305Z",
+    "problem": 1,
+    "duel": 5,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 6,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 74,
+    "created_at": "2024-04-22T19:31:07.056Z",
+    "problem": 1,
+    "duel": 5,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 7,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 10,
+    "created_at": "2024-04-22T19:33:04.984Z",
+    "problem": 1,
+    "duel": 6,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 8,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 91,
+    "created_at": "2024-04-22T19:33:07.008Z",
+    "problem": 1,
+    "duel": 6,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 9,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 22,
+    "created_at": "2024-04-22T19:34:52.328Z",
+    "problem": 2,
+    "duel": 6,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 10,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 98,
+    "created_at": "2024-04-22T20:26:05.975Z",
+    "problem": 1,
+    "duel": 12,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 11,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 44,
+    "created_at": "2024-04-22T20:32:53.888Z",
+    "problem": 1,
+    "duel": 13,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 12,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 19,
+    "created_at": "2024-04-22T20:33:10.608Z",
+    "problem": 2,
+    "duel": 13,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 13,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 45,
+    "created_at": "2024-04-22T20:33:13.697Z",
+    "problem": 2,
+    "duel": 13,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 14,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 33,
+    "created_at": "2024-04-22T20:37:33.297Z",
+    "problem": 2,
+    "duel": 13,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 15,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 23,
+    "created_at": "2024-04-22T20:37:36.221Z",
+    "problem": 2,
+    "duel": 13,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 16,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 76,
+    "created_at": "2024-04-22T20:37:37.321Z",
+    "problem": 2,
+    "duel": 13,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 17,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 30,
+    "created_at": "2024-04-22T20:37:38.638Z",
+    "problem": 2,
+    "duel": 13,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 18,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 95,
+    "created_at": "2024-04-22T21:28:14.301Z",
+    "problem": 1,
+    "duel": 14,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 19,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 81,
+    "created_at": "2024-04-22T21:53:04.320Z",
+    "problem": 2,
+    "duel": 14,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 20,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 55,
+    "created_at": "2024-04-22T22:55:02.408Z",
+    "problem": 2,
+    "duel": 15,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 21,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 5,
+    "created_at": "2024-04-22T23:24:11.188Z",
+    "problem": 1,
+    "duel": 16,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 22,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 92,
+    "created_at": "2024-04-23T05:36:16.609Z",
+    "problem": 2,
+    "duel": 20,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 23,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 67,
+    "created_at": "2024-04-23T05:36:20.929Z",
+    "problem": 2,
+    "duel": 20,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 24,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 57,
+    "created_at": "2024-04-23T05:36:32.018Z",
+    "problem": 1,
+    "duel": 20,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 25,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 84,
+    "created_at": "2024-04-23T05:36:43.638Z",
+    "problem": 2,
+    "duel": 20,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 26,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 81,
+    "created_at": "2024-04-23T09:27:43.722Z",
+    "problem": 4,
+    "duel": 23,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 27,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 1,
+    "created_at": "2024-04-23T09:27:53.203Z",
+    "problem": 3,
+    "duel": 23,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 28,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 72,
+    "created_at": "2024-04-23T09:27:55.642Z",
+    "problem": 3,
+    "duel": 23,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 29,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 44,
+    "created_at": "2024-04-23T09:28:01.628Z",
+    "problem": 4,
+    "duel": 23,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 30,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 72,
+    "created_at": "2024-04-23T09:28:02.719Z",
+    "problem": 4,
+    "duel": 23,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 31,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 17,
+    "created_at": "2024-04-23T09:28:08.032Z",
+    "problem": 2,
+    "duel": 23,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 32,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 28,
+    "created_at": "2024-04-23T09:28:09.827Z",
+    "problem": 2,
+    "duel": 23,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 33,
+  "fields": {
+    "code": "from django.views.generic import View\r\n\r\nclass SolutionView(View):            \r\n\t'''\r\n\tWrite your code here\r\n\t'''\r\n\tpass",
+    "score": 67,
+    "created_at": "2024-04-23T15:08:40.807Z",
+    "problem": 4,
+    "duel": 33,
+    "user": 2,
+    "exec_time": -1,
+    "verdict": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2024-04-10T14:32:32.714Z",
+    "user": 2,
+    "content_type": 2,
+    "object_id": "1",
+    "object_repr": "test task",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2024-04-16T11:38:23.374Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "2",
+    "object_repr": "medium task",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2024-04-16T11:38:55.019Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "hard task",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2024-04-16T11:54:00.498Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "hard task",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0421\\u043b\\u043e\\u0436\\u043d\\u043e\\u0441\\u0442\\u044c\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2024-04-16T16:36:02.550Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "SN admin2 admin приветики",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2024-04-20T14:35:22.680Z",
+    "user": 3,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "hard task",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u0430\\u0439\\u043b \\u0441 \\u0442\\u0435\\u0441\\u0442\\u0430\\u043c\\u0438\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2024-04-20T14:35:29.986Z",
+    "user": 3,
+    "content_type": 2,
+    "object_id": "2",
+    "object_repr": "medium task",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u0430\\u0439\\u043b \\u0441 \\u0442\\u0435\\u0441\\u0442\\u0430\\u043c\\u0438\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2024-04-20T14:35:38.558Z",
+    "user": 3,
+    "content_type": 2,
+    "object_id": "1",
+    "object_repr": "test task",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u0430\\u0439\\u043b \\u0441 \\u0442\\u0435\\u0441\\u0442\\u0430\\u043c\\u0438\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2024-04-22T19:04:15.570Z",
+    "user": 2,
+    "content_type": 2,
+    "object_id": "2",
+    "object_repr": "medium task",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0421\\u043b\\u043e\\u0436\\u043d\\u043e\\u0441\\u0442\\u044c\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2024-04-22T19:04:22.748Z",
+    "user": 2,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "hard task",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0421\\u043b\\u043e\\u0436\\u043d\\u043e\\u0441\\u0442\\u044c\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2024-04-22T19:43:49.148Z",
+    "user": 2,
+    "content_type": 1,
+    "object_id": "2",
+    "object_repr": "admin2",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Friends\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2024-04-23T05:16:22.314Z",
+    "user": 2,
+    "content_type": 2,
+    "object_id": "4",
+    "object_repr": "Джанго - фреймворк для мазохистов с дедлайнами",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2024-04-23T20:05:55.215Z",
+    "user": 2,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "djangists_group",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Title\", \"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2024-04-23T20:27:10.865Z",
+    "user": 2,
+    "content_type": 19,
+    "object_id": "1",
+    "object_repr": "ChatRoom object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.267Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "1",
+    "object_repr": "Message object (1)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.305Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "2",
+    "object_repr": "Message object (2)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.322Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "3",
+    "object_repr": "Message object (3)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.341Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "4",
+    "object_repr": "Message object (4)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.359Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "5",
+    "object_repr": "Message object (5)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.375Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "6",
+    "object_repr": "Message object (6)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.395Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "7",
+    "object_repr": "Message object (7)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.411Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "8",
+    "object_repr": "Message object (8)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.427Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "9",
+    "object_repr": "Message object (9)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.441Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "10",
+    "object_repr": "Message object (10)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.459Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "11",
+    "object_repr": "Message object (11)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.475Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "12",
+    "object_repr": "Message object (12)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.490Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "13",
+    "object_repr": "Message object (13)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.509Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "14",
+    "object_repr": "Message object (14)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.524Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "15",
+    "object_repr": "Message object (15)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.539Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "16",
+    "object_repr": "Message object (16)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.553Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "17",
+    "object_repr": "Message object (17)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.571Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "18",
+    "object_repr": "Message object (18)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.592Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "19",
+    "object_repr": "Message object (19)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.612Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "20",
+    "object_repr": "Message object (20)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.630Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "21",
+    "object_repr": "Message object (21)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.646Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "22",
+    "object_repr": "Message object (22)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.661Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "23",
+    "object_repr": "Message object (23)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.677Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "24",
+    "object_repr": "Message object (24)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.694Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "25",
+    "object_repr": "Message object (25)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.709Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "26",
+    "object_repr": "Message object (26)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.726Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "27",
+    "object_repr": "Message object (27)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.741Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "28",
+    "object_repr": "Message object (28)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.758Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "29",
+    "object_repr": "Message object (29)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.773Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "30",
+    "object_repr": "Message object (30)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.789Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "31",
+    "object_repr": "Message object (31)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.803Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "32",
+    "object_repr": "Message object (32)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.818Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "33",
+    "object_repr": "Message object (33)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.833Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "34",
+    "object_repr": "Message object (34)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.849Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "35",
+    "object_repr": "Message object (35)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.867Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "36",
+    "object_repr": "Message object (36)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.882Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "37",
+    "object_repr": "Message object (37)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.896Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "38",
+    "object_repr": "Message object (38)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.911Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "39",
+    "object_repr": "Message object (39)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.930Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "40",
+    "object_repr": "Message object (40)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.950Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "41",
+    "object_repr": "Message object (41)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.969Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "42",
+    "object_repr": "Message object (42)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2024-04-24T10:40:28.994Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "43",
+    "object_repr": "Message object (43)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2024-04-24T10:40:29.014Z",
+    "user": 2,
+    "content_type": 20,
+    "object_id": "44",
+    "object_repr": "Message object (44)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+}
+]

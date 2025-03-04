@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+Ашипки {{ errors }}<br>
+Всего тестов {{ tests_all }}<br>
+Тестов пройдено {{ tests_passed }}<br>
+<form method="POST">
+  {% csrf_token %}
+  <label for="code">Сюда вписывать код в виде единичной функции</label>
+  <br></br>
+  <textarea name="code" id="code" cols="50" rows="20"></textarea>
+  <br></br>
+  <label for="code">Сюда вписывать тесты в виде функций в которых что-то проверяется через assert, ошибку после assert добавлять желательно!</label>
+  <br></br>
+  <textarea name="test" id="test" cols="50" rows="20"></textarea>
+  <br></br>
+  <button type="submit">клацай чо тыришься</button>
+</form>
+{% endblock %}

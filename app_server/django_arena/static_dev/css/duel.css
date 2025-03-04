@@ -1,0 +1,278 @@
+::selection {
+  background: #5b8c8f;
+}
+
+::-webkit-scrollbar {
+  background: #343a39;
+  border-radius: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(75, 104, 99, 0.5);
+  opacity: 0.5;
+  border-radius: 10px;
+}
+
+/* resizable sections */
+
+body {
+  height: 100%;
+  color: #c1c8c9;
+}
+
+.CodeMirror {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  height: 50%;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+  background-color: #252b2a;
+}
+
+.flex-vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  background-color: #252b2a;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  margin: 25px;
+}
+
+.resizable-column {
+  overflow: auto;
+  height: 82vh;
+  border-radius: 10px;
+  border: 2px solid #77ddd0;
+}
+
+#column1 {
+  background-color: #252b2a;
+  width: 30vw;
+}
+
+#column2 {
+  background-color: #343a39;
+  width: 50%;
+}
+
+#column3 {
+  background-color: #343a39;
+  width: 20vw;
+}
+
+#code-section {
+  height: 58vh;
+  max-height: 78vh;
+  min-height: 30%;
+}
+
+#tests-section {
+  overflow: auto;
+  background-color: #252b2a;
+  height: 30%;
+  min-height: 7%;
+  max-height: 70%;
+}
+
+.resizer {
+  position: relative;
+  width: 10px;
+  background-color: #252b2a;
+  cursor: ew-resize;
+}
+
+.resizer2 {
+  position: relative;
+  height: 10px;
+  background-color: #252b2a;
+  cursor: ns-resize;
+}
+
+.circle,
+.circle2 {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: #8a9290;
+}
+
+.circle {
+  margin: 4px auto;
+}
+
+.circle2 {
+  margin: 3px;
+}
+
+.circles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+}
+
+.circles2 {
+  display: flex;
+  justify-content: center;
+}
+
+/* tasks sections */
+
+.li_task {
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  line-height: 2em;
+  border-radius: 1em;
+  background-color: #424c4a;
+  margin: 0 1em;
+  display: inline-block;
+  color: #c1c8c9;
+  position: relative;
+}
+
+.li_task_active {
+  background: #77ddd0;
+  color: #252b2a;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  line-height: 2em;
+  border-radius: 1em;
+  margin: 0 1em;
+  display: inline-block;
+  position: relative;
+}
+
+/* section with task description and submissions */
+
+.duel_tab {
+  color: #c1c8c9;
+  border: none;
+  position: relative;
+  display: inline-block;
+  margin: 2% 10%;
+  /* margin-left: 10%; */
+}
+
+.duel_tab::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: 0;
+  height: 2px;
+  background-color: #77ddd0;
+  transition: all 0.3s ease-out;
+  transform: translateX(-50%);
+}
+
+.duel_tab:hover {
+  border-color: transparent;
+  color: #ddf6f8;
+}
+
+.duel_tab:hover::after {
+  width: 70%;
+  transform: translateX(-50%);
+  border-color: transparent;
+}
+
+.duel_tab.duel_active {
+  color: #ddf6f8;
+}
+
+.duel_tab.duel_active::after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  bottom: 0;
+  display: block;
+  width: 80%;
+  height: 2px;
+  background: #77ddd0;
+}
+
+.duel_nav_tabs .nav-link:hover {
+  border-color: transparent;
+  font-size: 18px;
+}
+
+#task_num {
+  margin: 3%;
+  font-size: 19px;
+}
+
+.task_title {
+  color: #77ddd0;
+  font-size: 30px;
+  margin: 2% 5%;
+  width: 90%;
+  display: block;
+}
+
+.diff {
+  font-size: 20px;
+  margin: -2% 5%;
+}
+
+.task_text {
+  margin: 7% 5%;
+  font-size: 18px;
+}
+
+.empty_test_results {
+  text-align: center;
+  margin-top: 7vh;
+}
+
+#timer {
+  font-size: 17px;
+}
+
+.gradient-button {
+  float: right;
+  margin: -2% 3%;
+  background: linear-gradient(to right, #77ddd0 0%, #92c789 100%);
+  border: none;
+  border-radius: 10px;
+  color: #352727;
+  padding: 7px 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.gradient-button:hover {
+  transition: 0.3s;
+  background: linear-gradient(to right, #7de3bc 0%, #9ad88f 100%);
+}
+
+.players_title {
+  text-align: center;
+  margin-top: 2%;
+  font-size: 20px;
+}
+
+.results__table {
+  width: 100%;
+}
+
+.table__wrapper {
+  width: 100%;
+}
+
+td, th {
+  border-width: 1px !important;
+}
